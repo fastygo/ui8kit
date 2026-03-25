@@ -10,7 +10,9 @@ import (
 	"github.com/fastygo/ui8kit/layout"
 )
 
-func render(t *testing.T, c interface{ Render(context.Context, io.Writer) error }) string {
+func render(t *testing.T, c interface {
+	Render(context.Context, io.Writer) error
+}) string {
 	t.Helper()
 	var buf bytes.Buffer
 	if err := c.Render(context.Background(), &buf); err != nil {
