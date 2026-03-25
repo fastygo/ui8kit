@@ -1,0 +1,9 @@
+package ui
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ Box(props BoxProps) {
+	<div class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }>
+		{ children... }
+	</div>
+}

@@ -1,0 +1,19 @@
+package layout
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ Sidebar(props SidebarProps) {
+	for _, item := range props.Items {
+		if props.Mobile {
+			<a href={ templ.SafeURL(item.Path) } class={ sidebarItemClasses(props.Active, item.Path) } onclick="ui8kitCloseSidebar()">
+				<span class={ utils.Cn("latty", "latty-"+item.Icon, "h-4 w-4") }></span>
+				<span>{ item.Label }</span>
+			</a>
+		} else {
+			<a href={ templ.SafeURL(item.Path) } class={ sidebarItemClasses(props.Active, item.Path) }>
+				<span class={ utils.Cn("latty", "latty-"+item.Icon, "h-4 w-4") }></span>
+				<span>{ item.Label }</span>
+			</a>
+		}
+	}
+}

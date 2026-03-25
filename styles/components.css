@@ -1,0 +1,53 @@
+@layer components {
+  .card {
+    @apply rounded border border-border bg-card;
+  }
+
+  .card-header {
+    @apply border-b border-border px-4 py-2;
+  }
+
+  .card-title {
+    @apply text-sm font-semibold;
+  }
+
+  .card-content {
+    @apply p-4;
+  }
+
+  .form-label {
+    @apply block text-sm text-muted-foreground;
+  }
+
+  .form-label-inline {
+    @apply flex items-center gap-2 text-sm;
+  }
+
+  .table {
+    @apply w-full;
+  }
+
+  .table-header {
+    @apply bg-muted;
+  }
+
+  .table-header-cell {
+    @apply min-w-0 px-4 py-2 text-left text-xs font-semibold text-muted-foreground;
+  }
+
+  .table-body {
+    @apply divide-y divide-border;
+  }
+
+  .table-cell {
+    @apply min-w-0 px-4 py-2 text-sm;
+  }
+
+  .table-cell-muted {
+    @apply min-w-0 px-4 py-2 text-sm text-muted-foreground;
+  }
+
+  .pre-code {
+    @apply overflow-x-auto whitespace-pre-wrap rounded border border-border bg-muted px-4 py-2 text-xs;
+  }
+}

@@ -1,0 +1,13 @@
+package layout
+
+templ Header(props HeaderProps) {
+	<header class="h-15 flex items-center justify-between gap-2 border-b border-border px-4">
+		<button onclick="ui8kitOpenSidebar()" class="inline-flex h-8 w-8 items-center justify-center rounded border border-border md:hidden" aria-label="Open menu">
+			<span class="latty latty-menu h-4 w-4"></span>
+		</button>
+		<h1 class="flex-1 truncate px-2 text-base font-bold">{ props.Title }</h1>
+		<button onclick="ui8kitToggleTheme()" class="inline-flex h-8 w-8 items-center justify-center rounded border border-border" aria-label="Toggle theme">
+			<span id="theme-toggle-icon" class="latty latty-moon h-4 w-4"></span>
+		</button>
+	</header>
+}

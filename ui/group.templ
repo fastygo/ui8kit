@@ -1,0 +1,17 @@
+package ui
+
+import "github.com/fastygo/ui8kit/utils"
+
+func groupClasses(p GroupProps) string {
+	base := "flex gap-4 items-center justify-start min-w-0"
+	if p.Grow {
+		base = utils.Cn(base, "w-full")
+	}
+	return utils.Cn(base, p.UtilityProps.Resolve(), p.Class)
+}
+
+templ Group(props GroupProps) {
+	<div class={ groupClasses(props) }>
+		{ children... }
+	</div>
+}

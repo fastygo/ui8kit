@@ -1,0 +1,46 @@
+package layout
+
+templ Shell(props ShellProps) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>{ props.Title }</title>
+			<link rel="stylesheet" href={ shellCSS(props.CSSPath) }/>
+			@rawScript(themeScript)
+			if props.HeadExtra != nil {
+				@props.HeadExtra
+			}
+		</head>
+		<body class="min-h-screen overflow-x-hidden bg-background font-sans text-foreground">
+			<div id="ui8kit-sidebar-backdrop" class="fixed inset-0 z-30 hidden" onclick="ui8kitCloseSidebar()" style="background:rgba(0,0,0,.45)"></div>
+			<aside id="ui8kit-mobile-sidebar" class="fixed bottom-0 left-0 top-0 z-40 hidden w-64 max-w-full border-r border-border bg-card md:hidden">
+				<div class="flex h-15 items-center justify-between border-b border-border px-4">
+					<p class="font-bold">{ shellBrand(props.BrandName) }</p>
+					<button onclick="ui8kitCloseSidebar()" class="rounded border border-border px-2 py-1 text-xs">Close</button>
+				</div>
+				<nav class="space-y-1 p-2">
+					@Sidebar(SidebarProps{Items: props.NavItems, Active: props.Active, Mobile: true})
+				</nav>
+			</aside>
+			<div class="flex min-h-screen w-full">
+				<aside class="hidden border-r border-border bg-card md:block md:w-64">
+					<div class="flex h-15 items-center border-b border-border px-4">
+						<p class="font-bold">{ shellBrand(props.BrandName) }</p>
+					</div>
+					<nav class="space-y-1 p-2">
+						@Sidebar(SidebarProps{Items: props.NavItems, Active: props.Active})
+					</nav>
+				</aside>
+				<div class="flex min-w-0 flex-1 flex-col">
+					@Header(HeaderProps{Title: props.Title})
+					<main class="w-full min-w-0 max-w-full p-4 md:p-6">
+						{ children... }
+					</main>
+				</div>
+			</div>
+			@rawScript(sidebarScript)
+		</body>
+	</html>
+}

@@ -1,0 +1,43 @@
+package ui
+
+import "strconv"
+
+templ Field(props FieldProps) {
+	switch props.Component {
+		case "textarea":
+			<textarea
+				id={ props.ID }
+				name={ props.Name }
+				class={ fieldClasses(props) }
+				rows={ strconv.Itoa(fieldRows(props.Rows)) }
+				placeholder={ props.Placeholder }
+				disabled?={ props.Disabled }
+			>{ props.Value }</textarea>
+		case "select":
+			<select
+				id={ props.ID }
+				name={ props.Name }
+				class={ fieldClasses(props) }
+				disabled?={ props.Disabled }
+			>
+				for _, opt := range props.Options {
+					<option value={ opt.Value } selected?={ opt.Value == props.Value }>{ opt.Label }</option>
+				}
+			</select>
+		default:
+			<input
+				id={ props.ID }
+				name={ props.Name }
+				type={ fieldInputType(props.Type) }
+				class={ fieldClasses(props) }
+				placeholder={ props.Placeholder }
+				value={ props.Value }
+				min={ props.Min }
+				max={ props.Max }
+				autocomplete={ props.Autocomplete }
+				checked?={ props.Checked }
+				disabled?={ props.Disabled }
+				required?={ props.Required }
+			/>
+	}
+}

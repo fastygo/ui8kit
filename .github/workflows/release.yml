@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          cache: true
+
+      - name: Install templ
+        run: go install github.com/a-h/templ/cmd/templ@latest
+
+      - name: Verify version consistency
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          CODE_VERSION="v$(grep 'const Version' ui8kit.go | sed 's/.*"\(.*\)"/\1/')"
+          echo "Git tag:      $TAG"
+          echo "Code version: $CODE_VERSION"
+          if [ "$TAG" != "$CODE_VERSION" ]; then
+            echo "::error::Version mismatch: git tag is $TAG but ui8kit.go has $CODE_VERSION"
+            exit 1
+          fi
+
+      - name: Generate
+        run: templ generate ./...
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Test
+        run: go test ./... -race -count=1
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger Go proxy indexing
+        run: GOPROXY=proxy.golang.org go list -m "github.com/fastygo/ui8kit@${GITHUB_REF_NAME}"

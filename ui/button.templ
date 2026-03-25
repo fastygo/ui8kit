@@ -1,0 +1,11 @@
+package ui
+
+import "strings"
+
+templ Button(props ButtonProps, label string) {
+	if strings.TrimSpace(props.Href) != "" {
+		<a href={ templ.SafeURL(props.Href) } class={ buttonClasses(props) }>{ label }</a>
+	} else {
+		<button type={ buttonType(props.Type) } class={ buttonClasses(props) } disabled?={ props.Disabled }>{ label }</button>
+	}
+}
