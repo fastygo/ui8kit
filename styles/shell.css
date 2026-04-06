@@ -1,0 +1,128 @@
+@layer components {
+  .kit-shell-body {
+    @apply min-h-screen overflow-x-hidden bg-background font-sans text-foreground;
+  }
+
+  /*
+   * Mobile sheet (ui8kit-core Sheet.tsx pattern): hidden checkbox + label[for] trigger,
+   * fixed portal, overlay label closes on click, panel absolute left full height.
+   */
+  .kit-shell-mobile-sheet-input {
+    @apply sr-only;
+  }
+
+  .kit-shell-mobile-sheet-portal {
+    @apply fixed inset-0 z-50 md:hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+  }
+
+  @media (max-width: 47.999rem) {
+    .kit-shell-mobile-sheet-input:checked ~ .kit-shell-mobile-sheet-portal {
+      display: block;
+    }
+
+    body.kit-shell-body:has(.kit-shell-mobile-sheet-input:checked) {
+      overflow: hidden;
+    }
+  }
+
+  .kit-shell-mobile-sheet-overlay {
+    @apply absolute inset-0 cursor-pointer bg-card/50;
+    opacity: 0;
+    transition: opacity 180ms ease;
+  }
+
+  .kit-shell-mobile-sheet-input:checked ~ .kit-shell-mobile-sheet-portal .kit-shell-mobile-sheet-overlay {
+    opacity: 1;
+  }
+
+  .kit-shell-mobile-sheet-panel {
+    @apply absolute left-0 top-0 h-full max-h-dvh max-w-full overflow-y-auto border-r border-border bg-card p-4;
+    width: 20rem; /* Sheet size md (w-80) */
+    transform: translateX(-100%);
+    transition: transform 180ms ease;
+  }
+
+  .kit-shell-mobile-sheet-input:checked ~ .kit-shell-mobile-sheet-portal .kit-shell-mobile-sheet-panel {
+    transform: translateX(0);
+  }
+
+  .kit-shell-mobile-sheet-header {
+    @apply flex items-center justify-between gap-2;
+  }
+
+  .kit-shell-mobile-sheet-title {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .kit-shell-mobile-sheet-close {
+    @apply inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-border text-muted-foreground;
+  }
+
+  .kit-shell-mobile-sheet-content {
+    @apply mt-4;
+  }
+
+  .kit-shell-nav-mobile {
+    @apply space-y-1 p-2;
+  }
+
+  .kit-shell-desktop-aside {
+    @apply hidden border-r border-border bg-card md:block md:w-64;
+  }
+
+  .kit-shell-desktop-brand-row {
+    @apply flex h-15 items-center border-b border-border px-4;
+  }
+
+  .kit-shell-nav-desktop {
+    @apply space-y-1 p-2;
+  }
+
+  .kit-shell-layout-row {
+    @apply flex min-h-screen w-full;
+  }
+
+  .kit-shell-main-column {
+    @apply flex min-w-0 flex-1 flex-col;
+  }
+
+  .kit-shell-main {
+    @apply w-full min-w-0 max-w-full p-4 md:p-6;
+  }
+
+  .kit-header {
+    @apply h-15 flex items-center justify-between gap-2 border-b border-border px-4;
+  }
+
+  @media (max-width: 47.999rem) {
+    .kit-header {
+      @apply sticky top-0 z-40;
+      background-color: var(--background);
+    }
+  }
+
+  .kit-header-menu-btn {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded border border-border text-foreground md:hidden;
+  }
+
+  .kit-header-actions {
+    @apply flex items-center gap-2;
+  }
+
+  .kit-header-action-btn {
+    @apply inline-flex h-8 w-8 items-center justify-center gap-1 rounded border-0 bg-transparent p-0 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground;
+  }
+
+  .kit-header-theme-btn {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded border-0 bg-transparent p-0 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground;
+  }
+
+  .kit-header-title {
+    @apply flex-1 truncate px-2 text-base font-bold;
+  }
+}

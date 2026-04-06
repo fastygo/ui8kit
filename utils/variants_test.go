@@ -40,6 +40,20 @@ func TestBadgeSizeVariant(t *testing.T) {
 	}
 }
 
+func TestCardVariant(t *testing.T) {
+	for _, v := range []string{"", "default", "raised", "kpi", "muted", "ghost", "compact", "flat", "accent"} {
+		if got := CardVariant(v); got == "" {
+			t.Fatalf("CardVariant(%q) returned empty", v)
+		}
+	}
+	if got := CardVariant("kpi"); !strings.Contains(got, "kit-card--kpi") {
+		t.Fatalf("expected kpi modifier in %q", got)
+	}
+	if got := CardVariant("custom-extra"); !strings.Contains(got, "custom-extra") {
+		t.Fatal("fallback should append raw classes")
+	}
+}
+
 func TestTypographyClasses(t *testing.T) {
 	got := TypographyClasses("sm", "medium", "6", "tight", "muted-foreground", "left", true)
 	if got == "" {

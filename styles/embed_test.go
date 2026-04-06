@@ -7,7 +7,7 @@ import (
 )
 
 func TestEmbeddedFiles(t *testing.T) {
-	for _, name := range []string{"base.css", "components.css", "latty.css"} {
+	for _, name := range []string{"base.css", "shell.css", "components.css", "latty.css"} {
 		data, err := styles.FS.ReadFile(name)
 		if err != nil {
 			t.Fatalf("ReadFile(%q): %v", name, err)

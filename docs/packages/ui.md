@@ -1,54 +1,35 @@
 # Package `ui`
 
-Import:
+Component layer for dashboard surfaces.
+
+## Import
 
 ```go
 import "github.com/fastygo/ui8kit/ui"
 ```
 
-## Purpose
+## Components (short)
 
-The `ui` package provides presentational components: layout primitives, typography, actions, form fields, and icons. Each component is a `templ` template function that returns `templ.Component`.
+`Box`, `Stack`, `Group`, `Container`, `Block`, `Button`, `Badge`, `Text`, `Title`, `Field`, `Icon`.
 
-## Components
-
-| Component | Description |
-|-----------|-------------|
-| `Box` | Generic container; uses inner `<div>` with merged utility classes |
-| `Stack` | Vertical stack: `flex flex-col gap-4` plus utilities |
-| `Group` | Horizontal group: `flex` row with optional `Grow` |
-| `Container` | Centered max-width container (`max-w-7xl mx-auto px-4`) |
-| `Block` | Alias for `Box` (`BlockProps` = `BoxProps`) |
-| `Button` | Button or link (`Href` set → `<a>`) with variants and sizes |
-| `Badge` | Small status label |
-| `Text` | Paragraph with typography props |
-| `Title` | Heading `h1`–`h6` via `Order` |
-| `Field` | Input, textarea, select, checkbox/radio via `Component` and `Type` |
-| `Icon` | Latty icon span (`latty latty-{name}`) |
-
-## Props pattern
-
-All visual props are defined in `props.go` in this package. Embed `utils.UtilityProps` where applicable:
+## Typical usage
 
 ```go
 ui.Button(ui.ButtonProps{
     UtilityProps: utils.UtilityProps{P: "2", Rounded: "md"},
-    Variant:      "primary",
-    Size:         "sm",
+    Variant: "primary",
+    Size: "sm",
 }, "Save")
 ```
 
-## Button variants
+## Styling notes
 
-Common values for `Variant`: `primary`, `destructive`, `outline`, `secondary`, `ghost`, `link`. Unknown values fall through to raw class fragments (see `utils.ButtonStyleVariant`).
+- Prefer `utils.UtilityProps` and variants instead of raw class strings.
+- Dynamic utility values can be added to generated safelist via `scripts/gen-ui8kit-css.go`.
 
-## Field modes
+## Quick commands
 
-- Default: single-line `<input>`; set `Type` to `email`, `password`, etc.
-- `Component: "textarea"` — multi-line; use `Rows`.
-- `Component: "select"` — provide `Options` and `Value`.
-- Checkbox / radio: set `Type` to `checkbox` or `radio`; styling uses control-specific classes.
-
-## Children
-
-Components that wrap content (`Box`, `Stack`, `Group`, `Container`, `Block`) use templ’s `{ children... }` slot in the template source. Call them from other `.templ` files with block syntax as shown in the main [README](../../README.md).
+```bash
+templ generate
+./scripts/gen-css.sh
+```

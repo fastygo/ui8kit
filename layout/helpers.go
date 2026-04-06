@@ -1,19 +1,12 @@
 package layout
 
-import (
-	"context"
-	"io"
+import "github.com/fastygo/ui8kit/utils"
 
-	"github.com/a-h/templ"
-	"github.com/fastygo/ui8kit/utils"
-)
+// MobileSheetCheckboxID toggles the mobile nav sheet (checkbox + label pattern, same idea as ui8kit-core Sheet.tsx).
+const MobileSheetCheckboxID = "ui8kit-mobile-sheet"
 
-func rawScript(js string) templ.Component {
-	return templ.ComponentFunc(func(_ context.Context, w io.Writer) error {
-		_, err := io.WriteString(w, "<script>"+js+"</script>")
-		return err
-	})
-}
+// MobileSheetPanelID is the dialog surface referenced by aria-controls on the menu trigger.
+const MobileSheetPanelID = "ui8kit-mobile-sheet-panel"
 
 func sidebarLinkClass(active, path string) string {
 	if active == path {
@@ -40,6 +33,30 @@ func shellCSS(path string) string {
 	return path
 }
 
-const themeScript = `(function(){var r=document.documentElement,s=localStorage.getItem("ui8kit-theme"),d=window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches;r.classList.toggle("dark",s==="dark"||(!s&&d));var u=function(){var i=document.getElementById("theme-toggle-icon");if(i)i.className=r.classList.contains("dark")?"latty latty-sun h-4 w-4":"latty latty-moon h-4 w-4"};u();window.ui8kitToggleTheme=function(){var n=!r.classList.contains("dark");r.classList.toggle("dark",n);localStorage.setItem("ui8kit-theme",n?"dark":"light");u()};document.addEventListener("DOMContentLoaded",u)})();`
+func shellLang(value string) string {
+	if value == "" {
+		return "en"
+	}
+	return value
+}
 
-const sidebarScript = `window.ui8kitOpenSidebar=function(){var s=document.getElementById("ui8kit-mobile-sidebar"),b=document.getElementById("ui8kit-sidebar-backdrop");if(s&&b){s.classList.remove("hidden");b.classList.remove("hidden");document.body.style.overflow="hidden"}};window.ui8kitCloseSidebar=function(){var s=document.getElementById("ui8kit-mobile-sidebar"),b=document.getElementById("ui8kit-sidebar-backdrop");if(s&&b){s.classList.add("hidden");b.classList.add("hidden");document.body.style.overflow=""}};window.addEventListener("keydown",function(e){if(e&&e.key==="Escape")ui8kitCloseSidebar()});`
+func themeToggleLabel(value string) string {
+	if value == "" {
+		return "Toggle theme"
+	}
+	return value
+}
+
+func themeToggleSwitchToDarkLabel(value string) string {
+	if value == "" {
+		return "Switch to dark theme"
+	}
+	return value
+}
+
+func themeToggleSwitchToLightLabel(value string) string {
+	if value == "" {
+		return "Switch to light theme"
+	}
+	return value
+}

@@ -1,52 +1,32 @@
 # UI8Kit documentation
 
-Welcome to the UI8Kit documentation. UI8Kit is a **Go + templ + Tailwind CSS** component kit in the style of shadcn/ui.
+UI8Kit is a Go + `templ` + Tailwind component toolkit for server-rendered dashboards.
 
-## Contents
+## Core links
 
-### Getting started
+- [Getting started](getting-started/README.md)
+- [Installation](getting-started/installation.md)
+- [Project structure](getting-started/project-structure.md)
+- [Design principles](design-principles.md)
 
-- [Overview](getting-started/README.md) — what UI8Kit is and when to use it
-- [Installation](getting-started/installation.md) — Go module, templ CLI, optional Node.js for Tailwind
-- [Project structure](getting-started/project-structure.md) — how to lay out an app that uses UI8Kit
+## Packages
 
-### Packages
+- [packages](packages/README.md)
+- [ui](packages/ui.md)
+- [layout](packages/layout.md)
+- [utils](packages/utils.md)
+- [styles](packages/styles.md)
 
-- [Packages overview](packages/README.md)
-- [`ui`](packages/ui.md) — Box, Stack, Group, Container, Button, Badge, Text, Title, Field, Icon
-- [`layout`](packages/layout.md) — Shell, Header, Sidebar
-- [`utils`](packages/utils.md) — UtilityProps, `Cn`, variant helpers
-- [`styles`](packages/styles.md) — embedded CSS, theme tokens, Latty icons
+## Integration
 
-### Integration
+- [Scripts](scripts.md)
+- [Tailwind setup](integration/tailwind-setup.md)
+- [Sync CSS assets](integration/sync-ui8kit-css.md)
+- [HTTP server](integration/http-server.md)
 
-- [Integration overview](integration/README.md)
-- [Tailwind CSS v4 setup](integration/tailwind-setup.md) — compiler, `input.css`, watch scripts, scanning `.go` / `.templ`
-- [HTTP server and static assets](integration/http-server.md) — serving CSS, matching `layout.Shell` defaults
+## Process
 
-### Testing
+- [Testing](testing.md)
+- [Versioning and releases](versioning.md)
 
-- [Testing](testing.md) — test suite overview, architecture, CI integration, writing new tests
-
-### Versioning
-
-- [Versioning and releases](versioning.md) — semver, release script, git tags, Go proxy
-
-## Quick links
-
-| Topic | Document |
-|--------|----------|
-| `go get` and imports | [Installation](getting-started/installation.md) |
-| npm + `@tailwindcss/cli` | [Tailwind setup](integration/tailwind-setup.md) |
-| `UtilityProps` | [utils](packages/utils.md) |
-| Full-page layout | [layout](packages/layout.md) |
-
-## Module path
-
-```
-github.com/fastygo/ui8kit
-```
-
-## License
-
-MIT — see the repository [LICENSE](../LICENSE) file.
+Module: `github.com/fastygo/ui8kit`

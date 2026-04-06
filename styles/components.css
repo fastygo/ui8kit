@@ -1,6 +1,82 @@
 @layer components {
+  .kit-kpi-grid-2 {
+    @apply grid gap-4 md:grid-cols-2;
+  }
+
+  .kit-kpi-grid-3 {
+    @apply grid gap-4 md:grid-cols-2 xl:grid-cols-3;
+  }
+
+  .kit-kpi-grid-4 {
+    @apply grid gap-4 md:grid-cols-2 xl:grid-cols-4;
+  }
+
+  .kit-kpi-label {
+    @apply text-xs uppercase text-muted-foreground;
+  }
+
+  .kit-card {
+    @apply rounded-lg border border-border bg-card p-4 shadow-sm;
+  }
+
+  .kit-card--kpi {
+    @apply p-3;
+  }
+
+  .kit-card--muted {
+    @apply border-border bg-muted/40;
+  }
+
+  .kit-card--ghost {
+    @apply border-dashed bg-background;
+  }
+
+  .kit-card--compact {
+    @apply p-3;
+  }
+
+  .kit-card--flat {
+    @apply shadow-none;
+  }
+
+  .kit-card--accent {
+    @apply border-transparent bg-accent/30;
+  }
+
+  .kit-table-wrap {
+    @apply mt-4 overflow-x-auto;
+  }
+
+  .kit-table {
+    @apply min-w-full divide-y divide-border text-sm;
+  }
+
+  .kit-table-head-row {
+    @apply text-left text-muted-foreground;
+  }
+
+  .kit-table-head-cell {
+    @apply py-3 pr-4;
+  }
+
+  .kit-table-cell-label {
+    @apply py-3 pr-4 font-medium;
+  }
+
+  .kit-table-cell {
+    @apply py-3;
+  }
+
+  .kit-chip-list {
+    @apply mt-4 flex flex-wrap gap-2;
+  }
+
+  .kit-chip {
+    @apply inline-flex rounded-full border border-border px-3 py-1 text-xs;
+  }
+
   .card {
-    @apply rounded border border-border bg-card;
+    @apply rounded-lg border border-border bg-card;
   }
 
   .card-header {

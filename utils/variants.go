@@ -1,5 +1,30 @@
 package utils
 
+import "strings"
+
+// CardVariant returns semantic dashboard card classes. Base and modifiers are defined in
+// `styles/components.css` (kit-card + kit-card--*) via @apply.
+func CardVariant(variant string) string {
+	switch strings.TrimSpace(variant) {
+	case "", "default", "raised":
+		return "kit-card"
+	case "kpi":
+		return "kit-card kit-card--kpi"
+	case "muted":
+		return "kit-card kit-card--muted"
+	case "ghost":
+		return "kit-card kit-card--ghost"
+	case "compact":
+		return "kit-card kit-card--compact"
+	case "flat":
+		return "kit-card kit-card--flat"
+	case "accent":
+		return "kit-card kit-card--accent"
+	default:
+		return Cn("kit-card", variant)
+	}
+}
+
 // ButtonStyleVariant returns base + color classes for a button variant.
 func ButtonStyleVariant(variant string) string {
 	base := "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium rounded transition-colors shrink-0 outline-none"
@@ -107,7 +132,7 @@ func TypographyClasses(fontSize, fontWeight, lineHeight, letterSpacing, textColo
 
 // FieldVariant returns base + color classes for an input field.
 func FieldVariant(variant string) string {
-	base := "w-full rounded border px-3 py-2 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50"
+	base := "w-full rounded border px-3 py-2 text-sm outline-none transition-colors focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50"
 	switch variant {
 	case "", "default", "outline":
 		return Cn(base, "border-border bg-background")

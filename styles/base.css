@@ -97,12 +97,38 @@
   code, pre, kbd, samp {
     font-family: var(--font-mono);
   }
+
+  button {
+    @apply cursor-pointer;
+  }
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-.dark .latty {
-  filter: invert(1);
+/* Custom scrollbar styles with shadcn colors */
+/* width */
+
+.bg-scroll::-webkit-scrollbar,
+aside::-webkit-scrollbar {
+  @apply w-1.5;
+}
+
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-secondary rounded cursor-pointer;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary;
 }

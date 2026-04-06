@@ -1,68 +1,47 @@
 # UI8Kit Go
 
-A component kit for **Go + [templ](https://templ.guide) + Tailwind CSS** in the style of shadcn/ui design tokens.
+`github.com/fastygo/ui8kit` is a Go component kit for server-rendered dashboards powered by `templ` + Tailwind.
 
 ## Install
 
 ```bash
 go get github.com/fastygo/ui8kit@latest
+go install github.com/a-h/templ/cmd/templ@latest
+go build ./...
+go test ./...
 ```
-
-## Documentation
-
-Full guides (installation, packages, Tailwind v4 CLI setup for consuming apps) live in the [docs](docs/README.md) folder.
 
 ## Packages
 
-
-| Package  | Import                             | Description                                                                       |
-| -------- | ---------------------------------- | --------------------------------------------------------------------------------- |
-| `ui`     | `github.com/fastygo/ui8kit/ui`     | Primitives: Box, Stack, Group, Container, Button, Badge, Text, Title, Field, Icon |
-| `layout` | `github.com/fastygo/ui8kit/layout` | Shell (sidebar + header + main), Sidebar, Header                                  |
-| `utils`  | `github.com/fastygo/ui8kit/utils`  | UtilityProps, Cn(), variant helpers                                               |
-| `styles` | `github.com/fastygo/ui8kit/styles` | Embedded CSS (base theme, components, Latty icons)                                |
-
+- `ui` — primitives (`github.com/fastygo/ui8kit/ui`)
+- `layout` — shell and navigation (`github.com/fastygo/ui8kit/layout`)
+- `utils` — props, variants, utility composition (`github.com/fastygo/ui8kit/utils`)
+- `styles` — embedded CSS assets (`github.com/fastygo/ui8kit/styles`)
 
 ## Quick start
 
 ```go
-package pages
-
 import (
-    "github.com/fastygo/ui8kit/ui"
     "github.com/fastygo/ui8kit/layout"
+    "github.com/fastygo/ui8kit/ui"
 )
 
 templ Dashboard(nav []layout.NavItem) {
-    @layout.Shell(layout.ShellProps{
-        Title:     "Dashboard",
-        BrandName: "My App",
-        Active:    "/",
-        NavItems:  nav,
-    }) {
-        @ui.Stack(ui.StackProps{}) {
-            @ui.Title(ui.TitleProps{Order: 1}, "Welcome")
-            @ui.Group(ui.GroupProps{}) {
-                @ui.Button(ui.ButtonProps{Variant: "primary"}, "New")
-                @ui.Button(ui.ButtonProps{Variant: "outline"}, "Settings")
-            }
-        }
+    @layout.Shell(layout.ShellProps{Title: "HubRelay", Active: "/"}) {
+        @ui.Button(ui.ButtonProps{Variant: "primary"}, "Run")
     }
 }
 ```
 
-## Serving embedded CSS
+## CSS flow
 
-```go
-import (
-    "net/http"
-    "github.com/fastygo/ui8kit/styles"
-)
-
-http.Handle("/static/css/", http.StripPrefix("/static/css/",
-    http.FileServer(http.FS(styles.FS))))
+```bash
+npm install
+npm run build:css
+./scripts/gen-css.sh
 ```
 
-## License
+Serve either the compiled `static/css/app.css` path from the app, or `styles.FS` in local checks.
 
-MIT
+See full guides in [docs](docs/README.md).
+

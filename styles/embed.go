@@ -12,5 +12,5 @@ package styles
 
 import "embed"
 
-//go:embed base.css components.css latty.css
+//go:embed base.css shell.css components.css latty.css
 var FS embed.FS
