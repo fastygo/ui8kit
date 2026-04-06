@@ -2,9 +2,15 @@
 set -euo pipefail
 
 # Usage: ./scripts/release.sh 0.2.0
-# Creates an annotated git tag v0.2.0 and updates Version constant.
+# Creates a release commit and annotated tag v0.2.0.
+#
+# Local policy:
+# - Always run regular tests.
+# - Run race tests only when RELEASE_RUN_RACE=1 and the local toolchain supports CGO.
+# - CI remains the authoritative place for go test -race.
 
 VERSION="${1:-}"
+RUN_RACE="${RELEASE_RUN_RACE:-0}"
 
 if [ -z "$VERSION" ]; then
   echo "Usage: $0 <version>"
@@ -39,11 +45,27 @@ if [ "$BRANCH" != "main" ]; then
   fi
 fi
 
+echo "Generating templ files..."
+templ generate ./...
+
 echo "Running tests..."
-go test ./... -race
+go test ./... -count=1
+
+if [ "$RUN_RACE" = "1" ]; then
+  if [ "$(go env CGO_ENABLED)" = "1" ]; then
+    echo "Running race tests..."
+    go test ./... -race -count=1
+  else
+    echo "Warning: RELEASE_RUN_RACE=1 but CGO is disabled; skipping local race tests."
+    echo "CI will still enforce go test ./... -race on the release tag."
+  fi
+else
+  echo "Skipping local race tests."
+  echo "Set RELEASE_RUN_RACE=1 to run them when your environment supports CGO."
+fi
 
 echo "Updating Version constant to ${VERSION}..."
-sed -i "s/const Version = \".*\"/const Version = \"${VERSION}\"/" ui8kit.go
+go run ./scripts/cmd/set-version "${VERSION}"
 
 git add ui8kit.go
 git commit -m "chore: release ${TAG}"
@@ -56,7 +78,8 @@ echo "Done. To publish:"
 echo "  git push origin ${BRANCH} --tags"
 echo ""
 echo "After push:"
-echo "  - CI runs tests"
+echo "  - CI verifies tag/version consistency"
+echo "  - CI runs templ generate, go vet, and go test ./... -race"
 echo "  - release.yml creates GitHub Release with auto-generated notes"
 echo "  - proxy.golang.org indexes ${TAG} within minutes"
 echo "  - Users: go get github.com/fastygo/ui8kit@${TAG}"
