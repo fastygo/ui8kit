@@ -35,14 +35,8 @@ jobs:
             exit 1
           fi
 
-      - name: Generate
-        run: templ generate ./...
-
-      - name: Vet
-        run: go vet ./...
-
-      - name: Test
-        run: go test ./... -race -count=1
+      - name: Run preflight
+        run: PREFLIGHT_RUN_RACE=1 bash ./scripts/preflight.sh
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

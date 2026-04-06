@@ -5,7 +5,7 @@ set -euo pipefail
 # Creates a release commit and annotated tag v0.2.0.
 #
 # Local policy:
-# - Always run regular tests.
+# - Delegate all checks to scripts/preflight.sh.
 # - Run race tests only when RELEASE_RUN_RACE=1 and the local toolchain supports CGO.
 # - CI remains the authoritative place for go test -race.
 
@@ -45,24 +45,8 @@ if [ "$BRANCH" != "main" ]; then
   fi
 fi
 
-echo "Generating templ files..."
-templ generate ./...
-
-echo "Running tests..."
-go test ./... -count=1
-
-if [ "$RUN_RACE" = "1" ]; then
-  if [ "$(go env CGO_ENABLED)" = "1" ]; then
-    echo "Running race tests..."
-    go test ./... -race -count=1
-  else
-    echo "Warning: RELEASE_RUN_RACE=1 but CGO is disabled; skipping local race tests."
-    echo "CI will still enforce go test ./... -race on the release tag."
-  fi
-else
-  echo "Skipping local race tests."
-  echo "Set RELEASE_RUN_RACE=1 to run them when your environment supports CGO."
-fi
+echo "Running preflight checks..."
+PREFLIGHT_RUN_RACE="$RUN_RACE" bash ./scripts/preflight.sh
 
 echo "Updating Version constant to ${VERSION}..."
 go run ./scripts/cmd/set-version "${VERSION}"

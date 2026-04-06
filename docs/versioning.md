@@ -25,6 +25,28 @@ Examples:
 Run the release script from the repository root:
 
 ```bash
+bash ./scripts/preflight.sh
+bash ./scripts/release.sh 0.2.0
+```
+
+Or, if you prefer to think of it as explicit steps:
+
+```bash
+bash ./scripts/preflight.sh
+bash ./scripts/release.sh 0.2.0
+git push origin main --tags
+```
+
+The intended sequence is:
+
+1. `bash ./scripts/preflight.sh`
+2. Commit any generated or formatted changes if preflight produced them.
+3. `bash ./scripts/release.sh 0.2.0`
+4. `git push origin main --tags`
+
+If you already know the tree is clean and preflight already passed, the release script may be run directly:
+
+```bash
 ./scripts/release.sh 0.2.0
 ```
 

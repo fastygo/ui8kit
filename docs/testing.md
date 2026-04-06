@@ -3,10 +3,14 @@
 ## Run tests
 
 ```bash
+bash ./scripts/preflight.sh
+
 go test ./...
 
 go test ./... -race
 ```
+
+`preflight.sh` is the recommended local entry point because it also runs generation, formatting, vet, build, and clean-tree checks before tests.
 
 ## Scope
 
@@ -22,7 +26,5 @@ go test ./... -race
 3. Keep CI command set consistent:
 
 ```bash
-go test ./... -race
-
-go vet ./...
+bash ./scripts/preflight.sh
 ```
