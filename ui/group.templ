@@ -3,15 +3,34 @@ package ui
 import "github.com/fastygo/ui8kit/utils"
 
 func groupClasses(p GroupProps) string {
-	base := "flex gap-4 items-center justify-start min-w-0"
+	base := "ui-group"
 	if p.Grow {
-		base = utils.Cn(base, "w-full")
+		base = utils.Cn(base, "ui-group-grow")
 	}
 	return utils.Cn(base, p.UtilityProps.Resolve(), p.Class)
 }
 
 templ Group(props GroupProps) {
-	<div class={ groupClasses(props) }>
-		{ children... }
-	</div>
+	switch utils.ResolveTag(props.Tag, "div", utils.TagGroupGroup) {
+		case "section":
+			<section class={ groupClasses(props) }>{ children... }</section>
+		case "article":
+			<article class={ groupClasses(props) }>{ children... }</article>
+		case "aside":
+			<aside class={ groupClasses(props) }>{ children... }</aside>
+		case "header":
+			<header class={ groupClasses(props) }>{ children... }</header>
+		case "footer":
+			<footer class={ groupClasses(props) }>{ children... }</footer>
+		case "main":
+			<main class={ groupClasses(props) }>{ children... }</main>
+		case "nav":
+			<nav class={ groupClasses(props) }>{ children... }</nav>
+		case "figure":
+			<figure class={ groupClasses(props) }>{ children... }</figure>
+		case "fieldset":
+			<fieldset class={ groupClasses(props) }>{ children... }</fieldset>
+		default:
+			<div class={ groupClasses(props) }>{ children... }</div>
+	}
 }

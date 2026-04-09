@@ -46,7 +46,7 @@ func TestCardVariant(t *testing.T) {
 			t.Fatalf("CardVariant(%q) returned empty", v)
 		}
 	}
-	if got := CardVariant("kpi"); !strings.Contains(got, "kit-card--kpi") {
+	if got := CardVariant("kpi"); !strings.Contains(got, "ui-card--kpi") {
 		t.Fatalf("expected kpi modifier in %q", got)
 	}
 	if got := CardVariant("custom-extra"); !strings.Contains(got, "custom-extra") {
@@ -89,5 +89,38 @@ func TestFieldControlVariants(t *testing.T) {
 		if got := FieldControlSizeVariant(s); got == "" {
 			t.Fatalf("FieldControlSizeVariant(%q) returned empty", s)
 		}
+	}
+}
+
+func TestImageVariants(t *testing.T) {
+	if got := ImageFitVariant("contain"); got != "object-contain" {
+		t.Fatalf("unexpected fit: %q", got)
+	}
+	if got := ImagePositionVariant("left-top"); got != "object-left-top" {
+		t.Fatalf("unexpected position: %q", got)
+	}
+	if got := ImageAspectVariant("video"); got != "aspect-video" {
+		t.Fatalf("unexpected aspect: %q", got)
+	}
+}
+
+func TestGridVariants(t *testing.T) {
+	if got := GridColsVariant("3"); got != "grid-cols-3" {
+		t.Fatalf("unexpected cols: %q", got)
+	}
+	if got := GridColsVariant("1-3"); got == "" || !strings.Contains(got, "xl:grid-cols-3") {
+		t.Fatalf("unexpected preset cols: %q", got)
+	}
+	if got := GridColVariant(3, 2, 0, 1); !strings.Contains(got, "col-span-3") || !strings.Contains(got, "col-start-2") || !strings.Contains(got, "order-1") {
+		t.Fatalf("unexpected col variant: %q", got)
+	}
+}
+
+func TestSheetVariants(t *testing.T) {
+	if got := SheetSizeVariant("lg"); got != "w-96" {
+		t.Fatalf("unexpected sheet size: %q", got)
+	}
+	if got := SheetSideVariant("left"); got != "left-0 border-r" {
+		t.Fatalf("unexpected sheet side: %q", got)
 	}
 }

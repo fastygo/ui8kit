@@ -56,10 +56,10 @@ func TestHeaderRender(t *testing.T) {
 	html := render(t, h)
 	assertContains(t, html, "My Page")
 	assertContains(t, html, "<header")
-	assertContains(t, html, "kit-header")
+	assertContains(t, html, "ui-header")
 	assertContains(t, html, "ui8kit-theme-toggle")
 	assertContains(t, html, "aria-controls=\"ui8kit-mobile-sheet-panel\"")
-	assertContains(t, html, "for=\"ui8kit-mobile-sheet\"")
+	assertContains(t, html, "data-ui8kit-dialog-open")
 	assertContains(t, html, "header-extra")
 	assertContains(t, html, "header-trailing")
 	assertContains(t, html, "data-switch-to-dark-label=\"Dark mode\"")
@@ -78,7 +78,7 @@ func TestSidebarRender(t *testing.T) {
 	assertContains(t, html, "Home")
 	assertContains(t, html, "Settings")
 	assertContains(t, html, "latty-box")
-	assertContains(t, html, "bg-accent")
+	assertContains(t, html, "ui-sidebar-item-active")
 }
 
 func TestSidebarMobile(t *testing.T) {
@@ -118,18 +118,26 @@ func TestShellRender(t *testing.T) {
 	assertContains(t, html, "Brand")
 	assertContains(t, html, "Home")
 	assertContains(t, html, "aria-modal=\"true\"")
-	assertContains(t, html, "id=\"ui8kit-mobile-sheet\"")
-	assertContains(t, html, "type=\"checkbox\"")
-	assertContains(t, html, "kit-shell-mobile-sheet-overlay")
-	assertContains(t, html, "kit-shell-mobile-sheet-panel")
+	assertContains(t, html, "id=\"ui8kit-mobile-sheet-panel\"")
+	assertContains(t, html, "data-ui8kit-dialog")
+	assertNotContains(t, html, "type=\"checkbox\"")
+	assertContains(t, html, "ui-shell-mobile-sheet-overlay")
+	assertContains(t, html, "ui-shell-mobile-sheet-panel")
+	assertContains(t, html, "/static/js/ui8kit.js")
 	assertNotContains(t, html, "popover=")
 	assertNotContains(t, html, "ui8kitOpenSidebar")
 	assertNotContains(t, html, "ui8kitToggleTheme")
-	assertContains(t, html, "kit-shell-body")
-	assertContains(t, html, "kit-shell-main")
+	assertContains(t, html, "ui-shell-body")
+	assertContains(t, html, "ui-shell-main")
 	assertContains(t, html, "shell-extra")
 	assertContains(t, html, "shell-trailing")
 	assertContains(t, html, "data-switch-to-dark-label=\"To dark\"")
+}
+
+func TestShellMarketingBodyClass(t *testing.T) {
+	sh := layout.Shell(layout.ShellProps{Title: "Marketing", MarketingShell: true})
+	html := render(t, sh)
+	assertContains(t, html, "ui-shell-body--marketing")
 }
 
 func TestShellDefaultBrand(t *testing.T) {
@@ -148,4 +156,10 @@ func TestShellCustomCSS(t *testing.T) {
 	sh := layout.Shell(layout.ShellProps{Title: "X", CSSPath: "/assets/style.css"})
 	html := render(t, sh)
 	assertContains(t, html, "/assets/style.css")
+}
+
+func TestShellCustomJS(t *testing.T) {
+	sh := layout.Shell(layout.ShellProps{Title: "X", JSPath: "/assets/ui8kit.min.js"})
+	html := render(t, sh)
+	assertContains(t, html, "/assets/ui8kit.min.js")
 }

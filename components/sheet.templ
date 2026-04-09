@@ -1,0 +1,35 @@
+package components
+
+templ Sheet(props SheetProps) {
+	<div
+		id={ sheetPanelID(props.ID) }
+		data-ui8kit="sheet"
+		data-ui8kit-dialog
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby={ sheetTitleID(props.ID) }
+		class={ sheetPanelClasses(props) }
+		data-state="closed"
+		hidden
+	>
+		<div data-ui8kit-dialog-overlay data-ui8kit-dialog-close data-ui8kit-dialog-target={ sheetPanelID(props.ID) } class="ui-sheet-overlay" hidden></div>
+		<div
+			id={ sheetContentID(props.ID) }
+			data-ui8kit-dialog-content
+			data-sheet-panel
+			class="ui-sheet-content-wrapper"
+		>
+			<div class="ui-sheet-header">
+				<span id={ sheetTitleID(props.ID) } class="ui-sheet-title">{ props.Title }</span>
+				<button
+					type="button"
+					data-ui8kit-dialog-close
+					data-ui8kit-dialog-target={ sheetPanelID(props.ID) }
+					aria-label="Close"
+					class="ui-sheet-close"
+				>✕</button>
+			</div>
+			<div class="ui-sheet-content">{ children... }</div>
+		</div>
+	</div>
+}

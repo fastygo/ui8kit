@@ -1,5 +1,36 @@
 package ui
 
+import "github.com/fastygo/ui8kit/utils"
+
 templ Text(props TextProps, value string) {
-	<p class={ textClasses(props) }>{ value }</p>
+	switch utils.ResolveTag(props.Tag, "p", utils.TagGroupText) {
+		case "span":
+			<span class={ textClasses(props) }>{ value }</span>
+		case "small":
+			<small class={ textClasses(props) }>{ value }</small>
+		case "time":
+			<time class={ textClasses(props) }>{ value }</time>
+		case "em":
+			<em class={ textClasses(props) }>{ value }</em>
+		case "strong":
+			<strong class={ textClasses(props) }>{ value }</strong>
+		case "blockquote":
+			<blockquote class={ textClasses(props) }>{ value }</blockquote>
+		case "figcaption":
+			<figcaption class={ textClasses(props) }>{ value }</figcaption>
+		case "cite":
+			<cite class={ textClasses(props) }>{ value }</cite>
+		case "abbr":
+			<abbr class={ textClasses(props) }>{ value }</abbr>
+		case "address":
+			<address class={ textClasses(props) }>{ value }</address>
+		case "pre":
+			<pre class={ textClasses(props) }>{ value }</pre>
+		case "code":
+			<code class={ textClasses(props) }>{ value }</code>
+		case "mark":
+			<mark class={ textClasses(props) }>{ value }</mark>
+		default:
+			<p class={ textClasses(props) }>{ value }</p>
+	}
 }

@@ -4,7 +4,18 @@ import "strings"
 
 templ Button(props ButtonProps, label string) {
 	if strings.TrimSpace(props.Href) != "" {
-		<a href={ templ.SafeURL(props.Href) } class={ buttonClasses(props) }>{ label }</a>
+		if props.Disabled {
+			<a
+				href={ templ.SafeURL(props.Href) }
+				class={ buttonClasses(props) }
+				aria-disabled="true"
+				tabindex="-1"
+				role="link"
+				rel="nofollow noopener noreferrer"
+			>{ label }</a>
+		} else {
+			<a href={ templ.SafeURL(props.Href) } class={ buttonClasses(props) }>{ label }</a>
+		}
 	} else {
 		<button type={ buttonType(props.Type) } class={ buttonClasses(props) } disabled?={ props.Disabled }>{ label }</button>
 	}

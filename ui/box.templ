@@ -3,7 +3,24 @@ package ui
 import "github.com/fastygo/ui8kit/utils"
 
 templ Box(props BoxProps) {
-	<div class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }>
-		{ children... }
-	</div>
+	switch utils.ResolveTag(props.Tag, "div", utils.TagGroupLayout) {
+		case "section":
+			<section class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }>{ children... }</section>
+		case "article":
+			<article class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }>{ children... }</article>
+		case "aside":
+			<aside class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }>{ children... }</aside>
+		case "header":
+			<header class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }>{ children... }</header>
+		case "footer":
+			<footer class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }>{ children... }</footer>
+		case "main":
+			<main class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }>{ children... }</main>
+		case "nav":
+			<nav class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }>{ children... }</nav>
+		case "figure":
+			<figure class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }>{ children... }</figure>
+		default:
+			<div class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }>{ children... }</div>
+	}
 }

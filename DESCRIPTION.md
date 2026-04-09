@@ -63,7 +63,7 @@ ui.Box(ui.BoxProps{
         Flex: "col", Gap: "md",
     },
 })
-// Renders: class="p-4 bg-card rounded-lg shadow flex flex-col gap-4"
+// Renders: class="p-4 bg-card rounded-md shadow flex flex-col gap-4"
 ```
 
 Supported props: P/M (padding/margin with directional variants), W/H, Flex, Gap, Rounded, Shadow, Border, Bg, Text, Grid, and more.

@@ -3,7 +3,28 @@ package ui
 import "github.com/fastygo/ui8kit/utils"
 
 templ Stack(props StackProps) {
-	<div class={ utils.Cn("flex flex-col gap-4 items-start justify-start", props.UtilityProps.Resolve(), props.Class) }>
-		{ children... }
-	</div>
+	switch utils.ResolveTag(props.Tag, "div", utils.TagGroupStack) {
+		case "section":
+			<section class={ stackClasses(props) }>{ children... }</section>
+		case "article":
+			<article class={ stackClasses(props) }>{ children... }</article>
+		case "aside":
+			<aside class={ stackClasses(props) }>{ children... }</aside>
+		case "header":
+			<header class={ stackClasses(props) }>{ children... }</header>
+		case "footer":
+			<footer class={ stackClasses(props) }>{ children... }</footer>
+		case "main":
+			<main class={ stackClasses(props) }>{ children... }</main>
+		case "nav":
+			<nav class={ stackClasses(props) }>{ children... }</nav>
+		case "figure":
+			<figure class={ stackClasses(props) }>{ children... }</figure>
+		case "ul":
+			<ul class={ stackClasses(props) }>{ children... }</ul>
+		case "ol":
+			<ol class={ stackClasses(props) }>{ children... }</ol>
+		default:
+			<div class={ stackClasses(props) }>{ children... }</div>
+	}
 }

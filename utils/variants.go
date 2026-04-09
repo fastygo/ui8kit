@@ -1,27 +1,30 @@
 package utils
 
-import "strings"
+import (
+	"strconv"
+	"strings"
+)
 
 // CardVariant returns semantic dashboard card classes. Base and modifiers are defined in
-// `styles/components.css` (kit-card + kit-card--*) via @apply.
+// `styles/components.css` (ui-card + ui-card--*) via @apply.
 func CardVariant(variant string) string {
 	switch strings.TrimSpace(variant) {
 	case "", "default", "raised":
-		return "kit-card"
+		return "ui-card"
 	case "kpi":
-		return "kit-card kit-card--kpi"
+		return "ui-card ui-card--kpi"
 	case "muted":
-		return "kit-card kit-card--muted"
+		return "ui-card ui-card--muted"
 	case "ghost":
-		return "kit-card kit-card--ghost"
+		return "ui-card ui-card--ghost"
 	case "compact":
-		return "kit-card kit-card--compact"
+		return "ui-card ui-card--compact"
 	case "flat":
-		return "kit-card kit-card--flat"
+		return "ui-card ui-card--flat"
 	case "accent":
-		return "kit-card kit-card--accent"
+		return "ui-card ui-card--accent"
 	default:
-		return Cn("kit-card", variant)
+		return Cn("ui-card", variant)
 	}
 }
 
@@ -185,5 +188,96 @@ func FieldControlSizeVariant(size string) string {
 		return "h-5 w-5"
 	default:
 		return size
+	}
+}
+
+func ImageFitVariant(fit string) string {
+	switch strings.TrimSpace(fit) {
+	case "contain", "cover", "fill", "none", "scale-down":
+		return "object-" + fit
+	default:
+		return "object-cover"
+	}
+}
+
+func ImagePositionVariant(pos string) string {
+	switch strings.TrimSpace(pos) {
+	case "bottom", "center", "left", "right", "top", "left-bottom", "left-top", "right-bottom", "right-top":
+		return "object-" + pos
+	default:
+		return "object-center"
+	}
+}
+
+func ImageAspectVariant(aspect string) string {
+	switch strings.TrimSpace(aspect) {
+	case "auto", "square", "video":
+		return "aspect-" + aspect
+	default:
+		return "aspect-auto"
+	}
+}
+
+func GridColsVariant(cols string) string {
+	switch strings.TrimSpace(cols) {
+	case "", "1":
+		return "grid-cols-1"
+	case "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12":
+		return "grid-cols-" + cols
+	case "1-2":
+		return "grid-cols-1 md:grid-cols-2"
+	case "1-3":
+		return "grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+	case "1-4":
+		return "grid-cols-1 md:grid-cols-2 xl:grid-cols-4"
+	default:
+		return cols
+	}
+}
+
+func GridColVariant(span, start, end, order int) string {
+	parts := []string{}
+	if span > 0 {
+		parts = append(parts, "col-span-"+strconv.Itoa(span))
+	}
+	if start > 0 {
+		parts = append(parts, "col-start-"+strconv.Itoa(start))
+	}
+	if end > 0 {
+		parts = append(parts, "col-end-"+strconv.Itoa(end))
+	}
+	if order > 0 {
+		parts = append(parts, "order-"+strconv.Itoa(order))
+	}
+	return Cn(parts...)
+}
+
+func SheetSizeVariant(size string) string {
+	switch strings.TrimSpace(size) {
+	case "sm":
+		return "w-64"
+	case "", "md":
+		return "w-80"
+	case "lg":
+		return "w-96"
+	case "xl":
+		return "w-[28rem]"
+	case "2xl":
+		return "w-[32rem]"
+	case "full":
+		return "w-full"
+	default:
+		return size
+	}
+}
+
+func SheetSideVariant(side string) string {
+	switch strings.TrimSpace(side) {
+	case "left":
+		return "left-0 border-r"
+	case "", "right":
+		return "right-0 border-l"
+	default:
+		return "right-0 border-l"
 	}
 }

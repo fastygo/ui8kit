@@ -1,0 +1,49 @@
+package components
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ Dialog(props DialogProps) {
+	<div
+		id={ dialogID(props.ID) }
+		data-ui8kit="dialog"
+		data-ui8kit-dialog
+		data-dialog-target={ dialogID(props.ID) }
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby={ dialogTitleID(props.ID) }
+		aria-describedby={ dialogDescriptionID(props.ID) }
+		hidden?={!props.Open}
+		data-state={ map[bool]string{true: "open", false: "closed"}[props.Open] }
+		class={ utils.Cn("ui-dialog", props.UtilityProps.Resolve(), props.Class) }
+	>
+		<div class="ui-dialog-overlay" data-ui8kit-dialog-overlay data-ui8kit-dialog-close data-ui8kit-dialog-target={ dialogID(props.ID) }></div>
+		<section class="ui-dialog-content">
+			{ children... }
+		</section>
+	</div>
+}
+
+templ DialogTrigger(props DialogTriggerProps) {
+	<button
+		type="button"
+		data-ui8kit-dialog-open
+		data-ui8kit-dialog-target={ dialogID(props.For) }
+		class={ props.Class }
+	>
+		{ props.Label }
+	</button>
+}
+
+templ DialogTitle(id string, props string) {
+	<h2 id={ dialogTitleID(id) } class="ui-dialog-title">{ props }</h2>
+}
+
+templ DialogDescription(id string, props string) {
+	<p id={ dialogDescriptionID(id) } class="ui-dialog-description">{ props }</p>
+}
+
+templ DialogClose(props string) {
+	<button type="button" class="ui-dialog-close" data-ui8kit-dialog-close data-ui8kit-dialog-target={ props }>
+		<span aria-hidden="true">✕</span>
+	</button>
+}

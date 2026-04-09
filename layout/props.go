@@ -39,8 +39,11 @@ type ShellProps struct {
 	Active         string           // current path for nav highlight
 	NavItems       []NavItem        // sidebar links
 	CSSPath        string           // path to CSS file (defaults to "/static/css/app.css")
+	JSPath         string           // path to ui8kit JS bundle (defaults to "/static/js/ui8kit.js")
 	HeadExtra      templ.Component  // optional extra <head> content
 	HeaderExtra    templ.Component  // optional extra header actions before theme toggle
 	HeaderTrailing templ.Component  // optional trailing header actions after theme toggle
 	ThemeToggle    ThemeToggleProps // optional copy for the theme toggle button
+	// MarketingShell enables full-width marketing layout: no desktop sidebar, header grid, mobile header-nav hidden (nav stays in the sheet).
+	MarketingShell bool
 }

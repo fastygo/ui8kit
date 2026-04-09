@@ -1,0 +1,53 @@
+package components
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ Combobox(props ComboboxProps) {
+	<div
+		id={ comboboxID(props.ID) }
+		data-ui8kit="combobox"
+		data-combobox
+		data-combobox-input={ comboboxInputID(props.ID) }
+		data-combobox-options={ comboboxOptionsID(props.ID) }
+		class={ utils.Cn("ui-combobox", props.UtilityProps.Resolve(), props.Class) }
+	>
+		if props.Label != "" {
+			<label for={ comboboxInputID(props.ID) } class="ui-combobox-label">{ props.Label }</label>
+		}
+		<div class="ui-combobox-control">
+			<input
+				id={ comboboxInputID(props.ID) }
+				type="text"
+				name={ props.Name }
+				autocomplete="off"
+				role="combobox"
+				aria-expanded="false"
+				aria-controls={ comboboxOptionsID(props.ID) }
+				class="ui-combobox-input"
+				value={ props.Value }
+				placeholder={ props.Placeholder }
+			/>
+			<button
+				type="button"
+				class="ui-combobox-toggle"
+				aria-label="Open options"
+				data-combobox-toggle
+				data-combobox-target={ comboboxID(props.ID) }
+			>
+				▾
+			</button>
+		</div>
+		<ul id={ comboboxOptionsID(props.ID) } class="ui-combobox-options" hidden>
+			for _, option := range props.Options {
+				<li
+					id={ comboboxOptionID(props.ID, option.Value) }
+					role="option"
+					data-combobox-option
+					data-combobox-value={ option.Value }
+					aria-disabled={ map[bool]string{true: "true", false: "false"}[option.Disabled] }
+					tabindex="-1"
+				>{ option.Label }</li>
+			}
+		</ul>
+	</div>
+}

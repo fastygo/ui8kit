@@ -1,0 +1,25 @@
+.prose { @apply text-foreground leading-relaxed; }
+.prose h1 { @apply text-3xl font-bold mb-4; }
+.prose h2 { @apply text-2xl font-semibold mt-6 mb-3; }
+.prose h3 { @apply text-xl font-semibold mt-5 mb-2; }
+.prose p { @apply my-4 text-base; }
+.prose a { @apply text-primary underline; }
+.prose ul { @apply list-disc pl-6 my-4; }
+.prose ol { @apply list-decimal pl-6 my-4; }
+.prose li { @apply my-1; }
+.prose blockquote { @apply border-l-4 border-muted pl-4 italic my-4 text-secondary-foreground; }
+.prose img { @apply my-4 rounded; }
+.prose code { @apply px-1 py-0.5 rounded bg-muted font-mono text-sm text-foreground; }
+.prose pre { @apply p-3 rounded bg-muted overflow-x-auto my-4; }
+.prose pre code { @apply px-0 py-0 bg-transparent; }
+.prose hr { @apply my-6 border-border; }
+.prose figure { @apply my-4; }
+.prose figcaption { @apply text-sm text-secondary-foreground mt-2; }
+.prose table { @apply w-full my-4 border-collapse; }
+.prose thead { @apply border-b border-border; }
+.prose th,
+.prose td { @apply border-b border-border px-2 py-2 align-top; }
+.prose th { @apply font-semibold text-left; }
+.prose strong { @apply font-semibold; }
+.prose em { @apply italic; }
+

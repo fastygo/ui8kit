@@ -37,6 +37,10 @@ type UtilityProps struct {
 	Tracking string
 	Overflow string
 	Z        string
+	Object   string
+	Aspect   string
+	MinH     string
+	MaxH     string
 	Hidden   bool
 	Truncate bool
 	Grid     string
@@ -92,6 +96,10 @@ func (u UtilityProps) Resolve() string {
 	appendIf("tracking-", u.Tracking)
 	appendIf("overflow-", u.Overflow)
 	appendIf("z-", u.Z)
+	appendIf("object-", u.Object)
+	appendIf("aspect-", u.Aspect)
+	appendIf("min-h-", u.MinH)
+	appendIf("max-h-", u.MaxH)
 	appendIf("grid-cols-", u.Grid)
 	appendIf("col-span-", u.Col)
 	appendIf("row-span-", u.Row)

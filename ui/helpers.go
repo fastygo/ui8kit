@@ -2,22 +2,20 @@ package ui
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/fastygo/ui8kit/utils"
 )
 
 func resolveTag(tag, fallback string) string {
-	if t := strings.TrimSpace(tag); t != "" {
-		return t
-	}
-	return fallback
+	return utils.ResolveTag(tag, fallback, utils.TagGroupLayout)
 }
 
 func buttonClasses(p ButtonProps) string {
 	state := ""
 	if p.Disabled {
-		state = "pointer-events-none opacity-50"
+		state = "ui-button-disabled"
 	}
 	return utils.Cn(utils.ButtonStyleVariant(p.Variant), utils.ButtonSizeVariant(p.Size), p.UtilityProps.Resolve(), state, p.Class)
 }
@@ -29,11 +27,22 @@ func buttonType(t string) string {
 	return t
 }
 
+func buttonRel(disabled bool) string {
+	if disabled {
+		return "nofollow noopener noreferrer"
+	}
+	return ""
+}
+
 func fieldClasses(p FieldProps) string {
 	if p.Type == "checkbox" || p.Type == "radio" {
 		return utils.Cn(utils.FieldControlVariant(p.Variant), utils.FieldControlSizeVariant(p.Size), p.UtilityProps.Resolve(), p.Class)
 	}
 	return utils.Cn(utils.FieldVariant(p.Variant), utils.FieldSizeVariant(p.Size), p.UtilityProps.Resolve(), p.Class)
+}
+
+func stackClasses(p StackProps) string {
+	return utils.Cn("ui-stack", p.UtilityProps.Resolve(), p.Class)
 }
 
 func titleTag(order int) string {
@@ -63,15 +72,15 @@ func iconClasses(p IconProps) string {
 	size := p.Size
 	switch size {
 	case "xs":
-		size = "h-3 w-3"
+		size = "ui-icon-xs"
 	case "", "sm":
-		size = "h-4 w-4"
+		size = "ui-icon-sm"
 	case "md":
-		size = "h-5 w-5"
+		size = "ui-icon-md"
 	case "lg":
-		size = "h-6 w-6"
+		size = "ui-icon-lg"
 	}
-	return utils.Cn("latty", "latty-"+p.Name, size, p.Class)
+	return utils.Cn("ui-icon", "latty", "latty-"+p.Name, size, p.Class)
 }
 
 func fieldRows(rows int) int {
@@ -86,4 +95,110 @@ func fieldInputType(t string) string {
 		return "text"
 	}
 	return t
+}
+
+func fieldID(p FieldProps) string {
+	if strings.TrimSpace(p.ID) != "" {
+		return p.ID
+	}
+	if strings.TrimSpace(p.Name) != "" {
+		return p.Name
+	}
+	return ""
+}
+
+func imageLoading(value string) string {
+	switch strings.TrimSpace(value) {
+	case "eager":
+		return "eager"
+	default:
+		return "lazy"
+	}
+}
+
+func imageClasses(p ImageProps) string {
+	return utils.Cn(
+		"ui-image",
+		utils.ImageFitVariant(p.Fit),
+		utils.ImagePositionVariant(p.Position),
+		utils.ImageAspectVariant(p.Aspect),
+		p.UtilityProps.Resolve(),
+		p.Class,
+	)
+}
+
+func gridClasses(p GridProps) string {
+	return utils.Cn("ui-grid", utils.GridColsVariant(p.Cols), p.UtilityProps.Resolve(), p.Class)
+}
+
+func gridColClasses(p GridColProps) string {
+	return utils.Cn(utils.GridColVariant(p.Span, p.Start, p.End, p.Order), p.UtilityProps.Resolve(), p.Class)
+}
+
+func cardClasses(p CardProps) string {
+	return utils.Cn(utils.CardVariant(p.Variant), p.UtilityProps.Resolve(), p.Class)
+}
+
+func cardTag(tag string) string {
+	return utils.ResolveTag(tag, "div", utils.TagGroupLayout)
+}
+
+func cardTitleTag(order int) string {
+	if order < 1 || order > 6 {
+		return "h3"
+	}
+	return fmt.Sprintf("h%d", order)
+}
+
+func accordionType(value string) string {
+	switch strings.TrimSpace(value) {
+	case "multiple":
+		return "multiple"
+	default:
+		return "single"
+	}
+}
+
+func accordionState(open bool) string {
+	if open {
+		return "open"
+	}
+	return "closed"
+}
+
+func accordionTriggerID(value string) string {
+	return "trigger-" + strings.TrimSpace(value)
+}
+
+func accordionPanelID(value string) string {
+	return "panel-" + strings.TrimSpace(value)
+}
+
+func sheetID(value string) string {
+	if strings.TrimSpace(value) == "" {
+		return "sheet"
+	}
+	return value
+}
+
+func sheetPanelID(value string) string {
+	return sheetID(value) + "-panel"
+}
+
+func sheetTitleID(value string) string {
+	return sheetID(value) + "-title"
+}
+
+func sheetPanelClasses(p SheetProps) string {
+	return utils.Cn(
+		"ui-sheet-panel",
+		utils.SheetSideVariant(p.Side),
+		utils.SheetSizeVariant(p.Size),
+		p.UtilityProps.Resolve(),
+		p.Class,
+	)
+}
+
+func intAttr(n int) string {
+	return strconv.Itoa(n)
 }

@@ -1,0 +1,26 @@
+package components
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ Tooltip(props TooltipProps) {
+	<div
+		id={ tooltipID(props.ID) }
+		data-ui8kit="tooltip"
+		data-tooltip-trigger
+		data-tooltip-id={ tooltipID(props.ID) }
+		data-tooltip-content={ tooltipContentID(props.ID) }
+		class={ utils.Cn("ui-tooltip", props.UtilityProps.Resolve(), props.Class) }
+	>
+		<div class="ui-tooltip-trigger">
+			{ children... }
+		</div>
+		<span
+			id={ tooltipContentID(props.ID) }
+			role="tooltip"
+			hidden={!props.Open}
+			class="ui-tooltip-content"
+		>
+			{ props.Text }
+		</span>
+	</div>
+}

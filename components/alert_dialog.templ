@@ -1,0 +1,25 @@
+package components
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ AlertDialog(props AlertDialogProps) {
+	<div
+		id={ dialogID(props.ID) }
+		data-ui8kit="alertdialog"
+		data-ui8kit-dialog
+		role="alertdialog"
+		aria-modal="true"
+		hidden?={!props.Open}
+		data-state={ map[bool]string{true: "open", false: "closed"}[props.Open] }
+		class={ utils.Cn("ui-alert-dialog", props.UtilityProps.Resolve(), props.Class) }
+	>
+		<div class="ui-dialog-overlay" data-ui8kit-dialog-overlay data-ui8kit-dialog-close data-ui8kit-dialog-target={ dialogID(props.ID) }></div>
+		<section class="ui-alert-dialog-content">
+			{ children... }
+		</section>
+	</div>
+}
+
+templ AlertDialogCancelButton(label string) {
+	<button type="button" data-ui8kit-dialog-close class="ui-alert-dialog-cancel">{ label }</button>
+}

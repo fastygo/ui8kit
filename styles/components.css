@@ -1,129 +1,456 @@
 @layer components {
-  .kit-kpi-grid-2 {
+  .ui-kpi-grid-2 {
     @apply grid gap-4 md:grid-cols-2;
   }
 
-  .kit-kpi-grid-3 {
+  .ui-kpi-grid-3 {
     @apply grid gap-4 md:grid-cols-2 xl:grid-cols-3;
   }
 
-  .kit-kpi-grid-4 {
+  .ui-kpi-grid-4 {
     @apply grid gap-4 md:grid-cols-2 xl:grid-cols-4;
   }
 
-  .kit-kpi-label {
+  .ui-kpi-label {
     @apply text-xs uppercase text-muted-foreground;
   }
 
-  .kit-card {
-    @apply rounded-lg border border-border bg-card p-4 shadow-sm;
+  .ui-card {
+    @apply rounded border border-border bg-card p-4 shadow-sm;
   }
 
-  .kit-card--kpi {
+  .ui-card--kpi {
     @apply p-3;
   }
 
-  .kit-card--muted {
+  .ui-card--muted {
     @apply border-border bg-muted/40;
   }
 
-  .kit-card--ghost {
+  .ui-card--ghost {
     @apply border-dashed bg-background;
   }
 
-  .kit-card--compact {
+  .ui-card--compact {
     @apply p-3;
   }
 
-  .kit-card--flat {
+  .ui-card--flat {
     @apply shadow-none;
   }
 
-  .kit-card--accent {
+  .ui-card--accent {
     @apply border-transparent bg-accent/30;
   }
 
-  .kit-table-wrap {
+  .ui-table-wrap {
     @apply mt-4 overflow-x-auto;
   }
 
-  .kit-table {
+  .ui-table {
     @apply min-w-full divide-y divide-border text-sm;
   }
 
-  .kit-table-head-row {
+  .ui-table-head-row {
     @apply text-left text-muted-foreground;
   }
 
-  .kit-table-head-cell {
+  .ui-table-head-cell {
     @apply py-3 pr-4;
   }
 
-  .kit-table-cell-label {
+  .ui-table-cell-label {
     @apply py-3 pr-4 font-medium;
   }
 
-  .kit-table-cell {
+  .ui-table-cell {
     @apply py-3;
   }
 
-  .kit-chip-list {
+  .ui-chip-list {
     @apply mt-4 flex flex-wrap gap-2;
   }
 
-  .kit-chip {
+  .ui-chip {
     @apply inline-flex rounded-full border border-border px-3 py-1 text-xs;
   }
 
-  .card {
-    @apply rounded-lg border border-border bg-card;
+  .ui-sidebar-item {
+    @apply flex items-center gap-2 rounded-md px-4 py-2 text-sm;
   }
 
-  .card-header {
+  .ui-sidebar-item-active {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  .ui-sidebar-item-inactive {
+    @apply text-muted-foreground hover:bg-accent;
+  }
+
+  .ui-sidebar-item-icon {
+    @apply h-4 w-4;
+  }
+
+  .ui-sidebar-item-label {
+    @apply min-w-0;
+  }
+
+  .ui-sidebar-divider {
+    @apply my-2 border-t border-border;
+  }
+
+  .ui-card-surface {
+    @apply rounded border border-border bg-card;
+  }
+
+  .ui-card-header {
     @apply border-b border-border px-4 py-2;
   }
 
-  .card-title {
+  .ui-card-title {
     @apply text-sm font-semibold;
   }
 
-  .card-content {
+  .ui-card-content {
     @apply p-4;
   }
 
-  .form-label {
+  .ui-form-label {
     @apply block text-sm text-muted-foreground;
   }
 
-  .form-label-inline {
+  .ui-form-label-inline {
     @apply flex items-center gap-2 text-sm;
   }
 
-  .table {
+  .ui-table-basic {
     @apply w-full;
   }
 
-  .table-header {
+  .ui-table-header {
     @apply bg-muted;
   }
 
-  .table-header-cell {
+  .ui-table-header-cell {
     @apply min-w-0 px-4 py-2 text-left text-xs font-semibold text-muted-foreground;
   }
 
-  .table-body {
+  .ui-table-body {
     @apply divide-y divide-border;
   }
 
-  .table-cell {
+  .ui-table-body-cell {
     @apply min-w-0 px-4 py-2 text-sm;
   }
 
-  .table-cell-muted {
+  .ui-table-body-cell-muted {
     @apply min-w-0 px-4 py-2 text-sm text-muted-foreground;
   }
 
-  .pre-code {
+  .ui-pre-code {
     @apply overflow-x-auto whitespace-pre-wrap rounded border border-border bg-muted px-4 py-2 text-xs;
+  }
+
+  .ui-stack {
+    @apply flex flex-col gap-4 items-start justify-start;
+  }
+
+  .ui-group {
+    @apply flex gap-4 items-center justify-start min-w-0;
+  }
+
+  .ui-group-grow {
+    @apply w-full;
+  }
+
+  .ui-container {
+    @apply max-w-7xl mx-auto px-4;
+  }
+
+  .ui-field-wrap {
+    @apply flex flex-col gap-2;
+  }
+
+  .ui-field-label {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .ui-field-hint {
+    @apply text-xs text-muted-foreground;
+  }
+
+  .ui-field-error {
+    @apply text-xs text-destructive;
+  }
+
+  .ui-button-disabled {
+    @apply pointer-events-none opacity-50;
+  }
+
+  .ui-icon {
+    @apply inline-block;
+  }
+
+  .ui-icon-xs {
+    @apply h-3 w-3;
+  }
+
+  .ui-icon-sm {
+    @apply h-4 w-4;
+  }
+
+  .ui-icon-md {
+    @apply h-5 w-5;
+  }
+
+  .ui-icon-lg {
+    @apply h-6 w-6;
+  }
+
+  .ui-image {
+    @apply max-w-full h-auto;
+  }
+
+  .ui-grid {
+    @apply grid;
+  }
+
+  .ui-card-description {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .ui-card-footer {
+    @apply px-4 py-3 border-t border-border;
+  }
+
+  .ui-sheet {
+    @apply relative;
+  }
+
+  .ui-sheet-overlay {
+    @apply fixed inset-0 z-40 bg-card/50;
+  }
+
+  .ui-sheet-panel {
+    @apply fixed top-0 h-full max-w-full p-4 bg-card border-border;
+  }
+
+  .ui-sheet-header {
+    @apply flex items-center justify-between;
+  }
+
+  .ui-sheet-title {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .ui-sheet-close {
+    @apply inline-flex items-center justify-center h-8 w-8 rounded border border-border;
+  }
+
+  .ui-sheet-content {
+    @apply mt-4;
+  }
+
+  .ui-dialog {
+    @apply fixed inset-0 z-50;
+  }
+
+  .ui-dialog[data-state="open"] {
+    @apply block;
+  }
+
+  .ui-dialog[data-state="closed"] {
+    @apply hidden;
+  }
+
+  .ui-dialog-overlay {
+    @apply absolute inset-0 cursor-pointer bg-card/50;
+  }
+
+  .ui-dialog-content {
+    @apply relative h-full max-h-dvh w-full overflow-y-auto border-r border-border bg-card p-4;
+    width: 20rem;
+  }
+
+  .ui-dialog-title {
+    @apply text-sm font-semibold;
+  }
+
+  .ui-dialog-description {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .ui-dialog-close {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded border border-border;
+  }
+
+  .ui-alert-dialog {
+    @apply fixed inset-0 z-50;
+  }
+
+  .ui-alert-dialog-content {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded border border-border bg-card p-4 shadow-lg;
+  }
+
+  .ui-alert-dialog-cancel {
+    @apply inline-flex h-9 rounded border border-border px-3 py-2 text-sm;
+  }
+
+  .ui-alert {
+    @apply rounded border border-border p-4;
+  }
+
+  .ui-alert-default {
+    @apply bg-card text-card-foreground;
+  }
+
+  .ui-alert-success {
+    @apply border-green-500/30 bg-green-500/10 text-green-500;
+  }
+
+  .ui-alert-warning {
+    @apply border-yellow-500/30 bg-yellow-500/10 text-yellow-500;
+  }
+
+  .ui-alert-destructive {
+    @apply border-destructive bg-destructive/10 text-destructive;
+  }
+
+  .ui-breadcrumb {
+    @apply text-sm;
+  }
+
+  .ui-breadcrumb-list {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+  .ui-breadcrumb-item {
+    @apply inline-flex items-center;
+  }
+
+  .ui-breadcrumb-item::after {
+    content: "/";
+    @apply ml-2 text-muted-foreground;
+  }
+
+  .ui-breadcrumb-item:last-child::after {
+    @apply hidden;
+  }
+
+  .ui-breadcrumb-link {
+    @apply hover:underline;
+  }
+
+  .ui-breadcrumb-current {
+    @apply text-sm font-medium;
+  }
+
+  .ui-tabs {
+    @apply grid gap-2;
+  }
+
+  .ui-tab-trigger {
+    @apply inline-flex items-center justify-center rounded px-3 py-2 text-sm;
+  }
+
+  .ui-tab-trigger[aria-selected="true"] {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  .ui-tab-panel {
+    @apply mt-2;
+  }
+
+  .ui-combobox {
+    @apply grid gap-2;
+  }
+
+  .ui-combobox-label {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .ui-combobox-control {
+    @apply relative flex;
+  }
+
+  .ui-combobox-input {
+    @apply flex-1 border border-input bg-background px-3 py-2 text-sm;
+  }
+
+  .ui-combobox-toggle {
+    @apply border border-input bg-background px-3 py-2;
+  }
+
+  .ui-combobox-options {
+    @apply mt-1 max-h-60 overflow-auto border border-border bg-card p-1;
+  }
+
+  .ui-combobox-options li {
+    @apply cursor-pointer rounded px-2 py-2 text-sm;
+  }
+
+  .ui-combobox-option-active {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  .ui-tooltip {
+    @apply relative inline-flex;
+  }
+
+  .ui-tooltip-content {
+    @apply absolute z-40 hidden rounded border border-border bg-popover px-3 py-2 text-xs text-popover-foreground shadow;
+  }
+
+  /*
+   * Marketing / landing shell (e.g. welcome site): full width, no desktop sidebar,
+   * header uses a grid so title + HeaderExtra + theme share one row.
+   */
+  .ui-shell-body--marketing .ui-shell-desktop-aside {
+    @apply !hidden;
+  }
+
+  .ui-shell-body--marketing .ui-header {
+    @apply grid grid-cols-[auto_1fr] items-center;
+  }
+
+  .ui-shell-body--marketing .ui-header-actions {
+    @apply grid grid-cols-[1fr_auto_auto] items-center gap-4;
+  }
+
+  .ui-shell-body--marketing .ui-header-language {
+    @apply shrink-0;
+  }
+
+  .ui-shell-body--marketing .ui-header-title {
+    @apply pr-4;
+  }
+
+  .ui-shell-body--marketing .ui-shell-nav-mobile {
+    @apply flex flex-col items-stretch gap-1 p-2;
+  }
+
+  .ui-shell-body--marketing .ui-shell-nav-mobile a,
+  .ui-shell-body--marketing .ui-shell-nav-mobile button {
+    @apply flex w-full items-center rounded-md px-3 py-2 text-inherit no-underline;
+  }
+
+  .ui-shell-body--marketing .ui-shell-nav-mobile a:hover,
+  .ui-shell-body--marketing .ui-shell-nav-mobile button:hover {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  @media (max-width: 767px) {
+    .ui-shell-body--marketing .ui-header {
+      @apply flex flex-wrap;
+    }
+
+    .ui-shell-body--marketing .ui-header-actions {
+      @apply flex flex-1 justify-end;
+    }
+
+    .ui-shell-body--marketing .ui-header-nav-wrap,
+    .ui-shell-body--marketing .ui-header-nav {
+      @apply hidden;
+    }
   }
 }

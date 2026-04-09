@@ -57,7 +57,7 @@ func TestButtonDisabled(t *testing.T) {
 	btn := ui.Button(ui.ButtonProps{Disabled: true}, "No")
 	html := render(t, btn)
 	assertContains(t, html, "disabled")
-	assertContains(t, html, "opacity-50")
+	assertContains(t, html, "ui-button-disabled")
 }
 
 func TestBadgeVariants(t *testing.T) {
@@ -98,7 +98,7 @@ func TestIconRender(t *testing.T) {
 	icon := ui.Icon(ui.IconProps{Name: "sun", Size: "lg"})
 	html := render(t, icon)
 	assertContains(t, html, "latty-sun")
-	assertContains(t, html, "h-6 w-6")
+	assertContains(t, html, "ui-icon-lg")
 }
 
 func TestFieldInput(t *testing.T) {
@@ -148,19 +148,157 @@ func TestBoxWithUtilityProps(t *testing.T) {
 func TestStackRender(t *testing.T) {
 	stack := ui.Stack(ui.StackProps{})
 	html := render(t, stack)
-	assertContains(t, html, "flex flex-col")
-	assertContains(t, html, "gap-4")
+	assertContains(t, html, "ui-stack")
 }
 
 func TestGroupGrow(t *testing.T) {
 	group := ui.Group(ui.GroupProps{Grow: true})
 	html := render(t, group)
-	assertContains(t, html, "w-full")
+	assertContains(t, html, "ui-group-grow")
 }
 
 func TestContainerRender(t *testing.T) {
 	c := ui.Container(ui.ContainerProps{})
 	html := render(t, c)
-	assertContains(t, html, "max-w-7xl")
-	assertContains(t, html, "mx-auto")
+	assertContains(t, html, "ui-container")
+}
+
+func TestBoxWithTag(t *testing.T) {
+	box := ui.Box(ui.BoxProps{Tag: "section"})
+	html := render(t, box)
+	assertContains(t, html, "<section")
+}
+
+func TestBoxInvalidTag(t *testing.T) {
+	box := ui.Box(ui.BoxProps{Tag: "table"})
+	html := render(t, box)
+	assertContains(t, html, "<div")
+}
+
+func TestStackWithTag(t *testing.T) {
+	stack := ui.Stack(ui.StackProps{Tag: "ul"})
+	html := render(t, stack)
+	assertContains(t, html, "<ul")
+}
+
+func TestGroupWithTag(t *testing.T) {
+	group := ui.Group(ui.GroupProps{Tag: "fieldset"})
+	html := render(t, group)
+	assertContains(t, html, "<fieldset")
+}
+
+func TestTextWithTag(t *testing.T) {
+	txt := ui.Text(ui.TextProps{Tag: "span"}, "Hello")
+	html := render(t, txt)
+	assertContains(t, html, "<span")
+}
+
+func TestContainerWithTag(t *testing.T) {
+	c := ui.Container(ui.ContainerProps{Tag: "section"})
+	html := render(t, c)
+	assertContains(t, html, "<section")
+}
+
+func TestButtonDisabledLink(t *testing.T) {
+	btn := ui.Button(ui.ButtonProps{Href: "/x", Disabled: true}, "X")
+	html := render(t, btn)
+	assertContains(t, html, `aria-disabled="true"`)
+	assertContains(t, html, `tabindex="-1"`)
+	assertContains(t, html, `role="link"`)
+}
+
+func TestFieldWithLabelAndError(t *testing.T) {
+	field := ui.Field(ui.FieldProps{
+		ID:    "email",
+		Label: "Email",
+		Hint:  "Enter email",
+		Error: "Required",
+	})
+	html := render(t, field)
+	assertContains(t, html, "<label")
+	assertContains(t, html, `for="email"`)
+	assertContains(t, html, "Enter email")
+	assertContains(t, html, `role="alert"`)
+}
+
+func TestFieldSwitch(t *testing.T) {
+	field := ui.Field(ui.FieldProps{
+		Type:    "checkbox",
+		Switch:  true,
+		Checked: true,
+	})
+	html := render(t, field)
+	assertContains(t, html, `role="switch"`)
+	assertContains(t, html, `aria-checked="true"`)
+}
+
+func TestImageRender(t *testing.T) {
+	img := ui.Image(ui.ImageProps{
+		Src:      "/x.png",
+		Alt:      "X",
+		Fit:      "cover",
+		Position: "center",
+		Aspect:   "video",
+	})
+	html := render(t, img)
+	assertContains(t, html, "<img")
+	assertContains(t, html, `src="/x.png"`)
+	assertContains(t, html, "object-cover")
+	assertContains(t, html, "aspect-video")
+}
+
+func TestGridRender(t *testing.T) {
+	grid := ui.Grid(ui.GridProps{Cols: "3"})
+	html := render(t, grid)
+	assertContains(t, html, "grid-cols-3")
+}
+
+func TestGridColRender(t *testing.T) {
+	col := ui.GridCol(ui.GridColProps{Span: 4, Start: 2, Order: 1})
+	html := render(t, col)
+	assertContains(t, html, "col-span-4")
+	assertContains(t, html, "col-start-2")
+	assertContains(t, html, "order-1")
+}
+
+func TestCardRender(t *testing.T) {
+	card := ui.Card(ui.CardProps{Variant: "accent", Tag: "article"})
+	html := render(t, card)
+	assertContains(t, html, "<article")
+	assertContains(t, html, "ui-card--accent")
+}
+
+func TestCardTitle(t *testing.T) {
+	title := ui.CardTitle(ui.CardTitleProps{Order: 2}, "Card")
+	html := render(t, title)
+	assertContains(t, html, "<h2")
+	assertContains(t, html, "Card")
+}
+
+func TestAccordionRender(t *testing.T) {
+	a := ui.Accordion(ui.AccordionProps{Type: "multiple"})
+	html := render(t, a)
+	assertContains(t, html, `data-ui8kit="accordion"`)
+	assertContains(t, html, `data-accordion-type="multiple"`)
+}
+
+func TestAccordionParts(t *testing.T) {
+	trigger := ui.AccordionTrigger(ui.AccordionTriggerProps{Value: "a", Open: true})
+	content := ui.AccordionContent(ui.AccordionContentProps{Value: "a", Open: true})
+	th := render(t, trigger)
+	ch := render(t, content)
+	assertContains(t, th, `aria-controls="ui8kit-accordion-panel-a"`)
+	assertContains(t, th, `aria-expanded="true"`)
+	assertContains(t, ch, `role="region"`)
+	assertContains(t, ch, `aria-labelledby="ui8kit-accordion-trigger-a"`)
+}
+
+func TestSheetRender(t *testing.T) {
+	s := ui.Sheet(ui.SheetProps{ID: "menu", Side: "left", Size: "lg", Title: "Menu"})
+	html := render(t, s)
+	assertContains(t, html, `data-ui8kit="sheet"`)
+	assertContains(t, html, `role="dialog"`)
+	assertContains(t, html, `aria-modal="true"`)
+	assertContains(t, html, `id="menu-panel"`)
+	assertContains(t, html, `aria-labelledby="menu-title"`)
 }

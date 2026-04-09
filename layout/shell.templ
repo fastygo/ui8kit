@@ -6,46 +6,62 @@ templ Shell(props ShellProps) {
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link rel="icon" href="/static/img/favicon-32x32.png" type="image/png" sizes="32x32"/>
+			<link rel="icon" href="/static/img/favicon-192x192.png" type="image/png" sizes="192x192"/>
+			<link rel="apple-touch-icon" href="/static/img/favicon-192x192.png"/>
 			<title>{ props.Title }</title>
 			<link rel="stylesheet" href={ shellCSS(props.CSSPath) }/>
+			<script src={ shellJS(props.JSPath) } defer></script>
 			if props.HeadExtra != nil {
 				@props.HeadExtra
 			}
 		</head>
-		<body class="kit-shell-body">
-			<input id={ MobileSheetCheckboxID } type="checkbox" class="kit-shell-mobile-sheet-input" aria-hidden="true" tabindex="-1"/>
-			<div class="kit-shell-mobile-sheet-portal">
-				<label for={ MobileSheetCheckboxID } class="kit-shell-mobile-sheet-overlay" aria-label="Close overlay"></label>
-				<div
-					id={ MobileSheetPanelID }
-					class="kit-shell-mobile-sheet-panel"
-					role="dialog"
-					aria-modal="true"
-					aria-label="Navigation menu"
-				>
-					<div class="kit-shell-mobile-sheet-header">
-						<span class="kit-shell-mobile-sheet-title">{ shellBrand(props.BrandName) }</span>
-						<label for={ MobileSheetCheckboxID } class="kit-shell-mobile-sheet-close" aria-label="Close navigation menu">✕</label>
+		<body class={ shellBodyClass(props) }>
+			<div
+				id={ MobileSheetPanelID }
+				class="ui-shell-mobile-sheet-panel"
+				data-ui8kit="sheet"
+				data-ui8kit-dialog
+				role="dialog"
+				aria-modal="true"
+				aria-label="Navigation menu"
+				aria-labelledby="ui8kit-mobile-sheet-title"
+				data-state="closed"
+				hidden
+			>
+				<div class="ui-shell-mobile-sheet-overlay" data-ui8kit-dialog-overlay data-ui8kit-dialog-close data-ui8kit-dialog-target={ MobileSheetPanelID } aria-label="Close overlay"></div>
+				<div class="ui-shell-mobile-sheet-content-wrap">
+					<div class="ui-shell-mobile-sheet-header">
+						<span id="ui8kit-mobile-sheet-title" class="ui-shell-mobile-sheet-title">{ shellBrand(props.BrandName) }</span>
+						<button
+							type="button"
+							class="ui-shell-mobile-sheet-close"
+							data-ui8kit-dialog-close
+							data-ui8kit-dialog-target={ MobileSheetPanelID }
+							aria-label="Close navigation menu"
+						>
+							✕
+						</button>
 					</div>
-					<div class="kit-shell-mobile-sheet-content">
-						<nav class="kit-shell-nav-mobile">
+					<div class="ui-shell-mobile-sheet-content">
+						<nav class="ui-shell-nav-mobile">
 							@Sidebar(SidebarProps{Items: props.NavItems, Active: props.Active, Mobile: true})
 						</nav>
 					</div>
 				</div>
 			</div>
-			<div class="kit-shell-layout-row">
-				<aside class="kit-shell-desktop-aside">
-					<div class="kit-shell-desktop-brand-row">
-						<p class="font-bold">{ shellBrand(props.BrandName) }</p>
+			<div class="ui-shell-layout-row">
+				<aside class="ui-shell-desktop-aside">
+					<div class="ui-shell-desktop-brand-row">
+						<p class="ui-shell-brand-title">{ shellBrand(props.BrandName) }</p>
 					</div>
-					<nav class="kit-shell-nav-desktop">
+					<nav class="ui-shell-nav-desktop">
 						@Sidebar(SidebarProps{Items: props.NavItems, Active: props.Active})
 					</nav>
 				</aside>
-				<div class="kit-shell-main-column">
+				<div class="ui-shell-main-column">
 					@Header(HeaderProps{Title: props.Title, Extra: props.HeaderExtra, Trailing: props.HeaderTrailing, ThemeToggle: props.ThemeToggle})
-					<main class="kit-shell-main">
+					<main class="ui-shell-main">
 						{ children... }
 					</main>
 				</div>

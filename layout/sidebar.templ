@@ -3,16 +3,32 @@ package layout
 import "github.com/fastygo/ui8kit/utils"
 
 templ Sidebar(props SidebarProps) {
-	for _, item := range props.Items {
+	for i, item := range props.Items {
+		if props.Mobile && i > 0 && isExternalNavLink(item.Path) && !isExternalNavLink(props.Items[i-1].Path) {
+			<hr class="ui-sidebar-divider"/>
+		}
 		if props.Mobile {
-			<a href={ templ.SafeURL(item.Path) } class={ sidebarItemClasses(props.Active, item.Path) }>
-				<span class={ utils.Cn("latty", "latty-"+item.Icon, "h-4 w-4") }></span>
-				<span>{ item.Label }</span>
-			</a>
+			if isExternalNavLink(item.Path) {
+				<a href={ templ.SafeURL(item.Path) } class={ sidebarItemClasses(props.Active, item.Path) } target="_blank" rel="noopener noreferrer">
+					if item.Icon != "" {
+						<span class={ utils.Cn("latty", "latty-"+item.Icon, "ui-sidebar-item-icon") }></span>
+					}
+					<span class="ui-sidebar-item-label">{ item.Label }</span>
+				</a>
+			} else {
+				<a href={ templ.SafeURL(item.Path) } class={ sidebarItemClasses(props.Active, item.Path) }>
+					if item.Icon != "" {
+						<span class={ utils.Cn("latty", "latty-"+item.Icon, "ui-sidebar-item-icon") }></span>
+					}
+					<span class="ui-sidebar-item-label">{ item.Label }</span>
+				</a>
+			}
 		} else {
 			<a href={ templ.SafeURL(item.Path) } class={ sidebarItemClasses(props.Active, item.Path) }>
-				<span class={ utils.Cn("latty", "latty-"+item.Icon, "h-4 w-4") }></span>
-				<span>{ item.Label }</span>
+				if item.Icon != "" {
+					<span class={ utils.Cn("latty", "latty-"+item.Icon, "ui-sidebar-item-icon") }></span>
+				}
+				<span class="ui-sidebar-item-label">{ item.Label }</span>
 			</a>
 		}
 	}

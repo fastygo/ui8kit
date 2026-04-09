@@ -1,33 +1,35 @@
 package layout
 
 templ Header(props HeaderProps) {
-	<header class="kit-header">
-		<label
-			id="ui8kit-menu-trigger"
-			for={ MobileSheetCheckboxID }
-			class="kit-header-menu-btn"
+	<header class="ui-header">
+		<button
+			id={ MobileSheetTriggerID }
+			type="button"
+			class="ui-header-menu-btn"
+			data-ui8kit-dialog-open
+			data-ui8kit-dialog-target={ MobileSheetPanelID }
 			aria-label="Open navigation menu"
 			aria-haspopup="dialog"
 			aria-controls={ MobileSheetPanelID }
 		>
-			<span class="latty latty-menu h-4 w-4"></span>
-		</label>
-		<h1 class="kit-header-title">{ props.Title }</h1>
-		<div class="kit-header-actions">
+			<span class="latty latty-menu ui-theme-icon"></span>
+		</button>
+		<h1 class="ui-header-title">{ props.Title }</h1>
+		<div class="ui-header-actions">
 			if props.Extra != nil {
 				@props.Extra
 			}
 			<button
 				type="button"
 				id="ui8kit-theme-toggle"
-				class="kit-header-theme-btn"
+				class="ui-header-theme-btn"
 				data-switch-to-dark-label={ themeToggleSwitchToDarkLabel(props.ThemeToggle.SwitchToDarkLabel) }
 				data-switch-to-light-label={ themeToggleSwitchToLightLabel(props.ThemeToggle.SwitchToLightLabel) }
 				title={ themeToggleLabel(props.ThemeToggle.Label) }
 				aria-label={ themeToggleLabel(props.ThemeToggle.Label) }
 				aria-pressed="false"
 			>
-				<span id="theme-toggle-icon" class="latty latty-moon h-4 w-4"></span>
+				<span id="theme-toggle-icon" class="ui-theme-icon latty latty-moon"></span>
 			</button>
 			if props.Trailing != nil {
 				@props.Trailing

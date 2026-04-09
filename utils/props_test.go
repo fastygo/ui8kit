@@ -26,6 +26,7 @@ func TestUtilityPropsResolve(t *testing.T) {
 		{"hidden", UtilityProps{Hidden: true}, "hidden"},
 		{"truncate", UtilityProps{Truncate: true}, "truncate"},
 		{"grid + col", UtilityProps{Grid: "3", Col: "2"}, "grid-cols-3 col-span-2"},
+		{"image helpers", UtilityProps{Object: "cover", Aspect: "video", MinH: "40", MaxH: "96"}, "object-cover aspect-video min-h-40 max-h-96"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

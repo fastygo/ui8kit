@@ -25,6 +25,7 @@
 
 /* Pattern-based utility classes (dynamic values). */
 /* These are templates for runtime props and cannot be fully expanded. */
+/* aspect-{value} */
 /* basis-{value} */
 /* bg-{value} */
 /* col-span-{value} */
@@ -35,14 +36,17 @@
 /* justify-{value} */
 /* leading-{value} */
 /* m-{value} */
+/* max-h-{value} */
 /* max-w-{value} */
 /* mb-{value} */
+/* min-h-{value} */
 /* min-w-{value} */
 /* ml-{value} */
 /* mr-{value} */
 /* mt-{value} */
 /* mx-{value} */
 /* my-{value} */
+/* object-{value} */
 /* order-{value} */
 /* overflow-{value} */
 /* p-{value} */

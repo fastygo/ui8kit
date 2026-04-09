@@ -1,0 +1,47 @@
+package components
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ Card(props CardProps) {
+	switch cardTag(props.Tag) {
+		case "article":
+			<article class={ cardClasses(props) }>{ children... }</article>
+		case "section":
+			<section class={ cardClasses(props) }>{ children... }</section>
+		default:
+			<div class={ cardClasses(props) }>{ children... }</div>
+	}
+}
+
+templ CardHeader(props CardHeaderProps) {
+	<div class={ utils.Cn("ui-card-header", props.UtilityProps.Resolve(), props.Class) }>{ children... }</div>
+}
+
+templ CardTitle(props CardTitleProps, value string) {
+	switch cardTitleTag(props.Order) {
+		case "h1":
+			<h1 class={ utils.Cn("ui-card-title", props.Class) }>{ value }</h1>
+		case "h2":
+			<h2 class={ utils.Cn("ui-card-title", props.Class) }>{ value }</h2>
+		case "h4":
+			<h4 class={ utils.Cn("ui-card-title", props.Class) }>{ value }</h4>
+		case "h5":
+			<h5 class={ utils.Cn("ui-card-title", props.Class) }>{ value }</h5>
+		case "h6":
+			<h6 class={ utils.Cn("ui-card-title", props.Class) }>{ value }</h6>
+		default:
+			<h3 class={ utils.Cn("ui-card-title", props.Class) }>{ value }</h3>
+	}
+}
+
+templ CardDescription(props CardDescriptionProps, value string) {
+	<p class={ utils.Cn("ui-card-description", props.Class) }>{ value }</p>
+}
+
+templ CardContent(props CardContentProps) {
+	<div class={ utils.Cn("ui-card-content", props.UtilityProps.Resolve(), props.Class) }>{ children... }</div>
+}
+
+templ CardFooter(props CardFooterProps) {
+	<div class={ utils.Cn("ui-card-footer", props.UtilityProps.Resolve(), props.Class) }>{ children... }</div>
+}

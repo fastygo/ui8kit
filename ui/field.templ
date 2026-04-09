@@ -3,41 +3,95 @@ package ui
 import "strconv"
 
 templ Field(props FieldProps) {
+	if props.Label != "" || props.Hint != "" || props.Error != "" {
+		<div class="ui-field-wrap">
+			if props.Label != "" {
+				<label for={ fieldID(props) } class="ui-field-label">{ props.Label }</label>
+			}
+			@fieldControl(props)
+			if props.Hint != "" {
+				<small class="ui-field-hint">{ props.Hint }</small>
+			}
+			if props.Error != "" {
+				<span role="alert" class="ui-field-error">{ props.Error }</span>
+			}
+		</div>
+	} else {
+		@fieldControl(props)
+	}
+}
+
+templ fieldControl(props FieldProps) {
 	switch props.Component {
+		case "button":
+			<button
+				id={ fieldID(props) }
+				name={ props.Name }
+				type="button"
+				class={ fieldClasses(props) }
+				disabled?={ props.Disabled }
+				aria-label={ props.AriaLabel }
+				value={ props.Value }
+			>
+				{ props.Value }
+			</button>
 		case "textarea":
 			<textarea
-				id={ props.ID }
+				id={ fieldID(props) }
 				name={ props.Name }
 				class={ fieldClasses(props) }
 				rows={ strconv.Itoa(fieldRows(props.Rows)) }
 				placeholder={ props.Placeholder }
 				disabled?={ props.Disabled }
+				aria-label={ props.AriaLabel }
 			>{ props.Value }</textarea>
 		case "select":
 			<select
-				id={ props.ID }
+				id={ fieldID(props) }
 				name={ props.Name }
 				class={ fieldClasses(props) }
 				disabled?={ props.Disabled }
+				aria-label={ props.AriaLabel }
 			>
 				for _, opt := range props.Options {
 					<option value={ opt.Value } selected?={ opt.Value == props.Value }>{ opt.Label }</option>
 				}
 			</select>
 		default:
-			<input
-				id={ props.ID }
-				name={ props.Name }
-				type={ fieldInputType(props.Type) }
-				class={ fieldClasses(props) }
-				placeholder={ props.Placeholder }
-				value={ props.Value }
-				min={ props.Min }
-				max={ props.Max }
-				autocomplete={ props.Autocomplete }
-				checked?={ props.Checked }
-				disabled?={ props.Disabled }
-				required?={ props.Required }
-			/>
+			if props.Type == "checkbox" && props.Switch {
+				<input
+					id={ fieldID(props) }
+					name={ props.Name }
+					type={ fieldInputType(props.Type) }
+					class={ fieldClasses(props) }
+					placeholder={ props.Placeholder }
+					value={ props.Value }
+					min={ props.Min }
+					max={ props.Max }
+					autocomplete={ props.Autocomplete }
+					checked?={ props.Checked }
+					disabled?={ props.Disabled }
+					required?={ props.Required }
+					aria-label={ props.AriaLabel }
+					role="switch"
+					aria-checked={ map[bool]string{true: "true", false: "false"}[props.Checked] }
+				/>
+			} else {
+				<input
+					id={ fieldID(props) }
+					name={ props.Name }
+					type={ fieldInputType(props.Type) }
+					class={ fieldClasses(props) }
+					placeholder={ props.Placeholder }
+					value={ props.Value }
+					min={ props.Min }
+					max={ props.Max }
+					autocomplete={ props.Autocomplete }
+					checked?={ props.Checked }
+					disabled?={ props.Disabled }
+					required?={ props.Required }
+					aria-label={ props.AriaLabel }
+				/>
+			}
 	}
 }

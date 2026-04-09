@@ -1,0 +1,27 @@
+package components
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ Breadcrumb(props BreadcrumbProps) {
+	<nav
+		data-ui8kit="breadcrumb"
+		aria-label="Breadcrumb"
+		class={ utils.Cn("ui-breadcrumb", props.UtilityProps.Resolve(), props.Class) }
+	>
+		<ol class="ui-breadcrumb-list">
+			for _, item := range props.Items {
+				<li class="ui-breadcrumb-item">
+					if item.Current {
+						<span class="ui-breadcrumb-current" aria-current="page">
+							{ item.Label }
+						</span>
+					} else if item.Disabled {
+						<span class="ui-breadcrumb-link text-muted-foreground">{ item.Label }</span>
+					} else {
+						<a href={ item.Href } class="ui-breadcrumb-link">{ item.Label }</a>
+					}
+				</li>
+			}
+		</ol>
+	</nav>
+}

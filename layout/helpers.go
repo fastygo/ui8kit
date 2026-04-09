@@ -1,22 +1,26 @@
 package layout
 
-import "github.com/fastygo/ui8kit/utils"
+import (
+	"strings"
 
-// MobileSheetCheckboxID toggles the mobile nav sheet (checkbox + label pattern, same idea as ui8kit-core Sheet.tsx).
-const MobileSheetCheckboxID = "ui8kit-mobile-sheet"
+	"github.com/fastygo/ui8kit/utils"
+)
+
+// MobileSheetTriggerID opens the mobile navigation dialog in the shell header.
+const MobileSheetTriggerID = "ui8kit-mobile-sheet-trigger"
 
 // MobileSheetPanelID is the dialog surface referenced by aria-controls on the menu trigger.
 const MobileSheetPanelID = "ui8kit-mobile-sheet-panel"
 
-func sidebarLinkClass(active, path string) string {
+func sidebarItemStateClass(active, path string) string {
 	if active == path {
-		return "bg-accent text-accent-foreground"
+		return "ui-sidebar-item-active"
 	}
-	return "text-muted-foreground hover:bg-accent"
+	return "ui-sidebar-item-inactive"
 }
 
 func sidebarItemClasses(active, path string) string {
-	return utils.Cn("flex items-center gap-2 rounded px-4 py-2 text-sm", sidebarLinkClass(active, path))
+	return utils.Cn("ui-sidebar-item", sidebarItemStateClass(active, path))
 }
 
 func shellBrand(name string) string {
@@ -33,11 +37,29 @@ func shellCSS(path string) string {
 	return path
 }
 
+func shellJS(path string) string {
+	if path == "" {
+		return "/static/js/ui8kit.js"
+	}
+	return path
+}
+
 func shellLang(value string) string {
 	if value == "" {
 		return "en"
 	}
 	return value
+}
+
+func shellBodyClass(props ShellProps) string {
+	if props.MarketingShell {
+		return "ui-shell-body ui-shell-body--marketing"
+	}
+	return "ui-shell-body"
+}
+
+func isExternalNavLink(path string) bool {
+	return strings.HasPrefix(path, "http://") || strings.HasPrefix(path, "https://")
 }
 
 func themeToggleLabel(value string) string {

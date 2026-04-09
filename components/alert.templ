@@ -1,0 +1,13 @@
+package components
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ Alert(props AlertProps) {
+	<div
+		role="status"
+		aria-live="polite"
+		class={ utils.Cn("ui-alert", alertVariantClass(props.Variant), props.UtilityProps.Resolve(), props.Class) }
+	>
+		{ children... }
+	</div>
+}

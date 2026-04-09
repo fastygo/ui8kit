@@ -1,18 +1,24 @@
 package ui
 
 templ Title(props TitleProps, value string) {
+	@TitleBlock(props) {
+		{ value }
+	}
+}
+
+templ TitleBlock(props TitleProps) {
 	switch titleTag(props.Order) {
 		case "h1":
-			<h1 class={ titleClasses(props) }>{ value }</h1>
+			<h1 class={ titleClasses(props) }>{ children... }</h1>
 		case "h3":
-			<h3 class={ titleClasses(props) }>{ value }</h3>
+			<h3 class={ titleClasses(props) }>{ children... }</h3>
 		case "h4":
-			<h4 class={ titleClasses(props) }>{ value }</h4>
+			<h4 class={ titleClasses(props) }>{ children... }</h4>
 		case "h5":
-			<h5 class={ titleClasses(props) }>{ value }</h5>
+			<h5 class={ titleClasses(props) }>{ children... }</h5>
 		case "h6":
-			<h6 class={ titleClasses(props) }>{ value }</h6>
+			<h6 class={ titleClasses(props) }>{ children... }</h6>
 		default:
-			<h2 class={ titleClasses(props) }>{ value }</h2>
+			<h2 class={ titleClasses(props) }>{ children... }</h2>
 	}
 }

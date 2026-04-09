@@ -1,0 +1,46 @@
+package components
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ Tabs(props TabsProps) {
+	<div
+		id={ tabsID(props.ID) }
+		data-ui8kit="tabs"
+		data-tablist={ tabsID(props.ID) }
+		role="tablist"
+		class={ utils.Cn("ui-tabs", props.UtilityProps.Resolve(), props.Class) }
+	>
+		for _, tab := range props.Tabs {
+			<button
+				type="button"
+				id={ tabButtonID(props.ID, tab.Value) }
+				role="tab"
+				aria-selected={ map[bool]string{true: "true", false: "false"}[props.ActiveTab == tab.Value] }
+				aria-controls={ tabPanelID(props.ID, tab.Value) }
+				data-tabs-trigger
+				data-tabs-target={ tabsID(props.ID) }
+				data-tabs-value={ tab.Value }
+				class="ui-tab-trigger"
+				disabled?={ tab.Disabled }
+			>
+				{ tab.Label }
+			</button>
+		}
+		{ children... }
+	</div>
+}
+
+templ TabsPanel(props TabsPanelProps) {
+	<div
+		id={ tabPanelID(props.TabsID, props.Value) }
+		role="tabpanel"
+		aria-labelledby={ tabButtonID(props.TabsID, props.Value) }
+		data-tabs-panel
+		data-tabs-value={ props.Value }
+		hidden?={!props.Active}
+		data-tabs-target={ tabsID(props.TabsID) }
+		class="ui-tab-panel"
+	>
+		{ children... }
+	</div>
+}
