@@ -1,0 +1,17 @@
+---
+description: UI8Kit — atoms, layout grammar, token-only styling
+alwaysApply: true
+---
+
+# UI8Kit
+
+**Role:** Lowest UI layer — primitives and neutral composites (Card, Stack, Grid, Button, Field, …). Self-contained minimum “out of the box.”
+
+**Boundaries**
+- **Must not** import `Elements` or `Blocks`.
+- Styling: design tokens (e.g. shadcn) only — **no** brand gradients, decorative animations, or one-off product colors. Prefer semantic classes in `styles/components.css` (`@apply`) + `utils/variants.go`; avoid ad-hoc utilities in `.templ`.
+- **In `.templ`:** no raw Tailwind utility strings; use `class={ helpers }` / props that resolve classes in Go.
+
+**Naming:** prefer `ui-*` / existing kit prefixes in CSS.
+
+**API changes:** additive, semver-safe; breaking changes are expensive for upstream.
