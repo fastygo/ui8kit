@@ -10,5 +10,5 @@ Checklist:
 ## Required docs
 
 - [Tailwind setup](tailwind-setup.md)
-- [Sync UI8Kit assets](sync-ui8kit-css.md)
+- [Sync assets (CLI)](sync-assets.md)
 - [HTTP server](http-server.md)

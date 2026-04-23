@@ -25,7 +25,7 @@ The project is organized into four packages:
 
 * Props are defined once in `props.go` — never redeclare in `.templ` files.
 * Helper functions live in `helpers.go` within each package.
-* The only external dependency is `github.com/a-h/templ`.
+* Published Go packages depend on `github.com/a-h/templ` only; repository tooling also uses Bun (sync-assets subset build, CI, and `scripts/release.sh`).
 * Do not add application-specific logic to library components.
 
 ## Commit messages

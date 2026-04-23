@@ -1,4 +1,4 @@
-# Sync UI8Kit assets
+# Sync assets (CLI)
 
 Use this command before CSS build:
 

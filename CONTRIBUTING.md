@@ -6,6 +6,7 @@ Thanks for your interest in contributing to ui8kit! This is a Go component libra
 
 - [Go](https://go.dev/dl/) 1.23+
 - [templ CLI](https://templ.guide/quick-start/installation): `go install github.com/a-h/templ/cmd/templ@latest`
+- [Bun](https://bun.sh/) 1.3+ if you change `scripts/cmd/sync-assets`, layout asset wiring, or run `PREFLIGHT_REQUIRE_BUN=1` / `./scripts/release.sh` (CI uses Bun 1.3.3)
 
 ## Quick start
 
