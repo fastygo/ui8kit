@@ -12,4 +12,4 @@ package ui8kit
 // Version is the current release version of ui8kit.
 // This value is kept in sync with git tags by the release script.
 // Do not edit manually — use: ./scripts/release.sh <version>
-const Version = "0.3.0"
+const Version = "0.2.5"
