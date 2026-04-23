@@ -4,6 +4,7 @@ set -euo pipefail
 # Usage:
 #   ./scripts/preflight.sh
 #   PREFLIGHT_RUN_RACE=1 ./scripts/preflight.sh
+#   PREFLIGHT_REQUIRE_BUN=1 ./scripts/preflight.sh
 #
 # Checks performed:
 # - go generate ./...
@@ -12,9 +13,21 @@ set -euo pipefail
 # - go build ./...
 # - go test ./... -count=1
 # - optional: go test ./... -race -count=1
+# - optional: require Bun for sync-assets subset coverage
 # - git diff checks to ensure generation/formatting produced no uncommitted changes
 
 RUN_RACE="${PREFLIGHT_RUN_RACE:-0}"
+REQUIRE_BUN="${PREFLIGHT_REQUIRE_BUN:-0}"
+
+if [ "$REQUIRE_BUN" = "1" ]; then
+  echo "Checking Bun availability..."
+  if ! command -v bun >/dev/null 2>&1; then
+    echo "Error: Bun is required but was not found in PATH."
+    echo "Install Bun 1.3+ or rerun without PREFLIGHT_REQUIRE_BUN=1."
+    exit 1
+  fi
+  bun --version
+fi
 
 echo "Running go generate..."
 go generate ./...
@@ -37,6 +50,11 @@ go build ./...
 
 echo "Running tests..."
 go test ./... -count=1
+
+if [ "$REQUIRE_BUN" = "1" ]; then
+  echo "Running sync-assets tests with Bun available..."
+  go test ./scripts/cmd/sync-assets -count=1
+fi
 
 if [ "$RUN_RACE" = "1" ]; then
   if [ "$(go env CGO_ENABLED)" = "1" ]; then

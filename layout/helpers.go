@@ -1,8 +1,12 @@
 package layout
 
 import (
+	"context"
+	"html"
+	"io"
 	"strings"
 
+	"github.com/a-h/templ"
 	"github.com/fastygo/ui8kit/utils"
 )
 
@@ -37,11 +41,41 @@ func shellCSS(path string) string {
 	return path
 }
 
-func shellJS(path string) string {
+func shellThemeJS(path string) string {
 	if path == "" {
-		return "/static/js/ui8kit.js"
+		return "/static/js/theme.js"
 	}
 	return path
+}
+
+func shellAppJS(appPath, legacyPath string) string {
+	if appPath != "" {
+		return appPath
+	}
+	if legacyPath != "" {
+		return legacyPath
+	}
+	return "/static/js/ui8kit.js"
+}
+
+func shellScriptTag(src, integrity string, deferred bool) templ.Component {
+	return templ.ComponentFunc(func(_ context.Context, w io.Writer) error {
+		var b strings.Builder
+		b.WriteString(`<script src="`)
+		b.WriteString(html.EscapeString(src))
+		b.WriteString(`"`)
+		if deferred {
+			b.WriteString(` defer`)
+		}
+		if integrity != "" {
+			b.WriteString(` integrity="`)
+			b.WriteString(html.EscapeString(integrity))
+			b.WriteString(`" crossorigin="anonymous"`)
+		}
+		b.WriteString(`></script>`)
+		_, err := io.WriteString(w, b.String())
+		return err
+	})
 }
 
 func shellLang(value string) string {

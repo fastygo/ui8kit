@@ -16,14 +16,15 @@ import "github.com/fastygo/ui8kit/layout"
 
 ## Key props
 
-- `ShellProps` — title, brand, active route, nav, CSS path.
+- `ShellProps` — title, brand, active route, nav, CSS path, theme/app JS paths, optional SRI.
 - `SidebarProps` — nav items and active item.
 - `HeaderProps` — header title and extra actions.
 
 ## Default assumptions
 
 - CSS is at `/static/css/app.css` by default (`CSSPath`).
-- Mobile navigation is CSS-only (checkbox + label pattern).
+- Theme bootstrap is at `/static/js/theme.js`.
+- App behavior bundle is at `/static/js/ui8kit.js`.
 
 ## Best practice
 

@@ -7,6 +7,7 @@
 ```bash
 go get github.com/fastygo/ui8kit@latest
 go install github.com/a-h/templ/cmd/templ@latest
+bun install
 go build ./...
 go test ./...
 ```
@@ -36,10 +37,21 @@ templ Dashboard(nav []layout.NavItem) {
 ## CSS flow
 
 ```bash
-npm install
-npm run build:css
+bun install
+bun run build:css
 ./scripts/gen-css.sh
 ```
+
+## Asset CLI
+
+UI8Kit ships a Go CLI for vendoring static assets into an application:
+
+```bash
+go run github.com/fastygo/ui8kit/scripts/cmd/sync-assets@latest web/static
+```
+
+The CLI copies UI8Kit CSS, Framework font assets, emits `theme.js`, and builds
+`ui8kit.js` from `@ui8kit/aria` (full or subset mode).
 
 Serve either the compiled `static/css/app.css` path from the app, or `styles.FS` in local checks.
 

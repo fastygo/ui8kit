@@ -21,7 +21,7 @@ UI8Kit is a Go + `templ` + Tailwind component toolkit for server-rendered dashbo
 
 - [Scripts](scripts.md)
 - [Tailwind setup](integration/tailwind-setup.md)
-- [Sync CSS assets](integration/sync-ui8kit-css.md)
+- [Sync assets CLI](integration/sync-ui8kit-css.md)
 - [HTTP server](integration/http-server.md)
 
 ## Process

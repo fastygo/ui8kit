@@ -101,6 +101,6 @@ Three CSS files:
 
 **Why Tailwind over custom CSS?** Utility-first approach aligns with component-level styling. The UtilityProps system adds a semantic layer without losing Tailwind flexibility.
 
-**Why embed.FS?** Single `go get` installs everything. No npm, no asset pipeline, no separate CSS download. Consumers serve CSS from Go binary.
+**Why embed.FS?** Single `go get` installs everything for CSS primitives. Consumers serve CSS from Go binary or copy it into their own static directory.
 
-**Why no JavaScript?** Shell includes minimal vanilla JS for theme toggle and mobile sidebar. No framework dependencies. Consumers add interactivity via htmx, Alpine.js, or their own scripts.
+**Why a separate JS CLI?** Theme bootstrap stays tiny and embedded in `js/theme.js`, while interactive ARIA behavior comes from the published `@ui8kit/aria` package and is vendored into apps through `scripts/cmd/sync-assets`.

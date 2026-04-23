@@ -123,6 +123,7 @@ func TestShellRender(t *testing.T) {
 	assertNotContains(t, html, "type=\"checkbox\"")
 	assertContains(t, html, "ui-shell-mobile-sheet-overlay")
 	assertContains(t, html, "ui-shell-mobile-sheet-panel")
+	assertContains(t, html, "/static/js/theme.js")
 	assertContains(t, html, "/static/js/ui8kit.js")
 	assertNotContains(t, html, "popover=")
 	assertNotContains(t, html, "ui8kitOpenSidebar")
@@ -159,7 +160,25 @@ func TestShellCustomCSS(t *testing.T) {
 }
 
 func TestShellCustomJS(t *testing.T) {
-	sh := layout.Shell(layout.ShellProps{Title: "X", JSPath: "/assets/ui8kit.min.js"})
+	sh := layout.Shell(layout.ShellProps{Title: "X", ThemeJSPath: "/assets/theme.min.js", AppJSPath: "/assets/ui8kit.min.js"})
 	html := render(t, sh)
+	assertContains(t, html, "/assets/theme.min.js")
 	assertContains(t, html, "/assets/ui8kit.min.js")
+}
+
+func TestShellLegacyJSAlias(t *testing.T) {
+	sh := layout.Shell(layout.ShellProps{Title: "X", JSPath: "/assets/legacy-ui8kit.min.js"})
+	html := render(t, sh)
+	assertContains(t, html, "/assets/legacy-ui8kit.min.js")
+}
+
+func TestShellScriptIntegrity(t *testing.T) {
+	sh := layout.Shell(layout.ShellProps{
+		Title:            "X",
+		ThemeJSIntegrity: "sha384-theme",
+		AppJSIntegrity:   "sha384-app",
+	})
+	html := render(t, sh)
+	assertContains(t, html, `integrity="sha384-theme" crossorigin="anonymous"`)
+	assertContains(t, html, `integrity="sha384-app" crossorigin="anonymous"`)
 }

@@ -5,7 +5,7 @@ UI8Kit is a Go + `templ` component kit with Tailwind in the generated CSS pipeli
 ## Requirements
 
 - Go and `templ`
-- Node.js + npm (only for Tailwind build)
+- Bun (for Tailwind build and subset bundling)
 
 ## Install
 
@@ -23,8 +23,9 @@ templ generate
 Then set up CSS:
 
 ```bash
-npm install
-npm run build:css
+bun install
+bun run vendor:assets
+bun run build:css
 ```
 
 ## Module docs to read

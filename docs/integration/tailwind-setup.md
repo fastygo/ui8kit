@@ -10,11 +10,13 @@ Compile `static/css/app.css` from `static/css/input.css`.
 {
   "private": true,
   "type": "module",
-  "dependencies": {
+  "devDependencies": {
     "@tailwindcss/cli": "^4.2.1",
+    "@ui8kit/aria": "0.1.0",
     "tailwindcss": "^4.2.1"
   },
   "scripts": {
+    "vendor:assets": "go run github.com/fastygo/ui8kit/scripts/cmd/sync-assets web/static",
     "dev:css": "tailwindcss -i ./static/css/input.css -o ./static/css/app.css --watch",
     "build:css": "tailwindcss -i ./static/css/input.css -o ./static/css/app.css --minify"
   }
@@ -24,8 +26,9 @@ Compile `static/css/app.css` from `static/css/input.css`.
 ## Setup steps
 
 ```bash
-npm install
-npm run build:css
+bun install
+bun run vendor:assets
+bun run build:css
 ```
 
 ## `input.css` minimum
@@ -43,9 +46,9 @@ npm run build:css
 
 ## Helper
 
-Use sync helper before build:
+Use the sync-assets CLI before build:
 
 ```bash
-bash ./scripts/sync-ui8kit-css.sh
-npm run build:css
+go run github.com/fastygo/ui8kit/scripts/cmd/sync-assets web/static
+bun run build:css
 ```

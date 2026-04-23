@@ -5,7 +5,7 @@
 ## Behavior
 
 - Desktop: fixed sidebar + header + main content.
-- Mobile: CSS sheet panel controlled by checkbox + label.
+- Mobile: dialog-backed sheet panel controlled by `@ui8kit/aria`.
 - Optional header slot before theme toggle.
 
 ## Accessibility
@@ -16,6 +16,7 @@
 ## Extensibility
 
 - Set custom stylesheet path through `ShellProps.CSSPath`.
+- Set theme and app script paths through `ShellProps.ThemeJSPath` and `ShellProps.AppJSPath`.
 - Pass extra header actions via `HeaderExtra`.
 
-Theme behavior should be handled by app script; `Shell` exposes attributes and data to your existing toggle logic.
+Theme behavior is handled by `theme.js`; interactive layout behavior comes from the vendored `ui8kit.js` bundle.

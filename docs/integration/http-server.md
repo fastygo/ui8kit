@@ -1,6 +1,6 @@
 # HTTP server and static assets
 
-`layout.Shell` expects `/static/css/app.css` by default.
+`layout.Shell` expects `/static/css/app.css`, `/static/js/theme.js`, and `/static/js/ui8kit.js` by default.
 
 ## Quick route
 
@@ -21,5 +21,7 @@ http.Handle("/static/css/ui8kit/", http.StripPrefix("/static/css/ui8kit/",
 ## Production recommendation
 
 - serve one compiled `/static/css/app.css`.
+- vendor `theme.js` and `ui8kit.js` with `sync-assets`.
 - set `layout.ShellProps.CSSPath` only when route differs.
+- set `ShellProps.ThemeJSPath` / `ShellProps.AppJSPath` only when script routes differ.
 - set caching headers according to your asset strategy.

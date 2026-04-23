@@ -23,11 +23,15 @@ jobs:
           go-version: ${{ matrix.go-version }}
           cache: true
 
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.3
+
       - name: Install templ
         run: go install github.com/a-h/templ/cmd/templ@latest
 
       - name: Run preflight
-        run: PREFLIGHT_RUN_RACE=1 bash ./scripts/preflight.sh
+        run: PREFLIGHT_RUN_RACE=1 PREFLIGHT_REQUIRE_BUN=1 bash ./scripts/preflight.sh
 
       - name: Generate coverage
         if: matrix.go-version == '1.24'

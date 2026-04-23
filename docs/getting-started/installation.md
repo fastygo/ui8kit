@@ -8,6 +8,7 @@ Run from app root:
 
 ```bash
 go install github.com/a-h/templ/cmd/templ@latest
+bun install
 templ generate ./...
 go build ./...
 go test ./...
@@ -23,4 +24,4 @@ import (
 )
 ```
 
-For CSS workflow, follow [Tailwind setup](../integration/tailwind-setup.md).
+For CSS / JS asset workflow, follow [Tailwind setup](../integration/tailwind-setup.md).

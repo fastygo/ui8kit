@@ -1,26 +1,30 @@
-# Sync UI8Kit CSS
+# Sync UI8Kit assets
 
 Use this command before CSS build:
 
 ```bash
-bash ./scripts/sync-ui8kit-css.sh
+go run github.com/fastygo/ui8kit/scripts/cmd/sync-assets web/static
 ```
 
-The script copies:
+The CLI copies:
 
 - `base.css`
 - `components.css`
 - `shell.css`
+- `prose.css`
 - `latty.css`
+- Framework font assets into `web/static/fonts/`
+- `theme.js`
+- `ui8kit.js` built from `@ui8kit/aria`
 
-into `static/css/ui8kit/` and prints confirmation.
+into `web/static/` and prints confirmation plus a JS manifest with hashed filenames.
 
 Then:
 
 ```bash
 templ generate ./...
-npm run sync:ui8kit
-npm run build:css
+bun run vendor:assets
+bun run build:css
 ```
 
 Import in `static/css/input.css`:

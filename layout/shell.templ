@@ -11,7 +11,8 @@ templ Shell(props ShellProps) {
 			<link rel="apple-touch-icon" href="/static/img/favicon-192x192.png"/>
 			<title>{ props.Title }</title>
 			<link rel="stylesheet" href={ shellCSS(props.CSSPath) }/>
-			<script src={ shellJS(props.JSPath) } defer></script>
+			@shellScriptTag(shellThemeJS(props.ThemeJSPath), props.ThemeJSIntegrity, false)
+			@shellScriptTag(shellAppJS(props.AppJSPath, props.JSPath), props.AppJSIntegrity, true)
 			if props.HeadExtra != nil {
 				@props.HeadExtra
 			}

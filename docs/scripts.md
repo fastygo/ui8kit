@@ -2,6 +2,25 @@
 
 This document describes the helper scripts that live in the repository `scripts/` directory.
 
+## `cmd/sync-assets`
+
+### Purpose
+
+Vendors UI8Kit CSS, Framework font assets, `theme.js`, and a generated
+`ui8kit.js` bundle into an application's `web/static/` directory.
+
+### Run
+
+```bash
+go run github.com/fastygo/ui8kit/scripts/cmd/sync-assets web/static
+```
+
+### Notes
+
+- By default the CLI builds a **subset** IIFE from `@ui8kit/aria` using Bun.
+- `theme.js` is emitted separately for first-paint theme bootstrap.
+- `ui8kit.js` contains the ARIA bundle plus locale behavior.
+
 ## `gen-ui8kit-css.go`
 
 ### Purpose
