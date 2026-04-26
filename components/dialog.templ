@@ -14,7 +14,7 @@ templ Dialog(props DialogProps) {
 		aria-describedby={ dialogDescriptionID(props.ID) }
 		hidden?={!props.Open}
 		data-state={ map[bool]string{true: "open", false: "closed"}[props.Open] }
-		class={ utils.Cn("ui-dialog", props.UtilityProps.Resolve(), props.Class) }
+		class={ utils.Cn("ui-dialog", props.Class) }
 	>
 		<div class="ui-dialog-overlay" data-ui8kit-dialog-overlay data-ui8kit-dialog-close data-ui8kit-dialog-target={ dialogID(props.ID) }></div>
 		<section class="ui-dialog-content">

@@ -51,17 +51,15 @@ func Sheet(props SheetProps) templ.Component {
 
 func cardPropsFromUI(props CardProps) c.CardProps {
 	return c.CardProps{
-		UtilityProps: props.UtilityProps,
-		Class:        props.Class,
-		Variant:      props.Variant,
-		Tag:          props.Tag,
+		Class:   props.Class,
+		Variant: props.Variant,
+		Tag:     props.Tag,
 	}
 }
 
 func cardHeaderPropsFromUI(props CardHeaderProps) c.CardHeaderProps {
 	return c.CardHeaderProps{
-		UtilityProps: props.UtilityProps,
-		Class:        props.Class,
+		Class: props.Class,
 	}
 }
 
@@ -80,32 +78,28 @@ func cardDescriptionPropsFromUI(props CardDescriptionProps) c.CardDescriptionPro
 
 func cardContentPropsFromUI(props CardContentProps) c.CardContentProps {
 	return c.CardContentProps{
-		UtilityProps: props.UtilityProps,
-		Class:        props.Class,
+		Class: props.Class,
 	}
 }
 
 func cardFooterPropsFromUI(props CardFooterProps) c.CardFooterProps {
 	return c.CardFooterProps{
-		UtilityProps: props.UtilityProps,
-		Class:        props.Class,
+		Class: props.Class,
 	}
 }
 
 func accordionPropsFromUI(props AccordionProps) c.AccordionProps {
 	return c.AccordionProps{
-		UtilityProps: props.UtilityProps,
-		Class:        props.Class,
-		Type:         props.Type,
+		Class: props.Class,
+		Type:  props.Type,
 	}
 }
 
 func accordionItemPropsFromUI(props AccordionItemProps) c.AccordionItemProps {
 	return c.AccordionItemProps{
-		UtilityProps: props.UtilityProps,
-		Class:        props.Class,
-		Value:        props.Value,
-		Open:         props.Open,
+		Class: props.Class,
+		Value: props.Value,
+		Open:  props.Open,
 	}
 }
 
@@ -119,20 +113,18 @@ func accordionTriggerPropsFromUI(props AccordionTriggerProps) c.AccordionTrigger
 
 func accordionContentPropsFromUI(props AccordionContentProps) c.AccordionContentProps {
 	return c.AccordionContentProps{
-		UtilityProps: props.UtilityProps,
-		Class:        props.Class,
-		Value:        props.Value,
-		Open:         props.Open,
+		Class: props.Class,
+		Value: props.Value,
+		Open:  props.Open,
 	}
 }
 
 func sheetPropsFromUI(props SheetProps) c.SheetProps {
 	return c.SheetProps{
-		UtilityProps: props.UtilityProps,
-		Class:        props.Class,
-		ID:           props.ID,
-		Side:         props.Side,
-		Size:         props.Size,
-		Title:        props.Title,
+		Class: props.Class,
+		ID:    props.ID,
+		Side:  props.Side,
+		Size:  props.Size,
+		Title: props.Title,
 	}
 }

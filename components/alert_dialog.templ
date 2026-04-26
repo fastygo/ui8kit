@@ -11,7 +11,7 @@ templ AlertDialog(props AlertDialogProps) {
 		aria-modal="true"
 		hidden?={!props.Open}
 		data-state={ map[bool]string{true: "open", false: "closed"}[props.Open] }
-		class={ utils.Cn("ui-alert-dialog", props.UtilityProps.Resolve(), props.Class) }
+		class={ utils.Cn("ui-alert-dialog", props.Class) }
 	>
 		<div class="ui-dialog-overlay" data-ui8kit-dialog-overlay data-ui8kit-dialog-close data-ui8kit-dialog-target={ dialogID(props.ID) }></div>
 		<section class="ui-alert-dialog-content">

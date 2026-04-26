@@ -18,7 +18,7 @@ The project is organized into four packages:
 
 * `ui/` — UI primitives: Box, Stack, Group, Container, Button, Badge, Text, Title, Field, Icon.
 * `layout/` — Page shell: Shell (sidebar + header + main), Header, Sidebar.
-* `utils/` — UtilityProps, Cn(), variant helpers for Tailwind classes.
+* `utils/` — Cn(), variant helpers, tag helpers, and aria helpers.
 * `styles/` — Embedded CSS via `embed.FS` (base theme, components, Latty icons).
 
 ### Key rules
@@ -35,7 +35,7 @@ The project uses https://www.conventionalcommits.org/en/v1.0.0/
 Examples:
 
 * `feat: add Card component with header and content slots`
-* `fix: resolve class duplication in UtilityProps.Resolve`
+* `fix: resolve class duplication in component helpers`
 
 ## Writing style
 

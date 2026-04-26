@@ -9,7 +9,7 @@ templ Tooltip(props TooltipProps) {
 		data-tooltip-trigger
 		data-tooltip-id={ tooltipID(props.ID) }
 		data-tooltip-content={ tooltipContentID(props.ID) }
-		class={ utils.Cn("ui-tooltip", props.UtilityProps.Resolve(), props.Class) }
+		class={ utils.Cn("ui-tooltip", props.Class) }
 	>
 		<div class="ui-tooltip-trigger">
 			{ children... }

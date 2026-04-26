@@ -1,0 +1,12 @@
+{
+  "utilities": {
+    "bg-red-500": {
+      "reason": "Use semantic shadcn-style color tokens instead of raw palette colors.",
+      "suggest": ["bg-destructive"]
+    },
+    "text-red-500": {
+      "reason": "Use semantic shadcn-style color tokens instead of raw palette colors.",
+      "suggest": ["text-destructive"]
+    }
+  }
+}

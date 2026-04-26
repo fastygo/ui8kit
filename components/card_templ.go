@@ -151,7 +151,7 @@ func CardHeader(props CardHeaderProps) templ.Component {
 			templ_7745c5c3_Var8 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var9 = []any{utils.Cn("ui-card-header", props.UtilityProps.Resolve(), props.Class)}
+		var templ_7745c5c3_Var9 = []any{utils.Cn("ui-card-header", props.Class)}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var9...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -509,7 +509,7 @@ func CardContent(props CardContentProps) templ.Component {
 			templ_7745c5c3_Var34 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var35 = []any{utils.Cn("ui-card-content", props.UtilityProps.Resolve(), props.Class)}
+		var templ_7745c5c3_Var35 = []any{utils.Cn("ui-card-content", props.Class)}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var35...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -564,7 +564,7 @@ func CardFooter(props CardFooterProps) templ.Component {
 			templ_7745c5c3_Var37 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var38 = []any{utils.Cn("ui-card-footer", props.UtilityProps.Resolve(), props.Class)}
+		var templ_7745c5c3_Var38 = []any{utils.Cn("ui-card-footer", props.Class)}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var38...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

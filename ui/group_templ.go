@@ -15,7 +15,7 @@ func groupClasses(p GroupProps) string {
 	if p.Grow {
 		base = utils.Cn(base, "ui-group-grow")
 	}
-	return utils.Cn(base, p.UtilityProps.Resolve(), p.Class)
+	return utils.Cn(base, p.Class)
 }
 
 func Group(props GroupProps) templ.Component {

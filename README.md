@@ -1,6 +1,6 @@
 # UI8Kit Go
 
-`github.com/fastygo/ui8kit` is a Go component kit for server-rendered dashboards powered by `templ` + Tailwind.
+`github.com/fastygo/ui8kit` is a Go component kit for server-rendered dashboards powered by `templ` + Tailwind. Styling is expressed as explicit Tailwind utility classes and validated with `ui8px`.
 
 ## Install
 
@@ -16,7 +16,7 @@ go test ./...
 
 - `ui` — primitives (`github.com/fastygo/ui8kit/ui`)
 - `layout` — shell and navigation (`github.com/fastygo/ui8kit/layout`)
-- `utils` — props, variants, utility composition (`github.com/fastygo/ui8kit/utils`)
+- `utils` — class composition, variants, tags, and aria helpers (`github.com/fastygo/ui8kit/utils`)
 - `styles` — embedded CSS assets (`github.com/fastygo/ui8kit/styles`)
 
 ## Quick start
@@ -39,8 +39,12 @@ templ Dashboard(nav []layout.NavItem) {
 ```bash
 bun install
 bun run build:css
-./scripts/gen-css.sh
+npx ui8px@latest lint ui components utils styles tests/examples
 ```
+
+Keep `.ui8px/` in the repository root. The policy separates compact `control`
+files from strict 8px `layout` examples so Tailwind classes remain explicit
+while the design-grid rules stay enforceable.
 
 ## Asset CLI
 

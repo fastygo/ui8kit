@@ -9,7 +9,7 @@ templ Combobox(props ComboboxProps) {
 		data-combobox
 		data-combobox-input={ comboboxInputID(props.ID) }
 		data-combobox-options={ comboboxOptionsID(props.ID) }
-		class={ utils.Cn("ui-combobox", props.UtilityProps.Resolve(), props.Class) }
+		class={ utils.Cn("ui-combobox", props.Class) }
 	>
 		if props.Label != "" {
 			<label for={ comboboxInputID(props.ID) } class="ui-combobox-label">{ props.Label }</label>

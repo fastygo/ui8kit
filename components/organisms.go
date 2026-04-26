@@ -1,9 +1,6 @@
 package components
 
-import "github.com/fastygo/ui8kit/utils"
-
 type DialogProps struct {
-	utils.UtilityProps
 	ID    string
 	Class string
 	Title string
@@ -17,20 +14,17 @@ type DialogTriggerProps struct {
 }
 
 type AlertDialogProps struct {
-	utils.UtilityProps
 	ID    string
 	Class string
 	Open  bool
 }
 
 type AlertProps struct {
-	utils.UtilityProps
 	Class   string
 	Variant string
 }
 
 type BreadcrumbProps struct {
-	utils.UtilityProps
 	Class string
 	Items []BreadcrumbItem
 }
@@ -43,7 +37,6 @@ type BreadcrumbItem struct {
 }
 
 type TabsProps struct {
-	utils.UtilityProps
 	ID        string
 	Class     string
 	Tabs      []TabDescriptor
@@ -64,7 +57,6 @@ type TabsPanelProps struct {
 }
 
 type ComboboxProps struct {
-	utils.UtilityProps
 	ID          string
 	Class       string
 	Name        string
@@ -81,7 +73,6 @@ type ComboboxOptionProps struct {
 }
 
 type TooltipProps struct {
-	utils.UtilityProps
 	ID    string
 	Class string
 	Text  string

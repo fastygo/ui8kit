@@ -1,0 +1,24 @@
+{
+  "defaultScope": "layout",
+  "scopes": [
+    {
+      "name": "controls",
+      "files": [
+        "ui/**",
+        "components/**",
+        "utils/variants.go",
+        "styles/**"
+      ],
+      "spacing": "control"
+    },
+    {
+      "name": "layout",
+      "files": [
+        "tests/examples/**",
+        "examples/**",
+        "internal/site/views/**"
+      ],
+      "spacing": "layout"
+    }
+  ]
+}

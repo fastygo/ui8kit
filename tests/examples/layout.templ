@@ -1,0 +1,18 @@
+package examples
+
+import "github.com/fastygo/ui8kit/ui"
+
+templ LayoutExample() {
+	@ui.Box(ui.BoxProps{Tag: "section", Class: "px-6 py-8"}) {
+		@ui.Container(ui.ContainerProps{Class: "flex flex-col gap-6"}) {
+			@ui.Stack(ui.StackProps{Class: "gap-4"}) {
+				@ui.Title(ui.TitleProps{Order: 2, Class: "text-2xl"}, "Explicit utility classes")
+				@ui.Text(ui.TextProps{Class: "max-w-full text-muted-foreground"}, "Layout examples stay on the 8px spacing rhythm and are validated by ui8px.")
+			}
+			@ui.Group(ui.GroupProps{Class: "gap-4"}) {
+				@ui.Button(ui.ButtonProps{Variant: "primary", Size: "lg"}, "Primary action")
+				@ui.Button(ui.ButtonProps{Variant: "outline", Size: "lg"}, "Secondary action")
+			}
+		}
+	}
+}

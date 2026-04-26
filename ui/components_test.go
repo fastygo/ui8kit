@@ -8,7 +8,6 @@ import (
 	"testing"
 
 	"github.com/fastygo/ui8kit/ui"
-	"github.com/fastygo/ui8kit/utils"
 )
 
 func render(t *testing.T, c interface {
@@ -132,10 +131,9 @@ func TestFieldSelect(t *testing.T) {
 	assertContains(t, html, "selected")
 }
 
-func TestBoxWithUtilityProps(t *testing.T) {
+func TestBoxWithExplicitClass(t *testing.T) {
 	box := ui.Box(ui.BoxProps{
-		UtilityProps: utils.UtilityProps{P: "4", Bg: "card", Rounded: "lg"},
-		Class:        "extra",
+		Class: "p-4 bg-card rounded-lg extra",
 	})
 	html := render(t, box)
 	assertContains(t, html, "<div")

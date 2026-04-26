@@ -1,0 +1,11 @@
+{
+  "groups": {
+    "display": ["block", "flex", "grid", "hidden", "inline-block", "inline-flex"],
+    "flex.direction": ["flex-col", "flex-row", "flex-wrap"],
+    "align.items": ["items-start", "items-center", "items-end", "items-stretch"],
+    "align.justify": ["justify-start", "justify-center", "justify-end", "justify-between"],
+    "radius": ["rounded", "rounded-md", "rounded-full"],
+    "shadow": ["shadow", "shadow-none", "shadow-sm"],
+    "text.align": ["text-left", "text-center", "text-right"]
+  }
+}

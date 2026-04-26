@@ -1,0 +1,127 @@
+{
+  "generatedAt": "2026-04-26T12:56:35.483Z",
+  "patterns": [
+    {
+      "canonical": "text-sm text-muted-foreground",
+      "fingerprint": "u:5a72bb168cce",
+      "count": 6,
+      "suggestedName": "ui-utility-pattern",
+      "occurrences": [
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\components.css",
+          "line": 172,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\components.css",
+          "line": 216,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\components.css",
+          "line": 240,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\components.css",
+          "line": 277,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\components.css",
+          "line": 366,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\shell.css",
+          "line": 54,
+          "column": 4
+        }
+      ]
+    },
+    {
+      "canonical": "bg-accent text-accent-foreground",
+      "fingerprint": "u:ce485a97e274",
+      "count": 5,
+      "suggestedName": "ui-utility-pattern",
+      "occurrences": [
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\components.css",
+          "line": 80,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\components.css",
+          "line": 354,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\components.css",
+          "line": 390,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\components.css",
+          "line": 435,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\utils\\variants.go",
+          "line": 85,
+          "column": 10
+        }
+      ]
+    },
+    {
+      "canonical": "w-4 h-4",
+      "fingerprint": "u:df001b2dcda3",
+      "count": 4,
+      "suggestedName": "ui-utility-pattern",
+      "occurrences": [
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\components.css",
+          "line": 88,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\components.css",
+          "line": 196,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\shell.css",
+          "line": 125,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\utils\\variants.go",
+          "line": 186,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "canonical": "text-sm font-semibold",
+      "fingerprint": "u:34dbfcf46a04",
+      "count": 3,
+      "suggestedName": "ui-utility-pattern",
+      "occurrences": [
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\components.css",
+          "line": 108,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\components.css",
+          "line": 273,
+          "column": 4
+        },
+        {
+          "file": "e:\\_@Go\\@UI8Kit\\styles\\shell.css",
+          "line": 78,
+          "column": 4
+        }
+      ]
+    }
+  ]
+}
