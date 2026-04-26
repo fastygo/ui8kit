@@ -61,7 +61,7 @@ templ Shell(props ShellProps) {
 					</nav>
 				</aside>
 				<div class="ui-shell-main-column">
-					@Header(HeaderProps{Title: props.Title, Extra: props.HeaderExtra, Trailing: props.HeaderTrailing, ThemeToggle: props.ThemeToggle})
+					@Header(HeaderProps{Title: props.Title, Extra: props.HeaderExtra, Trailing: props.HeaderTrailing, ThemeToggle: props.ThemeToggle, ThemeToggleComponent: props.ThemeToggleComponent})
 					<main class="ui-shell-main">
 						{ children... }
 					</main>

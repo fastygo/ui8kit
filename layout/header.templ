@@ -19,18 +19,22 @@ templ Header(props HeaderProps) {
 			if props.Extra != nil {
 				@props.Extra
 			}
-			<button
-				type="button"
-				id="ui8kit-theme-toggle"
-				class="ui-header-theme-btn"
-				data-switch-to-dark-label={ themeToggleSwitchToDarkLabel(props.ThemeToggle.SwitchToDarkLabel) }
-				data-switch-to-light-label={ themeToggleSwitchToLightLabel(props.ThemeToggle.SwitchToLightLabel) }
-				title={ themeToggleLabel(props.ThemeToggle.Label) }
-				aria-label={ themeToggleLabel(props.ThemeToggle.Label) }
-				aria-pressed="false"
-			>
-				<span id="theme-toggle-icon" class="ui-theme-icon latty latty-moon"></span>
-			</button>
+			if props.ThemeToggleComponent != nil {
+				@props.ThemeToggleComponent
+			} else {
+				<button
+					type="button"
+					id="ui8kit-theme-toggle"
+					class="ui-header-theme-btn"
+					data-switch-to-dark-label={ themeToggleSwitchToDarkLabel(props.ThemeToggle.SwitchToDarkLabel) }
+					data-switch-to-light-label={ themeToggleSwitchToLightLabel(props.ThemeToggle.SwitchToLightLabel) }
+					title={ themeToggleLabel(props.ThemeToggle.Label) }
+					aria-label={ themeToggleLabel(props.ThemeToggle.Label) }
+					aria-pressed="false"
+				>
+					<span id="theme-toggle-icon" class="ui-theme-icon latty latty-moon"></span>
+				</button>
+			}
 			if props.Trailing != nil {
 				@props.Trailing
 			}
