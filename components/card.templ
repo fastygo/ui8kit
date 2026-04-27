@@ -1,47 +1,38 @@
 package components
 
-import "github.com/fastygo/ui8kit/utils"
+import (
+	"github.com/fastygo/ui8kit/ui"
+	"github.com/fastygo/ui8kit/utils"
+)
 
 templ Card(props CardProps) {
-	switch cardTag(props.Tag) {
-		case "article":
-			<article class={ cardClasses(props) }>{ children... }</article>
-		case "section":
-			<section class={ cardClasses(props) }>{ children... }</section>
-		default:
-			<div class={ cardClasses(props) }>{ children... }</div>
+	@ui.Box(ui.BoxProps{Class: cardClasses(props), Tag: cardTag(props.Tag)}) {
+		{ children... }
 	}
 }
 
 templ CardHeader(props CardHeaderProps) {
-	<div class={ utils.Cn("ui-card-header", props.Class) }>{ children... }</div>
-}
-
-templ CardTitle(props CardTitleProps, value string) {
-	switch cardTitleTag(props.Order) {
-		case "h1":
-			<h1 class={ utils.Cn("ui-card-title", props.Class) }>{ value }</h1>
-		case "h2":
-			<h2 class={ utils.Cn("ui-card-title", props.Class) }>{ value }</h2>
-		case "h4":
-			<h4 class={ utils.Cn("ui-card-title", props.Class) }>{ value }</h4>
-		case "h5":
-			<h5 class={ utils.Cn("ui-card-title", props.Class) }>{ value }</h5>
-		case "h6":
-			<h6 class={ utils.Cn("ui-card-title", props.Class) }>{ value }</h6>
-		default:
-			<h3 class={ utils.Cn("ui-card-title", props.Class) }>{ value }</h3>
+	@ui.Box(ui.BoxProps{Class: utils.Cn("ui-card-header", props.Class)}) {
+		{ children... }
 	}
 }
 
+templ CardTitle(props CardTitleProps, value string) {
+	@ui.Title(ui.TitleProps{Class: utils.Cn("ui-card-title", props.Class), Order: props.Order, FontSize: "sm", FontWeight: "semibold"}, value)
+}
+
 templ CardDescription(props CardDescriptionProps, value string) {
-	<p class={ utils.Cn("text-sm text-muted-foreground", props.Class) }>{ value }</p>
+	@ui.Text(ui.TextProps{Class: props.Class, FontSize: "sm", TextColor: "muted-foreground"}, value)
 }
 
 templ CardContent(props CardContentProps) {
-	<div class={ utils.Cn("ui-card-content", props.Class) }>{ children... }</div>
+	@ui.Box(ui.BoxProps{Class: utils.Cn("ui-card-content", props.Class)}) {
+		{ children... }
+	}
 }
 
 templ CardFooter(props CardFooterProps) {
-	<div class={ utils.Cn("ui-card-footer", props.Class) }>{ children... }</div>
+	@ui.Box(ui.BoxProps{Class: utils.Cn("ui-card-footer", props.Class)}) {
+		{ children... }
+	}
 }

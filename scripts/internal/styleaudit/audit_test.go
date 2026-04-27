@@ -102,18 +102,31 @@ func TestRemoveUnusedRules(t *testing.T) {
   .ui-used:hover {
     @apply block;
   }
+
+  .ui-preserved {
+    @apply flex items-center;
+  }
 }
 `
 
 	cleaned, removed := RemoveUnusedRules(css, []string{"ui-unused", "ui-unused-child"})
-	if removed != 2 {
-		t.Fatalf("removed = %d, want 2", removed)
+	if removed != 1 {
+		t.Fatalf("removed = %d, want 1", removed)
 	}
 	if strings.Contains(cleaned, "ui-unused {") {
 		t.Fatalf("unused rule was not removed:\n%s", cleaned)
 	}
+	if !strings.Contains(cleaned, ".ui-used .ui-unused-child") {
+		t.Fatalf("mixed selector rule should be preserved:\n%s", cleaned)
+	}
 	if strings.Contains(cleaned, "ui-unused-child") {
-		t.Fatalf("unused selector was not removed:\n%s", cleaned)
+		t.Log("mixed selector with unused class was preserved to avoid rewriting live CSS formatting")
+	}
+	preserved := `  .ui-preserved {
+    @apply flex items-center;
+  }`
+	if !strings.Contains(cleaned, preserved) {
+		t.Fatalf("live rule formatting was not preserved:\n%s", cleaned)
 	}
 	if !strings.Contains(cleaned, ".ui-used:hover") {
 		t.Fatalf("live selector was removed:\n%s", cleaned)

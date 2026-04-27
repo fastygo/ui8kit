@@ -134,69 +134,6 @@ func gridColClasses(p GridColProps) string {
 	return utils.Cn(utils.GridColVariant(p.Span, p.Start, p.End, p.Order), p.Class)
 }
 
-func cardClasses(p CardProps) string {
-	return utils.Cn(utils.CardVariant(p.Variant), p.Class)
-}
-
-func cardTag(tag string) string {
-	return utils.ResolveTag(tag, "div", utils.TagGroupLayout)
-}
-
-func cardTitleTag(order int) string {
-	if order < 1 || order > 6 {
-		return "h3"
-	}
-	return fmt.Sprintf("h%d", order)
-}
-
-func accordionType(value string) string {
-	switch strings.TrimSpace(value) {
-	case "multiple":
-		return "multiple"
-	default:
-		return "single"
-	}
-}
-
-func accordionState(open bool) string {
-	if open {
-		return "open"
-	}
-	return "closed"
-}
-
-func accordionTriggerID(value string) string {
-	return "trigger-" + strings.TrimSpace(value)
-}
-
-func accordionPanelID(value string) string {
-	return "panel-" + strings.TrimSpace(value)
-}
-
-func sheetID(value string) string {
-	if strings.TrimSpace(value) == "" {
-		return "sheet"
-	}
-	return value
-}
-
-func sheetPanelID(value string) string {
-	return sheetID(value) + "-panel"
-}
-
-func sheetTitleID(value string) string {
-	return sheetID(value) + "-title"
-}
-
-func sheetPanelClasses(p SheetProps) string {
-	return utils.Cn(
-		"ui-sheet-panel",
-		utils.SheetSideVariant(p.Side),
-		utils.SheetSizeVariant(p.Size),
-		p.Class,
-	)
-}
-
 func intAttr(n int) string {
 	return strconv.Itoa(n)
 }

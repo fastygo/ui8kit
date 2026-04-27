@@ -241,43 +241,42 @@ func RemoveUnusedRules(css string, unusedClasses []string) (string, int) {
 			return rule
 		}
 
-		prefix := matches[1]
 		selectorText := strings.TrimSpace(matches[2])
-		body := matches[3]
 		selectors := splitSelectorList(selectorText)
-		kept := make([]string, 0, len(selectors))
+		if len(selectors) == 0 {
+			return rule
+		}
 
+		allDead := true
 		for _, selector := range selectors {
-			classMatches := classPattern.FindAllStringSubmatch(selector, -1)
-			if len(classMatches) == 0 {
-				kept = append(kept, selector)
-				continue
-			}
-
-			dead := false
-			for _, classMatch := range classMatches {
-				if unused[classMatch[1]] {
-					dead = true
-					break
-				}
-			}
-			if !dead {
-				kept = append(kept, selector)
+			if !selectorUsesUnusedClass(selector, unused, classPattern) {
+				allDead = false
+				break
 			}
 		}
 
-		if len(kept) == 0 {
+		if allDead {
 			removed++
 			return ""
 		}
-		if len(kept) != len(selectors) {
-			removed++
-		}
-		return prefix + strings.Join(kept, ",\n  ") + " {\n" + body + "}"
+		return rule
 	})
 
 	cleaned = removeEmptyAtRules(cleaned)
 	return cleaned, removed
+}
+
+func selectorUsesUnusedClass(selector string, unused map[string]bool, classPattern *regexp.Regexp) bool {
+	classMatches := classPattern.FindAllStringSubmatch(selector, -1)
+	if len(classMatches) == 0 {
+		return false
+	}
+	for _, classMatch := range classMatches {
+		if unused[classMatch[1]] {
+			return true
+		}
+	}
+	return false
 }
 
 func splitSelectorList(selectorText string) []string {

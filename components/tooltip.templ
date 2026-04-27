@@ -1,6 +1,9 @@
 package components
 
-import "github.com/fastygo/ui8kit/utils"
+import (
+	"github.com/fastygo/ui8kit/ui"
+	"github.com/fastygo/ui8kit/utils"
+)
 
 templ Tooltip(props TooltipProps) {
 	<div
@@ -11,9 +14,9 @@ templ Tooltip(props TooltipProps) {
 		data-tooltip-content={ tooltipContentID(props.ID) }
 		class={ utils.Cn("ui-tooltip", props.Class) }
 	>
-		<div class="ui-tooltip-trigger">
+		@ui.Box(ui.BoxProps{Class: "ui-tooltip-trigger"}) {
 			{ children... }
-		</div>
+		}
 		<span
 			id={ tooltipContentID(props.ID) }
 			role="tooltip"

@@ -25,10 +25,11 @@ CSS variables follow the shadcn/ui design tokens convention (`--primary`, `--des
 ```
 Consumer App
     │
-    ├── import "github.com/fastygo/ui8kit/ui"       ← primitives
-    ├── import "github.com/fastygo/ui8kit/layout"    ← page shell
-    ├── import "github.com/fastygo/ui8kit/utils"     ← class utilities
-    └── import "github.com/fastygo/ui8kit/styles"    ← embedded CSS
+    ├── import "github.com/fastygo/ui8kit/ui"         ← primitives
+    ├── import "github.com/fastygo/ui8kit/components" ← composites
+    ├── import "github.com/fastygo/ui8kit/layout"     ← page shell
+    ├── import "github.com/fastygo/ui8kit/utils"      ← class utilities
+    └── import "github.com/fastygo/ui8kit/styles"     ← embedded CSS
 ```
 
 ### Package Responsibilities
@@ -36,6 +37,7 @@ Consumer App
 | Package | Purpose |
 |---------|---------|
 | `ui` | Visual primitives: Box, Stack, Group, Container, Button, Badge, Text, Title, Field, Icon |
+| `components` | Composite components: Card, Accordion, Sheet, Dialog, Alert, Breadcrumb, Tabs, Combobox, Tooltip |
 | `layout` | Page structure: Shell (sidebar + header + main), Header, Sidebar |
 | `utils` | Cn (class joiner), variant helpers, tag helpers, aria helpers |
 | `styles` | Embedded CSS via `embed.FS`: base theme, component classes, Latty icon font |

@@ -60,6 +60,30 @@ PREFLIGHT_REQUIRE_BUN=1 bash ./scripts/preflight.sh
 - CI still enforces `go test ./... -race`.
 - If `preflight.sh` changes generated or formatted files, it fails on the final `git diff` check so you can review and commit those changes before releasing.
 
+## `cmd/style-patterns`
+
+### Purpose
+
+Generates `.ui8px/policy/patterns.json` from UI8Kit CSS `@apply` rules and source-only `ui-*` semantic classes.
+
+### Run
+
+```bash
+go run ./scripts/cmd/style-patterns
+```
+
+Check that the generated policy is current without writing:
+
+```bash
+go run ./scripts/cmd/style-patterns --check
+```
+
+### Notes
+
+- By default the CLI reads `styles/components.css` and `styles/shell.css`.
+- It scans `components`, `ui`, and `layout` for `ui-*` classes that are used as semantic modifiers but do not have their own CSS rule.
+- State, pseudo, media, and contextual selectors are intentionally not folded into base patterns.
+
 ## `release.sh`
 
 ### Purpose
@@ -87,4 +111,5 @@ bash ./scripts/release.sh 0.3.0
 
 - Utility classes stay explicit in `.templ`, `.go`, and CSS `@apply` source files.
 - Validate them with `npx ui8px@latest lint ui components utils styles tests/examples`.
+- Regenerate semantic pattern policy with `go run ./scripts/cmd/style-patterns`.
 - Use `npx ui8px@latest validate patterns ...` manually when reviewing repeated compositions for possible `ui-*` promotion.

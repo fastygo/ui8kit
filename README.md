@@ -15,6 +15,7 @@ go test ./...
 ## Packages
 
 - `ui` — primitives (`github.com/fastygo/ui8kit/ui`)
+- `components` — composites built from primitives (`github.com/fastygo/ui8kit/components`)
 - `layout` — shell and navigation (`github.com/fastygo/ui8kit/layout`)
 - `utils` — class composition, variants, tags, and aria helpers (`github.com/fastygo/ui8kit/utils`)
 - `styles` — embedded CSS assets (`github.com/fastygo/ui8kit/styles`)

@@ -33,10 +33,10 @@ func main() {
 	}
 
 	if cfg.DryRun {
-		fmt.Printf("style-clean: would remove %d CSS rules/selectors for %d unused classes\n", removed, len(result.Unused))
+		fmt.Printf("style-clean: would remove %d CSS rules for %d unused classes\n", removed, len(result.Unused))
 		return
 	}
-	fmt.Printf("style-clean: removed %d CSS rules/selectors for %d unused classes\n", removed, len(result.Unused))
+	fmt.Printf("style-clean: removed %d CSS rules for %d unused classes\n", removed, len(result.Unused))
 }
 
 func parseFlags(args []string) (config, error) {

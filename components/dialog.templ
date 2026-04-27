@@ -1,6 +1,9 @@
 package components
 
-import "github.com/fastygo/ui8kit/utils"
+import (
+	"github.com/fastygo/ui8kit/ui"
+	"github.com/fastygo/ui8kit/utils"
+)
 
 templ Dialog(props DialogProps) {
 	<div
@@ -17,9 +20,9 @@ templ Dialog(props DialogProps) {
 		class={ utils.Cn("ui-dialog", props.Class) }
 	>
 		<div class="ui-dialog-overlay" data-ui8kit-dialog-overlay data-ui8kit-dialog-close data-ui8kit-dialog-target={ dialogID(props.ID) }></div>
-		<section class="ui-dialog-content">
+		@ui.Box(ui.BoxProps{Class: "ui-dialog-content", Tag: "section"}) {
 			{ children... }
-		</section>
+		}
 	</div>
 }
 

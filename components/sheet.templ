@@ -1,5 +1,7 @@
 package components
 
+import "github.com/fastygo/ui8kit/ui"
+
 templ Sheet(props SheetProps) {
 	<div
 		id={ sheetPanelID(props.ID) }
@@ -19,7 +21,7 @@ templ Sheet(props SheetProps) {
 			data-sheet-panel
 			class="ui-sheet-content-wrapper"
 		>
-			<div class="ui-sheet-header">
+			@ui.Box(ui.BoxProps{Class: "ui-sheet-header"}) {
 				<span id={ sheetTitleID(props.ID) } class="text-sm text-muted-foreground">{ props.Title }</span>
 				<button
 					type="button"
@@ -28,8 +30,10 @@ templ Sheet(props SheetProps) {
 					aria-label="Close"
 					class="inline-flex h-8 w-8 items-center justify-center rounded border border-border"
 				>✕</button>
-			</div>
-			<div class="ui-sheet-content">{ children... }</div>
+			}
+			@ui.Box(ui.BoxProps{Class: "ui-sheet-content"}) {
+				{ children... }
+			}
 		</div>
 	</div>
 }
