@@ -372,7 +372,10 @@ func syncUI8pxPolicy(appDir, ui8kitDir string) error {
 		return fmt.Errorf("create ui8px policy dir: %w", err)
 	}
 
-	for _, name := range []string{"allowed.json", "denied.json", "groups.json"} {
+	if err := syncUI8pxAllowed(filepath.Join(ui8kitDir, ".ui8px", "policy", "allowed.json"), filepath.Join(policyDir, "allowed.json")); err != nil {
+		return err
+	}
+	for _, name := range []string{"denied.json", "groups.json"} {
 		dst := filepath.Join(policyDir, name)
 		if _, err := os.Stat(dst); err == nil {
 			continue
@@ -400,6 +403,57 @@ func syncUI8pxPolicy(appDir, ui8kitDir string) error {
 		return fmt.Errorf("write ui8px scopes: %w", err)
 	}
 	return nil
+}
+
+type ui8pxAllowedPolicy struct {
+	Spacing   map[string][]string `json:"spacing"`
+	Utilities []string            `json:"utilities"`
+}
+
+func syncUI8pxAllowed(src, dst string) error {
+	srcPolicy, err := readUI8pxAllowed(src)
+	if err != nil {
+		return fmt.Errorf("read ui8px allowed source: %w", err)
+	}
+	if _, err := os.Stat(dst); errors.Is(err, os.ErrNotExist) {
+		if err := copyFile(src, dst); err != nil {
+			return fmt.Errorf("copy ui8px allowed.json: %w", err)
+		}
+		return nil
+	} else if err != nil {
+		return fmt.Errorf("stat %s: %w", dst, err)
+	}
+
+	dstPolicy, err := readUI8pxAllowed(dst)
+	if err != nil {
+		return fmt.Errorf("read ui8px allowed target: %w", err)
+	}
+	dstPolicy.Utilities = mergeStringLists(dstPolicy.Utilities, srcPolicy.Utilities)
+	if dstPolicy.Spacing == nil {
+		dstPolicy.Spacing = srcPolicy.Spacing
+	}
+
+	data, err := json.MarshalIndent(dstPolicy, "", "  ")
+	if err != nil {
+		return fmt.Errorf("marshal ui8px allowed: %w", err)
+	}
+	data = append(data, '\n')
+	if err := os.WriteFile(dst, data, 0o644); err != nil {
+		return fmt.Errorf("write ui8px allowed: %w", err)
+	}
+	return nil
+}
+
+func readUI8pxAllowed(path string) (ui8pxAllowedPolicy, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return ui8pxAllowedPolicy{}, err
+	}
+	var policy ui8pxAllowedPolicy
+	if err := json.Unmarshal(data, &policy); err != nil {
+		return ui8pxAllowedPolicy{}, err
+	}
+	return policy, nil
 }
 
 type ui8pxPatternsPolicy struct {
@@ -453,6 +507,27 @@ func readUI8pxPatterns(path string) (ui8pxPatternsPolicy, error) {
 		return ui8pxPatternsPolicy{}, err
 	}
 	return policy, nil
+}
+
+func mergeStringLists(existing, incoming []string) []string {
+	seen := make(map[string]bool, len(existing)+len(incoming))
+	merged := make([]string, 0, len(existing)+len(incoming))
+	for _, value := range existing {
+		if value == "" || seen[value] {
+			continue
+		}
+		seen[value] = true
+		merged = append(merged, value)
+	}
+	for _, value := range incoming {
+		if value == "" || seen[value] {
+			continue
+		}
+		seen[value] = true
+		merged = append(merged, value)
+	}
+	slices.Sort(merged)
+	return merged
 }
 
 const appUI8pxScopesJSON = `{

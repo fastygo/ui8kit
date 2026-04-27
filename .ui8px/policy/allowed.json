@@ -108,6 +108,7 @@
     "overflow-x-auto",
     "overflow-y-auto",
     "pointer-events-none",
+    "prose",
     "relative",
     "rounded",
     "rounded-full",

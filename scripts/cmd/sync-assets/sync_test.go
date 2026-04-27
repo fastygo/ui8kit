@@ -127,11 +127,12 @@ func TestSyncUI8pxPolicyWritesMissingAppPolicy(t *testing.T) {
 func TestSyncUI8pxPolicyDoesNotOverwriteExistingPolicy(t *testing.T) {
 	appDir := t.TempDir()
 	ui8kitDir := filepath.Join(t.TempDir(), "ui8kit")
-	for _, name := range []string{"allowed.json", "denied.json", "groups.json"} {
+	writeFile(t, filepath.Join(ui8kitDir, ".ui8px", "policy", "allowed.json"), `{"utilities":["prose"],"spacing":{"layout":["0"],"control":["0"]}}`)
+	for _, name := range []string{"denied.json", "groups.json"} {
 		writeFile(t, filepath.Join(ui8kitDir, ".ui8px", "policy", name), `{"from":"ui8kit"}`)
 	}
 	writeFile(t, filepath.Join(ui8kitDir, ".ui8px", "policy", "patterns.json"), `{"patterns":{"ui-grid":["grid","gap-4"]}}`)
-	writeFile(t, filepath.Join(appDir, ".ui8px", "policy", "allowed.json"), `{"from":"app"}`)
+	writeFile(t, filepath.Join(appDir, ".ui8px", "policy", "allowed.json"), `{"utilities":["app-only"],"spacing":{"layout":["0"],"control":["0"]}}`)
 	writeFile(t, filepath.Join(appDir, ".ui8px", "policy", "scopes.json"), `{"from":"app"}`)
 
 	if err := syncUI8pxPolicy(appDir, ui8kitDir); err != nil {
@@ -142,8 +143,11 @@ func TestSyncUI8pxPolicyDoesNotOverwriteExistingPolicy(t *testing.T) {
 	if err != nil {
 		t.Fatalf("read allowed: %v", err)
 	}
-	if string(data) != `{"from":"app"}` {
-		t.Fatalf("allowed.json was overwritten: %s", data)
+	content := string(data)
+	for _, want := range []string{`"app-only"`, `"prose"`} {
+		if !strings.Contains(content, want) {
+			t.Fatalf("allowed.json missing %q after merge: %s", want, data)
+		}
 	}
 	data, err = os.ReadFile(filepath.Join(appDir, ".ui8px", "policy", "scopes.json"))
 	if err != nil {

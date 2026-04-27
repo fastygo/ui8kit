@@ -65,6 +65,10 @@
     @apply mt-4;
   }
 
+  .ui-shell-mobile-sheet-divider {
+    @apply my-4 border-t border-border;
+  }
+
   .ui-shell-nav-mobile {
     @apply space-y-1 p-2;
   }
@@ -94,7 +98,7 @@
   }
 
   .ui-shell-main {
-    @apply w-full min-w-0 max-w-full p-4 md:p-6;
+    @apply flex w-full min-w-0 max-w-full flex-col gap-6 p-4 md:p-6;
   }
 
   .ui-header {

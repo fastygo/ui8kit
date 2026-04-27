@@ -25,9 +25,11 @@ go run github.com/fastygo/ui8kit/scripts/cmd/sync-assets web/static
   token CSS such as `web/static/css/shadcn.css` as control/theme CSS instead of
   app layout CSS. Pass `--ui8px-policy=false` when an application owns its policy
   completely.
-- Existing app policy is preserved: `scopes.json`, `allowed.json`, `denied.json`,
-  and `groups.json` are only written when missing. `patterns.json` is merged so
-  UI8Kit-owned `ui-*` patterns stay current while app-specific patterns remain.
+- Existing app policy is preserved: `scopes.json`, `denied.json`, and
+  `groups.json` are only written when missing. `allowed.json` utilities are
+  merged so shared UI8Kit utilities such as `prose` stay available.
+  `patterns.json` is merged so UI8Kit-owned `ui-*` patterns stay current while
+  app-specific patterns remain.
 
 ## `preflight.sh`
 
