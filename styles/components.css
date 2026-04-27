@@ -99,6 +99,14 @@
     @apply pointer-events-none opacity-50;
   }
 
+  .ui-auth-shell {
+    @apply flex min-h-screen items-center justify-center bg-background p-4;
+  }
+
+  .ui-auth-card {
+    @apply w-full max-w-sm;
+  }
+
   .ui-icon {
     @apply inline-block;
   }

@@ -81,6 +81,7 @@
     "max-h-dvh",
     "max-w-7xl",
     "max-w-full",
+    "max-w-sm",
     "min-h-screen",
     "min-w-0",
     "min-w-full",

@@ -7,6 +7,8 @@
     "ui-alert-dialog-content": ["absolute","left-1/2","top-1/2","-translate-x-1/2","-translate-y-1/2","rounded","border","border-border","bg-card","p-4","shadow-lg"],
     "ui-alert-success": ["border-primary","bg-primary/10","text-primary"],
     "ui-alert-warning": ["border-border","bg-accent","text-accent-foreground"],
+    "ui-auth-card": ["w-full","max-w-sm"],
+    "ui-auth-shell": ["flex","min-h-screen","items-center","justify-center","bg-background","p-4"],
     "ui-breadcrumb": ["text-sm"],
     "ui-breadcrumb-item": ["inline-flex","items-center"],
     "ui-breadcrumb-list": ["flex","flex-wrap","items-center","gap-2"],
