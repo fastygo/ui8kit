@@ -1,5 +1,14 @@
 package ui
 
+import "github.com/a-h/templ"
+
+type DOMProps struct {
+	ID       string
+	Role     string
+	TabIndex string
+	Attrs    templ.Attributes
+}
+
 type BoxProps struct {
 	Class string
 	Tag   string
@@ -24,12 +33,17 @@ type ContainerProps struct {
 type BlockProps = BoxProps
 
 type ButtonProps struct {
-	Variant  string
-	Size     string
-	Href     string
-	Class    string
-	Type     string
-	Disabled bool
+	ID        string
+	Role      string
+	TabIndex  string
+	Attrs     templ.Attributes
+	Variant   string
+	Size      string
+	Href      string
+	Class     string
+	Type      string
+	AriaLabel string
+	Disabled  bool
 }
 
 type BadgeProps struct {
@@ -68,12 +82,15 @@ type FieldOption struct {
 }
 
 type FieldProps struct {
+	ID           string
+	Role         string
+	TabIndex     string
+	Attrs        templ.Attributes
 	Class        string
 	Variant      string
 	Size         string
 	Type         string
 	Name         string
-	ID           string
 	Placeholder  string
 	Value        string
 	Rows         int

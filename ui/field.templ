@@ -8,7 +8,7 @@ templ Field(props FieldProps) {
 			if props.Label != "" {
 				<label for={ fieldID(props) } class="ui-field-label">{ props.Label }</label>
 			}
-			@fieldControl(props)
+			@FieldControl(props)
 			if props.Hint != "" {
 				<small class="ui-field-hint">{ props.Hint }</small>
 			}
@@ -17,11 +17,11 @@ templ Field(props FieldProps) {
 			}
 		</div>
 	} else {
-		@fieldControl(props)
+		@FieldControl(props)
 	}
 }
 
-templ fieldControl(props FieldProps) {
+templ FieldControl(props FieldProps) {
 	switch props.Component {
 		case "button":
 			<button
@@ -30,8 +30,8 @@ templ fieldControl(props FieldProps) {
 				type="button"
 				class={ fieldClasses(props) }
 				disabled?={ props.Disabled }
-				aria-label={ props.AriaLabel }
 				value={ props.Value }
+				{ fieldAttrs(props)... }
 			>
 				{ props.Value }
 			</button>
@@ -43,7 +43,7 @@ templ fieldControl(props FieldProps) {
 				rows={ strconv.Itoa(fieldRows(props.Rows)) }
 				placeholder={ props.Placeholder }
 				disabled?={ props.Disabled }
-				aria-label={ props.AriaLabel }
+				{ fieldAttrs(props)... }
 			>{ props.Value }</textarea>
 		case "select":
 			<select
@@ -51,7 +51,7 @@ templ fieldControl(props FieldProps) {
 				name={ props.Name }
 				class={ fieldClasses(props) }
 				disabled?={ props.Disabled }
-				aria-label={ props.AriaLabel }
+				{ fieldAttrs(props)... }
 			>
 				for _, opt := range props.Options {
 					<option value={ opt.Value } selected?={ opt.Value == props.Value }>{ opt.Label }</option>
@@ -72,9 +72,7 @@ templ fieldControl(props FieldProps) {
 					checked?={ props.Checked }
 					disabled?={ props.Disabled }
 					required?={ props.Required }
-					aria-label={ props.AriaLabel }
-					role="switch"
-					aria-checked={ map[bool]string{true: "true", false: "false"}[props.Checked] }
+					{ fieldAttrs(props)... }
 				/>
 			} else {
 				<input
@@ -90,7 +88,7 @@ templ fieldControl(props FieldProps) {
 					checked?={ props.Checked }
 					disabled?={ props.Disabled }
 					required?={ props.Required }
-					aria-label={ props.AriaLabel }
+					{ fieldAttrs(props)... }
 				/>
 			}
 	}

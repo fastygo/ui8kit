@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/a-h/templ"
 	"github.com/fastygo/ui8kit/utils"
 )
 
@@ -18,6 +19,38 @@ func buttonClasses(p ButtonProps) string {
 		state = "ui-button-disabled"
 	}
 	return utils.Cn(utils.ButtonStyleVariant(p.Variant), utils.ButtonSizeVariant(p.Size), state, p.Class)
+}
+
+func domAttrs(p DOMProps) templ.Attributes {
+	attrs := templ.Attributes{}
+	for key, value := range p.Attrs {
+		attrs[key] = value
+	}
+	if strings.TrimSpace(p.ID) != "" {
+		attrs["id"] = p.ID
+	}
+	if strings.TrimSpace(p.Role) != "" {
+		attrs["role"] = p.Role
+	}
+	if strings.TrimSpace(p.TabIndex) != "" {
+		attrs["tabindex"] = p.TabIndex
+	}
+	return attrs
+}
+
+func buttonAttrs(p ButtonProps) templ.Attributes {
+	attrs := domAttrs(DOMProps{ID: p.ID, Role: p.Role, TabIndex: p.TabIndex, Attrs: p.Attrs})
+	if strings.TrimSpace(p.AriaLabel) != "" {
+		attrs["aria-label"] = p.AriaLabel
+	}
+	if strings.TrimSpace(p.Href) != "" && p.Disabled {
+		attrs["aria-disabled"] = "true"
+		attrs["tabindex"] = "-1"
+		if _, ok := attrs["role"]; !ok {
+			attrs["role"] = "link"
+		}
+	}
+	return attrs
 }
 
 func buttonType(t string) string {
@@ -39,6 +72,19 @@ func fieldClasses(p FieldProps) string {
 		return utils.Cn(utils.FieldControlVariant(p.Variant), utils.FieldControlSizeVariant(p.Size), p.Class)
 	}
 	return utils.Cn(utils.FieldVariant(p.Variant), utils.FieldSizeVariant(p.Size), p.Class)
+}
+
+func fieldAttrs(p FieldProps) templ.Attributes {
+	attrs := domAttrs(DOMProps{ID: p.ID, Role: p.Role, TabIndex: p.TabIndex, Attrs: p.Attrs})
+	delete(attrs, "id")
+	if strings.TrimSpace(p.AriaLabel) != "" {
+		attrs["aria-label"] = p.AriaLabel
+	}
+	if p.Type == "checkbox" && p.Switch {
+		attrs["role"] = "switch"
+		attrs["aria-checked"] = strconv.FormatBool(p.Checked)
+	}
+	return attrs
 }
 
 func stackClasses(p StackProps) string {

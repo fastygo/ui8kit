@@ -7,6 +7,16 @@ import (
 	"github.com/a-h/templ"
 )
 
+func MergeAttrs(groups ...templ.Attributes) templ.Attributes {
+	merged := templ.Attributes{}
+	for _, group := range groups {
+		for key, value := range group {
+			merged[key] = value
+		}
+	}
+	return merged
+}
+
 func AriaExpanded(expanded bool) templ.Attributes {
 	return templ.Attributes{"aria-expanded": strconv.FormatBool(expanded)}
 }

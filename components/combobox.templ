@@ -1,6 +1,9 @@
 package components
 
-import "github.com/fastygo/ui8kit/utils"
+import (
+	"github.com/fastygo/ui8kit/ui"
+	"github.com/fastygo/ui8kit/utils"
+)
 
 templ Combobox(props ComboboxProps) {
 	<div
@@ -15,27 +18,19 @@ templ Combobox(props ComboboxProps) {
 			<label for={ comboboxInputID(props.ID) } class="text-sm text-muted-foreground">{ props.Label }</label>
 		}
 		<div class="relative flex">
-			<input
-				id={ comboboxInputID(props.ID) }
-				type="text"
-				name={ props.Name }
-				autocomplete="off"
-				role="combobox"
-				aria-expanded="false"
-				aria-controls={ comboboxOptionsID(props.ID) }
-				class="flex-1 border border-input bg-background px-3 py-2 text-sm"
-				value={ props.Value }
-				placeholder={ props.Placeholder }
-			/>
-			<button
-				type="button"
-				class="border border-input bg-background px-3 py-2"
-				aria-label="Open options"
-				data-combobox-toggle
-				data-combobox-target={ comboboxID(props.ID) }
-			>
-				▾
-			</button>
+			@ui.FieldControl(ui.FieldProps{
+				ID: comboboxInputID(props.ID),
+				Role: "combobox",
+				Attrs: comboboxInputAttrs(props),
+				Type: "text",
+				Name: props.Name,
+				Autocomplete: "off",
+				Variant: "unstyled",
+				Class: "flex-1 border border-input bg-background px-3 py-2 text-sm",
+				Value: props.Value,
+				Placeholder: props.Placeholder,
+			})
+			@ui.Button(ui.ButtonProps{Attrs: comboboxToggleAttrs(props), Variant: "unstyled", Class: "border border-input bg-background px-3 py-2", AriaLabel: "Open options"}, "▾")
 		</div>
 		<ul id={ comboboxOptionsID(props.ID) } class="mt-1 max-h-60 overflow-auto border border-border bg-card p-1" hidden>
 			for _, option := range props.Options {

@@ -32,6 +32,8 @@ func CardVariant(variant string) string {
 func ButtonStyleVariant(variant string) string {
 	base := "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium rounded transition-colors shrink-0 outline-none"
 	switch variant {
+	case "unstyled":
+		return ""
 	case "", "default", "primary":
 		return Cn(base, "bg-primary text-primary-foreground hover:opacity-90")
 	case "destructive":
@@ -137,6 +139,8 @@ func TypographyClasses(fontSize, fontWeight, lineHeight, letterSpacing, textColo
 func FieldVariant(variant string) string {
 	base := "w-full rounded border px-3 py-2 text-sm outline-none transition-colors focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50"
 	switch variant {
+	case "unstyled":
+		return ""
 	case "", "default", "outline":
 		return Cn(base, "border-border bg-background")
 	case "ghost":
@@ -166,6 +170,8 @@ func FieldSizeVariant(size string) string {
 func FieldControlVariant(variant string) string {
 	base := "rounded border border-primary text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50"
 	switch variant {
+	case "unstyled":
+		return ""
 	case "", "default", "outline":
 		return Cn(base, "border-primary")
 	case "ghost":

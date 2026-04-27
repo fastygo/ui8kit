@@ -1,5 +1,7 @@
 package components
 
+import "github.com/fastygo/ui8kit/ui"
+
 templ Accordion(props AccordionProps) {
 	<div
 		data-ui8kit="accordion"
@@ -24,16 +26,9 @@ templ AccordionItem(props AccordionItemProps) {
 
 templ AccordionTrigger(props AccordionTriggerProps) {
 	<h3>
-		<button
-			id={ accordionTriggerID(props.Value) }
-			type="button"
-			data-ui8kit-accordion-trigger
-			aria-expanded={ map[bool]string{true: "true", false: "false"}[props.Open] }
-			aria-controls={ accordionPanelID(props.Value) }
-			class={ props.Class }
-		>
+		@ui.ButtonBlock(ui.ButtonProps{ID: accordionTriggerID(props.Value), Attrs: accordionTriggerAttrs(props), Variant: "unstyled", Class: props.Class}) {
 			{ children... }
-		</button>
+		}
 	</h3>
 }
 

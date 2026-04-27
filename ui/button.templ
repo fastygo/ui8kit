@@ -3,20 +3,24 @@ package ui
 import "strings"
 
 templ Button(props ButtonProps, label string) {
+	@ButtonBlock(props) {
+		{ label }
+	}
+}
+
+templ ButtonBlock(props ButtonProps) {
 	if strings.TrimSpace(props.Href) != "" {
 		if props.Disabled {
 			<a
 				href={ templ.SafeURL(props.Href) }
 				class={ buttonClasses(props) }
-				aria-disabled="true"
-				tabindex="-1"
-				role="link"
 				rel="nofollow noopener noreferrer"
-			>{ label }</a>
+				{ buttonAttrs(props)... }
+			>{ children... }</a>
 		} else {
-			<a href={ templ.SafeURL(props.Href) } class={ buttonClasses(props) }>{ label }</a>
+			<a href={ templ.SafeURL(props.Href) } class={ buttonClasses(props) } { buttonAttrs(props)... }>{ children... }</a>
 		}
 	} else {
-		<button type={ buttonType(props.Type) } class={ buttonClasses(props) } disabled?={ props.Disabled }>{ label }</button>
+		<button type={ buttonType(props.Type) } class={ buttonClasses(props) } disabled?={ props.Disabled } { buttonAttrs(props)... }>{ children... }</button>
 	}
 }

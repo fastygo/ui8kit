@@ -60,6 +60,33 @@ func TestAccordionParts(t *testing.T) {
 	assertContains(t, contentHTML, `aria-labelledby="ui8kit-accordion-trigger-a"`)
 }
 
+func TestAlertDialogCancelButton(t *testing.T) {
+	button := components.AlertDialogCancelButton("Cancel")
+	html := render(t, button)
+	assertContains(t, html, `<button`)
+	assertContains(t, html, `type="button"`)
+	assertContains(t, html, `data-ui8kit-dialog-close`)
+	assertContains(t, html, "Cancel")
+}
+
+func TestComboboxRender(t *testing.T) {
+	combobox := components.Combobox(components.ComboboxProps{
+		ID:          "city",
+		Name:        "city",
+		Label:       "City",
+		Placeholder: "Choose city",
+		Options:     []components.ComboboxOptionProps{{Value: "paris", Label: "Paris"}},
+	})
+	html := render(t, combobox)
+	assertContains(t, html, `data-ui8kit="combobox"`)
+	assertContains(t, html, `role="combobox"`)
+	assertContains(t, html, `aria-expanded="false"`)
+	assertContains(t, html, `aria-controls="ui8kit-combobox-city-options"`)
+	assertContains(t, html, `data-combobox-toggle`)
+	assertContains(t, html, `aria-label="Open options"`)
+	assertContains(t, html, `role="option"`)
+}
+
 func TestSheetRender(t *testing.T) {
 	sheet := components.Sheet(components.SheetProps{ID: "menu", Side: "left", Size: "lg", Title: "Menu"})
 	html := render(t, sheet)

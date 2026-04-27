@@ -7,6 +7,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/a-h/templ"
 	"github.com/fastygo/ui8kit/ui"
 )
 
@@ -205,6 +206,23 @@ func TestButtonDisabledLink(t *testing.T) {
 	assertContains(t, html, `role="link"`)
 }
 
+func TestButtonBlockWithDOMAttributes(t *testing.T) {
+	btn := ui.ButtonBlock(ui.ButtonProps{
+		ID:   "trigger",
+		Role: "tab",
+		Attrs: templ.Attributes{
+			"data-tabs-trigger": true,
+			"aria-selected":     "true",
+		},
+		Variant: "unstyled",
+	})
+	html := render(t, btn)
+	assertContains(t, html, `id="trigger"`)
+	assertContains(t, html, `role="tab"`)
+	assertContains(t, html, `data-tabs-trigger`)
+	assertContains(t, html, `aria-selected="true"`)
+}
+
 func TestFieldWithLabelAndError(t *testing.T) {
 	field := ui.Field(ui.FieldProps{
 		ID:    "email",
@@ -228,6 +246,24 @@ func TestFieldSwitch(t *testing.T) {
 	html := render(t, field)
 	assertContains(t, html, `role="switch"`)
 	assertContains(t, html, `aria-checked="true"`)
+}
+
+func TestFieldControlWithDOMAttributes(t *testing.T) {
+	field := ui.FieldControl(ui.FieldProps{
+		ID:   "search",
+		Role: "combobox",
+		Attrs: templ.Attributes{
+			"aria-expanded": "false",
+			"aria-controls": "search-options",
+		},
+		Variant: "unstyled",
+		Type:    "text",
+	})
+	html := render(t, field)
+	assertContains(t, html, `id="search"`)
+	assertContains(t, html, `role="combobox"`)
+	assertContains(t, html, `aria-expanded="false"`)
+	assertContains(t, html, `aria-controls="search-options"`)
 }
 
 func TestImageRender(t *testing.T) {

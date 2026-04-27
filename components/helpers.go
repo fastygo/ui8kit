@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/a-h/templ"
 	"github.com/fastygo/ui8kit/utils"
 )
 
@@ -44,6 +45,14 @@ func accordionTriggerID(value string) string {
 
 func accordionPanelID(value string) string {
 	return "ui8kit-accordion-panel-" + strings.TrimSpace(value)
+}
+
+func accordionTriggerAttrs(props AccordionTriggerProps) templ.Attributes {
+	return utils.MergeAttrs(
+		templ.Attributes{"data-ui8kit-accordion-trigger": true},
+		utils.AriaExpanded(props.Open),
+		utils.AriaControls(accordionPanelID(props.Value)),
+	)
 }
 
 func sheetID(value string) string {
@@ -103,6 +112,10 @@ func alertVariantClass(value string) string {
 	}
 }
 
+func alertDialogCancelAttrs() templ.Attributes {
+	return templ.Attributes{"data-ui8kit-dialog-close": true}
+}
+
 func tabsID(value string) string {
 	if strings.TrimSpace(value) == "" {
 		return "ui8kit-tabs"
@@ -152,6 +165,20 @@ func comboboxOptionsID(value string) string {
 
 func comboboxOptionID(root string, option string) string {
 	return comboboxID(root) + "-option-" + strings.TrimSpace(option)
+}
+
+func comboboxInputAttrs(props ComboboxProps) templ.Attributes {
+	return utils.MergeAttrs(
+		templ.Attributes{"aria-expanded": "false"},
+		utils.AriaControls(comboboxOptionsID(props.ID)),
+	)
+}
+
+func comboboxToggleAttrs(props ComboboxProps) templ.Attributes {
+	return templ.Attributes{
+		"data-combobox-toggle": true,
+		"data-combobox-target": comboboxID(props.ID),
+	}
 }
 
 func tooltipID(value string) string {
