@@ -67,7 +67,7 @@ func LayoutExample() templ.Component {
 						}()
 					}
 					ctx = templ.InitializeContext(ctx)
-					templ_7745c5c3_Err = ui.Title(ui.TitleProps{Order: 2, Class: "text-2xl"}, "Explicit utility classes").Render(ctx, templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = ui.Title(ui.TitleProps{Order: 2}, "Primitive layout").Render(ctx, templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -75,13 +75,13 @@ func LayoutExample() templ.Component {
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = ui.Text(ui.TextProps{Class: "max-w-full text-muted-foreground"}, "Layout examples stay on the 8px spacing rhythm and are validated by ui8px.").Render(ctx, templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = ui.Text(ui.TextProps{}, "Use UI8Kit defaults first. Add variants or shared kit classes only when the default contract is not enough.").Render(ctx, templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "gap-4"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = ui.Stack(ui.StackProps{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -101,7 +101,7 @@ func LayoutExample() templ.Component {
 						}()
 					}
 					ctx = templ.InitializeContext(ctx)
-					templ_7745c5c3_Err = ui.Button(ui.ButtonProps{Variant: "primary", Size: "lg"}, "Primary action").Render(ctx, templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = ui.Button(ui.ButtonProps{Variant: "primary"}, "Primary action").Render(ctx, templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -109,25 +109,25 @@ func LayoutExample() templ.Component {
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = ui.Button(ui.ButtonProps{Variant: "outline", Size: "lg"}, "Secondary action").Render(ctx, templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = ui.Button(ui.ButtonProps{Variant: "outline"}, "Secondary action").Render(ctx, templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = ui.Group(ui.GroupProps{Class: "gap-4"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = ui.Group(ui.GroupProps{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = ui.Container(ui.ContainerProps{Class: "flex flex-col gap-6"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Container(ui.ContainerProps{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = ui.Box(ui.BoxProps{Tag: "section", Class: "px-6 py-8"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Box(ui.BoxProps{Tag: "section"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

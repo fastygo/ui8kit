@@ -8,6 +8,7 @@ UI8Kit is a Go + `templ` + Tailwind component toolkit for server-rendered dashbo
 - [Installation](getting-started/installation.md)
 - [Project structure](getting-started/project-structure.md)
 - [Design principles](design-principles.md)
+- [Reference examples](examples.md)
 
 ## Packages
 

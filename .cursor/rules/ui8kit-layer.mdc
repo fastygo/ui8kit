@@ -11,6 +11,12 @@ alwaysApply: true
 - **Must not** import `Elements` or `Blocks`.
 - Styling: design tokens (e.g. shadcn) only — **no** brand gradients, decorative animations, or one-off product colors. Prefer semantic classes in `styles/components.css` (`@apply`) + `utils/variants.go`; avoid ad-hoc utilities in `.templ`.
 - **In `.templ`:** no raw Tailwind utility strings; use `class={ helpers }` / props that resolve classes in Go.
+- **Reference examples:** `tests/examples/` defines the baseline for future `Elements` and `Blocks`. Examples must compose `ui` primitives and `components` composites first, without raw HTML tags, inline styles, app-specific classes, or brand CSS.
+
+**Layering**
+- `ui` = primitives and form controls.
+- `components` = neutral composites built from `ui`.
+- `tests/examples` = reference compositions only; they should not become a design system or app theme.
 
 **Naming:** prefer `ui-*` / existing kit prefixes in CSS.
 

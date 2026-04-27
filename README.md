@@ -24,16 +24,27 @@ go test ./...
 
 ```go
 import (
+    cmp "github.com/fastygo/ui8kit/components"
     "github.com/fastygo/ui8kit/layout"
     "github.com/fastygo/ui8kit/ui"
 )
 
 templ Dashboard(nav []layout.NavItem) {
     @layout.Shell(layout.ShellProps{Title: "HubRelay", Active: "/"}) {
-        @ui.Button(ui.ButtonProps{Variant: "primary"}, "Run")
+        @cmp.Card(cmp.CardProps{}) {
+            @cmp.CardHeader(cmp.CardHeaderProps{}) {
+                @cmp.CardTitle(cmp.CardTitleProps{Order: 2}, "Dashboard")
+                @cmp.CardDescription(cmp.CardDescriptionProps{}, "Start with neutral UI8Kit primitives and composites.")
+            }
+            @cmp.CardContent(cmp.CardContentProps{}) {
+                @ui.Button(ui.ButtonProps{Variant: "primary"}, "Run")
+            }
+        }
     }
 }
 ```
+
+Use `tests/examples/` as the reference for future `Elements` and `Blocks` work: compose `ui` primitives and `components` composites first, without app-specific tags, utility classes, inline styles, or brand CSS.
 
 ## CSS flow
 

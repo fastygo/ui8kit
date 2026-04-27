@@ -1,0 +1,53 @@
+package examples
+
+import (
+	cmp "github.com/fastygo/ui8kit/components"
+	"github.com/fastygo/ui8kit/ui"
+)
+
+templ ActionCardElement() {
+	@cmp.Card(cmp.CardProps{Tag: "article"}) {
+		@cmp.CardHeader(cmp.CardHeaderProps{}) {
+			@cmp.CardTitle(cmp.CardTitleProps{Order: 3}, "Action card")
+			@cmp.CardDescription(cmp.CardDescriptionProps{}, "A reusable element composed from Card, Text, Group, and Button without local classes.")
+		}
+		@cmp.CardContent(cmp.CardContentProps{}) {
+			@ui.Group(ui.GroupProps{}) {
+				@ui.Button(ui.ButtonProps{Variant: "primary"}, "Continue")
+				@ui.Button(ui.ButtonProps{Variant: "outline"}, "Details")
+			}
+		}
+	}
+}
+
+templ FormFieldElement() {
+	@cmp.Card(cmp.CardProps{Variant: "muted", Tag: "article"}) {
+		@cmp.CardHeader(cmp.CardHeaderProps{}) {
+			@cmp.CardTitle(cmp.CardTitleProps{Order: 3}, "Form field")
+			@cmp.CardDescription(cmp.CardDescriptionProps{}, "Field owns the label, hint, error, control, and ARIA wrapper contract.")
+		}
+		@cmp.CardContent(cmp.CardContentProps{}) {
+			@ui.Field(ui.FieldProps{
+				ID: "example-email",
+				Name: "email",
+				Type: "email",
+				Label: "Email",
+				Hint: "Used for product updates.",
+				Placeholder: "name@example.com",
+			})
+		}
+	}
+}
+
+templ DisclosureElement() {
+	@cmp.Accordion(cmp.AccordionProps{}) {
+		@cmp.AccordionItem(cmp.AccordionItemProps{Value: "shipping"}) {
+			@cmp.AccordionTrigger(cmp.AccordionTriggerProps{Value: "shipping"}) {
+				Shipping details
+			}
+			@cmp.AccordionContent(cmp.AccordionContentProps{Value: "shipping"}) {
+				@ui.Text(ui.TextProps{}, "Accordion elements keep APG ids, controls, labels, and states wired through UI8Kit components.")
+			}
+		}
+	}
+}

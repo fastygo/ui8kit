@@ -1,0 +1,87 @@
+package examples
+
+import (
+	cmp "github.com/fastygo/ui8kit/components"
+	"github.com/fastygo/ui8kit/ui"
+)
+
+templ SummaryBlockExample() {
+	@ui.Box(ui.BoxProps{Tag: "section"}) {
+		@ui.Container(ui.ContainerProps{}) {
+			@ui.Stack(ui.StackProps{}) {
+				@ui.Title(ui.TitleProps{Order: 2}, "Summary block")
+				@ui.Text(ui.TextProps{}, "Blocks compose primitives and neutral components. They should not introduce product-specific tags, classes, or CSS.")
+				@ui.Grid(ui.GridProps{Cols: "3"}) {
+					@cmp.Card(cmp.CardProps{Variant: "muted", Tag: "article"}) {
+						@cmp.CardHeader(cmp.CardHeaderProps{}) {
+							@cmp.CardTitle(cmp.CardTitleProps{Order: 3}, "Users")
+							@cmp.CardDescription(cmp.CardDescriptionProps{}, "Active accounts")
+						}
+						@cmp.CardContent(cmp.CardContentProps{}) {
+							@ui.Text(ui.TextProps{}, "1,248")
+						}
+					}
+					@cmp.Card(cmp.CardProps{Variant: "accent", Tag: "article"}) {
+						@cmp.CardHeader(cmp.CardHeaderProps{}) {
+							@cmp.CardTitle(cmp.CardTitleProps{Order: 3}, "Revenue")
+							@cmp.CardDescription(cmp.CardDescriptionProps{}, "Current period")
+						}
+						@cmp.CardContent(cmp.CardContentProps{}) {
+							@ui.Text(ui.TextProps{}, "$42k")
+						}
+					}
+					@cmp.Card(cmp.CardProps{Variant: "ghost", Tag: "article"}) {
+						@cmp.CardHeader(cmp.CardHeaderProps{}) {
+							@cmp.CardTitle(cmp.CardTitleProps{Order: 3}, "Tasks")
+							@cmp.CardDescription(cmp.CardDescriptionProps{}, "Open work")
+						}
+						@cmp.CardContent(cmp.CardContentProps{}) {
+							@ui.Text(ui.TextProps{}, "18")
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+templ SettingsBlockExample() {
+	@ui.Box(ui.BoxProps{Tag: "section"}) {
+		@ui.Container(ui.ContainerProps{}) {
+			@cmp.Card(cmp.CardProps{Tag: "article"}) {
+				@cmp.CardHeader(cmp.CardHeaderProps{}) {
+					@cmp.CardTitle(cmp.CardTitleProps{Order: 2}, "Settings block")
+					@cmp.CardDescription(cmp.CardDescriptionProps{}, "A block-level form starts from Field, Combobox, Alert, and Button before app-specific styling.")
+				}
+				@cmp.CardContent(cmp.CardContentProps{}) {
+					@ui.Stack(ui.StackProps{}) {
+						@cmp.Alert(cmp.AlertProps{Variant: "success"}) {
+							Settings are saved automatically.
+						}
+						@ui.Field(ui.FieldProps{
+							ID: "example-name",
+							Name: "name",
+							Label: "Display name",
+							Placeholder: "Acme Inc.",
+						})
+						@cmp.Combobox(cmp.ComboboxProps{
+							ID: "example-plan",
+							Name: "plan",
+							Label: "Plan",
+							Placeholder: "Choose a plan",
+							Options: []cmp.ComboboxOptionProps{
+								{Value: "starter", Label: "Starter"},
+								{Value: "growth", Label: "Growth"},
+								{Value: "scale", Label: "Scale"},
+							},
+						})
+						@ui.Group(ui.GroupProps{}) {
+							@ui.Button(ui.ButtonProps{Variant: "primary"}, "Save")
+							@ui.Button(ui.ButtonProps{Variant: "ghost"}, "Cancel")
+						}
+					}
+				}
+			}
+		}
+	}
+}

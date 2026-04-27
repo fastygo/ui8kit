@@ -17,3 +17,5 @@ github.com/fastygo/ui8kit (root) -> version constant only
 ```
 
 Docs: [ui](ui.md), [layout](layout.md), [layout shell](layout-shell.md), [utils](utils.md), [styles](styles.md).
+
+Use [`../examples.md`](../examples.md) and `tests/examples/` for the standard composition style expected from future `Elements` and `Blocks` packages.
