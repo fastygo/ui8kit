@@ -14,7 +14,7 @@ templ Card(props CardProps) {
 }
 
 templ CardHeader(props CardHeaderProps) {
-	<div class={ utils.Cn("ui-card-header", props.UtilityProps.Resolve(), props.Class) }>{ children... }</div>
+	<div class={ utils.Cn("ui-card-header", props.Class) }>{ children... }</div>
 }
 
 templ CardTitle(props CardTitleProps, value string) {
@@ -39,9 +39,9 @@ templ CardDescription(props CardDescriptionProps, value string) {
 }
 
 templ CardContent(props CardContentProps) {
-	<div class={ utils.Cn("ui-card-content", props.UtilityProps.Resolve(), props.Class) }>{ children... }</div>
+	<div class={ utils.Cn("ui-card-content", props.Class) }>{ children... }</div>
 }
 
 templ CardFooter(props CardFooterProps) {
-	<div class={ utils.Cn("ui-card-footer", props.UtilityProps.Resolve(), props.Class) }>{ children... }</div>
+	<div class={ utils.Cn("ui-card-footer", props.Class) }>{ children... }</div>
 }

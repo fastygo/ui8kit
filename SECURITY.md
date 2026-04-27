@@ -33,7 +33,7 @@ GitHub's private disclosure mechanism ensures that vulnerability details remain 
 UI8Kit is a server-side HTML rendering library with no runtime JavaScript framework. The primary attack surface includes:
 
 - HTML injection through unescaped component output.
-- CSS injection via UtilityProps or class parameters.
+- CSS injection via class parameters.
 - Path traversal in embedded asset serving (`styles.FS`).
 
 Issues outside the library's control (e.g. misconfigured HTTP servers, Tailwind CSS CDN integrity) are out of scope.

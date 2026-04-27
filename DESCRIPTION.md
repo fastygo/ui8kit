@@ -15,7 +15,7 @@ All components render to HTML on the server via Go's templ engine. No JavaScript
 The only external dependency is `github.com/a-h/templ`. No routers, no ORMs, no CSS-in-JS runtimes. Consumers bring their own HTTP stack.
 
 ### 3. Type-Safe Props
-Every component accepts a typed Props struct with embedded `UtilityProps` for Tailwind shorthand. Compile-time validation, zero reflection, zero interface{}.
+Every component accepts a typed Props struct for behavior, variants, semantic tags, and explicit class extension. Compile-time validation, zero reflection, zero interface{}.
 
 ### 4. shadcn/ui Design Tokens
 CSS variables follow the shadcn/ui design tokens convention (`--primary`, `--destructive`, `--muted`, etc.) with light and dark themes. Consumers can override tokens to match their brand.
@@ -37,7 +37,7 @@ Consumer App
 |---------|---------|
 | `ui` | Visual primitives: Box, Stack, Group, Container, Button, Badge, Text, Title, Field, Icon |
 | `layout` | Page structure: Shell (sidebar + header + main), Header, Sidebar |
-| `utils` | UtilityProps (semantic Tailwind mapping), Cn (class joiner), variant helpers |
+| `utils` | Cn (class joiner), variant helpers, tag helpers, aria helpers |
 | `styles` | Embedded CSS via `embed.FS`: base theme, component classes, Latty icon font |
 
 ### Component Pattern
@@ -52,21 +52,17 @@ button.templ →  templ Button(props, label) { ... }  (template)
 
 Props are never redeclared in `.templ` files. Generated `_templ.go` files are excluded from version control.
 
-### UtilityProps System
+### Explicit Class Policy
 
-Semantic shorthand props that resolve to Tailwind classes at render time:
+Component APIs keep Tailwind utility classes visible to the source scanner:
 
 ```go
 ui.Box(ui.BoxProps{
-    UtilityProps: utils.UtilityProps{
-        P: "4", Bg: "card", Rounded: "lg", Shadow: "true",
-        Flex: "col", Gap: "md",
-    },
+    Class: "flex flex-col gap-4 rounded-lg bg-card p-4 shadow",
 })
-// Renders: class="p-4 bg-card rounded-md shadow flex flex-col gap-4"
 ```
 
-Supported props: P/M (padding/margin with directional variants), W/H, Flex, Gap, Rounded, Shadow, Border, Bg, Text, Grid, and more.
+The `ui8px` CLI validates classes against the repository policy so layout files keep an 8px spacing rhythm while compact controls can use finer 4px steps.
 
 ### Variant System
 
@@ -99,7 +95,7 @@ Three CSS files:
 
 **Why templ over html/template?** Type safety, composability, IDE support, and compile-time error checking. templ components are Go functions that return `templ.Component`.
 
-**Why Tailwind over custom CSS?** Utility-first approach aligns with component-level styling. The UtilityProps system adds a semantic layer without losing Tailwind flexibility.
+**Why Tailwind over custom CSS?** Utility-first approach aligns with component-level styling. Explicit class strings keep Tailwind builds minimal, while `ui8px` enforces the 8px design-grid policy.
 
 **Why embed.FS?** Single `go get` installs everything for CSS primitives. Consumers serve CSS from Go binary or copy it into their own static directory.
 

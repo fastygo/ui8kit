@@ -21,55 +21,6 @@ go run github.com/fastygo/ui8kit/scripts/cmd/sync-assets web/static
 - `theme.js` is emitted separately for first-paint theme bootstrap.
 - `ui8kit.js` contains the ARIA bundle plus locale behavior.
 
-## `gen-ui8kit-css.go`
-
-### Purpose
-
-Generates a concrete utility safelist file from:
-
-- static utility classes from `utils/props.go`
-- utility literals used in generated `*_templ.go` files
-
-This helps keep Tailwind CSS generation stable when utility classes are produced from Go structs at compile time.
-
-### How it works
-
-- Parses `utils/props.go` and finds literal utility classes and value patterns.
-- Scans all `*_templ.go` files and extracts `.Resolve()` outputs from `UtilityProps` composites.
-- Writes CSS declarations into `styles/ui8kit.css` so classes remain detectable by Tailwind.
-
-### Run
-
-```bash
-templ generate
-go run ./scripts/gen-ui8kit-css.go
-```
-
-The default output is `styles/ui8kit.css`.
-
-## `gen-css.sh`
-
-### Purpose
-
-Convenience wrapper that performs both steps:
-
-- runs `templ generate`
-- runs `go run ./scripts/gen-ui8kit-css.go`
-
-### Run
-
-```bash
-./scripts/gen-css.sh
-```
-
-### When to use
-
-Use when you changed:
-
-- `.templ` files that affect utility props usage,
-- `utils/props.go`,
-- `utils/variants.go`.
-
 ## `preflight.sh`
 
 ### Purpose
@@ -134,6 +85,6 @@ bash ./scripts/release.sh 0.3.0
 
 ## Notes
 
-- The generated `styles/ui8kit.css` is intended for development and verification of utility presence.
-- It is safe to keep this file in source control as long as your team policy accepts generated style artifacts.
-- If you change generator behavior, update this document and the related documentation guides together.
+- Utility classes stay explicit in `.templ`, `.go`, and CSS `@apply` source files.
+- Validate them with `npx ui8px@latest lint ui components utils styles tests/examples`.
+- Use `npx ui8px@latest validate patterns ...` manually when reviewing repeated compositions for possible `ui-*` promotion.

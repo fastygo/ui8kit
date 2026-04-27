@@ -1,28 +1,22 @@
 package ui
 
-import "github.com/fastygo/ui8kit/utils"
-
 type BoxProps struct {
-	utils.UtilityProps
 	Class string
 	Tag   string
 }
 
 type StackProps struct {
-	utils.UtilityProps
 	Class string
 	Tag   string
 }
 
 type GroupProps struct {
-	utils.UtilityProps
 	Class string
 	Tag   string
 	Grow  bool
 }
 
 type ContainerProps struct {
-	utils.UtilityProps
 	Class string
 	Tag   string
 }
@@ -30,7 +24,6 @@ type ContainerProps struct {
 type BlockProps = BoxProps
 
 type ButtonProps struct {
-	utils.UtilityProps
 	Variant  string
 	Size     string
 	Href     string
@@ -40,14 +33,12 @@ type ButtonProps struct {
 }
 
 type BadgeProps struct {
-	utils.UtilityProps
 	Variant string
 	Size    string
 	Class   string
 }
 
 type TextProps struct {
-	utils.UtilityProps
 	Class         string
 	Tag           string
 	FontSize      string
@@ -60,7 +51,6 @@ type TextProps struct {
 }
 
 type TitleProps struct {
-	utils.UtilityProps
 	Class         string
 	Order         int
 	FontSize      string
@@ -78,7 +68,6 @@ type FieldOption struct {
 }
 
 type FieldProps struct {
-	utils.UtilityProps
 	Class        string
 	Variant      string
 	Size         string
@@ -110,7 +99,6 @@ type IconProps struct {
 }
 
 type ImageProps struct {
-	utils.UtilityProps
 	Class    string
 	Src      string
 	Alt      string
@@ -123,13 +111,11 @@ type ImageProps struct {
 }
 
 type GridProps struct {
-	utils.UtilityProps
 	Class string
 	Cols  string
 }
 
 type GridColProps struct {
-	utils.UtilityProps
 	Class string
 	Span  int
 	Start int
@@ -138,14 +124,12 @@ type GridColProps struct {
 }
 
 type CardProps struct {
-	utils.UtilityProps
 	Class   string
 	Variant string
 	Tag     string
 }
 
 type CardHeaderProps struct {
-	utils.UtilityProps
 	Class string
 }
 
@@ -159,23 +143,19 @@ type CardDescriptionProps struct {
 }
 
 type CardContentProps struct {
-	utils.UtilityProps
 	Class string
 }
 
 type CardFooterProps struct {
-	utils.UtilityProps
 	Class string
 }
 
 type AccordionProps struct {
-	utils.UtilityProps
 	Class string
 	Type  string
 }
 
 type AccordionItemProps struct {
-	utils.UtilityProps
 	Class string
 	Value string
 	Open  bool
@@ -188,14 +168,12 @@ type AccordionTriggerProps struct {
 }
 
 type AccordionContentProps struct {
-	utils.UtilityProps
 	Class string
 	Value string
 	Open  bool
 }
 
 type SheetProps struct {
-	utils.UtilityProps
 	Class string
 	ID    string
 	Side  string

@@ -1,13 +1,11 @@
 package components
 
-import "github.com/fastygo/ui8kit/utils"
-
 templ Accordion(props AccordionProps) {
 	<div
 		data-ui8kit="accordion"
 		data-ui8kit-accordion
 		data-accordion-type={ accordionType(props.Type) }
-		class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }
+		class={ props.Class }
 	>
 		{ children... }
 	</div>
@@ -18,7 +16,7 @@ templ AccordionItem(props AccordionItemProps) {
 		data-accordion-item
 		data-value={ props.Value }
 		data-state={ accordionState(props.Open) }
-		class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }
+		class={ props.Class }
 	>
 		{ children... }
 	</div>
@@ -46,7 +44,7 @@ templ AccordionContent(props AccordionContentProps) {
 		role="region"
 		aria-labelledby={ accordionTriggerID(props.Value) }
 		hidden?={ !props.Open }
-		class={ utils.Cn(props.UtilityProps.Resolve(), props.Class) }
+		class={ props.Class }
 	>
 		{ children... }
 	</div>

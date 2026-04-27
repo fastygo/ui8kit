@@ -5,10 +5,10 @@ import "github.com/fastygo/ui8kit/utils"
 templ Container(props ContainerProps) {
 	switch utils.ResolveTag(props.Tag, "div", utils.TagGroupContainer) {
 		case "main":
-			<main class={ utils.Cn("ui-container", props.UtilityProps.Resolve(), props.Class) }>{ children... }</main>
+			<main class={ utils.Cn("ui-container", props.Class) }>{ children... }</main>
 		case "section":
-			<section class={ utils.Cn("ui-container", props.UtilityProps.Resolve(), props.Class) }>{ children... }</section>
+			<section class={ utils.Cn("ui-container", props.Class) }>{ children... }</section>
 		default:
-			<div class={ utils.Cn("ui-container", props.UtilityProps.Resolve(), props.Class) }>{ children... }</div>
+			<div class={ utils.Cn("ui-container", props.Class) }>{ children... }</div>
 	}
 }

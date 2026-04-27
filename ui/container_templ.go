@@ -33,7 +33,7 @@ func Container(props ContainerProps) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		switch utils.ResolveTag(props.Tag, "div", utils.TagGroupContainer) {
 		case "main":
-			var templ_7745c5c3_Var2 = []any{utils.Cn("ui-container", props.UtilityProps.Resolve(), props.Class)}
+			var templ_7745c5c3_Var2 = []any{utils.Cn("ui-container", props.Class)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -64,7 +64,7 @@ func Container(props ContainerProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "section":
-			var templ_7745c5c3_Var4 = []any{utils.Cn("ui-container", props.UtilityProps.Resolve(), props.Class)}
+			var templ_7745c5c3_Var4 = []any{utils.Cn("ui-container", props.Class)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var4...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -95,7 +95,7 @@ func Container(props ContainerProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		default:
-			var templ_7745c5c3_Var6 = []any{utils.Cn("ui-container", props.UtilityProps.Resolve(), props.Class)}
+			var templ_7745c5c3_Var6 = []any{utils.Cn("ui-container", props.Class)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var6...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

@@ -8,7 +8,7 @@ templ Tabs(props TabsProps) {
 		data-ui8kit="tabs"
 		data-tablist={ tabsID(props.ID) }
 		role="tablist"
-		class={ utils.Cn("ui-tabs", props.UtilityProps.Resolve(), props.Class) }
+		class={ utils.Cn("ui-tabs", props.Class) }
 	>
 		for _, tab := range props.Tabs {
 			<button

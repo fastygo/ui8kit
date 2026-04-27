@@ -16,7 +16,7 @@ import "github.com/fastygo/ui8kit/ui"
 
 ```go
 ui.Button(ui.ButtonProps{
-    UtilityProps: utils.UtilityProps{P: "2", Rounded: "md"},
+    Class: "rounded-md p-2",
     Variant: "primary",
     Size: "sm",
 }, "Save")
@@ -24,12 +24,12 @@ ui.Button(ui.ButtonProps{
 
 ## Styling notes
 
-- Prefer `utils.UtilityProps` and variants instead of raw class strings.
-- Dynamic utility values can be added to generated safelist via `scripts/gen-ui8kit-css.go`.
+- Prefer explicit utility classes in `Class` for local composition.
+- Validate explicit classes with `npx ui8px@latest lint ...` from the repository root.
 
 ## Quick commands
 
 ```bash
 templ generate
-./scripts/gen-css.sh
+npx ui8px@latest lint ui components utils styles tests/examples
 ```

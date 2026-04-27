@@ -17,7 +17,7 @@ func buttonClasses(p ButtonProps) string {
 	if p.Disabled {
 		state = "ui-button-disabled"
 	}
-	return utils.Cn(utils.ButtonStyleVariant(p.Variant), utils.ButtonSizeVariant(p.Size), p.UtilityProps.Resolve(), state, p.Class)
+	return utils.Cn(utils.ButtonStyleVariant(p.Variant), utils.ButtonSizeVariant(p.Size), state, p.Class)
 }
 
 func buttonType(t string) string {
@@ -36,13 +36,13 @@ func buttonRel(disabled bool) string {
 
 func fieldClasses(p FieldProps) string {
 	if p.Type == "checkbox" || p.Type == "radio" {
-		return utils.Cn(utils.FieldControlVariant(p.Variant), utils.FieldControlSizeVariant(p.Size), p.UtilityProps.Resolve(), p.Class)
+		return utils.Cn(utils.FieldControlVariant(p.Variant), utils.FieldControlSizeVariant(p.Size), p.Class)
 	}
-	return utils.Cn(utils.FieldVariant(p.Variant), utils.FieldSizeVariant(p.Size), p.UtilityProps.Resolve(), p.Class)
+	return utils.Cn(utils.FieldVariant(p.Variant), utils.FieldSizeVariant(p.Size), p.Class)
 }
 
 func stackClasses(p StackProps) string {
-	return utils.Cn("ui-stack", p.UtilityProps.Resolve(), p.Class)
+	return utils.Cn("ui-stack", p.Class)
 }
 
 func titleTag(order int) string {
@@ -61,11 +61,11 @@ func titleClasses(p TitleProps) string {
 	if fontWeight == "" {
 		fontWeight = "semibold"
 	}
-	return utils.Cn(utils.TypographyClasses(fontSize, fontWeight, p.LineHeight, p.LetterSpacing, p.TextColor, p.TextAlign, p.Truncate), p.UtilityProps.Resolve(), p.Class)
+	return utils.Cn(utils.TypographyClasses(fontSize, fontWeight, p.LineHeight, p.LetterSpacing, p.TextColor, p.TextAlign, p.Truncate), p.Class)
 }
 
 func textClasses(p TextProps) string {
-	return utils.Cn(utils.TypographyClasses(p.FontSize, p.FontWeight, p.LineHeight, p.LetterSpacing, p.TextColor, p.TextAlign, p.Truncate), p.UtilityProps.Resolve(), p.Class)
+	return utils.Cn(utils.TypographyClasses(p.FontSize, p.FontWeight, p.LineHeight, p.LetterSpacing, p.TextColor, p.TextAlign, p.Truncate), p.Class)
 }
 
 func iconClasses(p IconProps) string {
@@ -122,21 +122,20 @@ func imageClasses(p ImageProps) string {
 		utils.ImageFitVariant(p.Fit),
 		utils.ImagePositionVariant(p.Position),
 		utils.ImageAspectVariant(p.Aspect),
-		p.UtilityProps.Resolve(),
 		p.Class,
 	)
 }
 
 func gridClasses(p GridProps) string {
-	return utils.Cn("ui-grid", utils.GridColsVariant(p.Cols), p.UtilityProps.Resolve(), p.Class)
+	return utils.Cn("ui-grid", utils.GridColsVariant(p.Cols), p.Class)
 }
 
 func gridColClasses(p GridColProps) string {
-	return utils.Cn(utils.GridColVariant(p.Span, p.Start, p.End, p.Order), p.UtilityProps.Resolve(), p.Class)
+	return utils.Cn(utils.GridColVariant(p.Span, p.Start, p.End, p.Order), p.Class)
 }
 
 func cardClasses(p CardProps) string {
-	return utils.Cn(utils.CardVariant(p.Variant), p.UtilityProps.Resolve(), p.Class)
+	return utils.Cn(utils.CardVariant(p.Variant), p.Class)
 }
 
 func cardTag(tag string) string {
@@ -194,7 +193,6 @@ func sheetPanelClasses(p SheetProps) string {
 		"ui-sheet-panel",
 		utils.SheetSideVariant(p.Side),
 		utils.SheetSizeVariant(p.Size),
-		p.UtilityProps.Resolve(),
 		p.Class,
 	)
 }

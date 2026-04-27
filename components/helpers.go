@@ -8,7 +8,7 @@ import (
 )
 
 func cardClasses(p CardProps) string {
-	return utils.Cn(utils.CardVariant(p.Variant), p.UtilityProps.Resolve(), p.Class)
+	return utils.Cn(utils.CardVariant(p.Variant), p.Class)
 }
 
 func cardTag(tag string) string {
@@ -70,7 +70,6 @@ func sheetPanelClasses(p SheetProps) string {
 		"ui-sheet-panel",
 		utils.SheetSideVariant(p.Side),
 		utils.SheetSizeVariant(p.Size),
-		p.UtilityProps.Resolve(),
 		p.Class,
 	)
 }

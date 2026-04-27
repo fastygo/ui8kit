@@ -38,7 +38,7 @@ Thanks for your interest in contributing to ui8kit! This is a Go component libra
 ui8kit/
 ├── ui/         UI primitives (Box, Stack, Button, Badge, Field, Icon, ...)
 ├── layout/     Page shell (Shell, Header, Sidebar)
-├── utils/      UtilityProps, Cn(), variant helpers
+├── utils/      Cn(), variant helpers, tag helpers, aria helpers
 ├── styles/     Embedded CSS (base theme, components, Latty icons)
 └── ui8kit.go   Root package, version constant
 ```
@@ -55,6 +55,9 @@ Each package follows the same pattern:
 ```bash
 # Generate Go code from templ files
 templ generate ./...
+
+# Validate explicit utility classes
+npx ui8px@latest lint ui components utils styles tests/examples
 
 # Build all packages
 go build ./...

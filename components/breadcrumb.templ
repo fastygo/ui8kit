@@ -6,7 +6,7 @@ templ Breadcrumb(props BreadcrumbProps) {
 	<nav
 		data-ui8kit="breadcrumb"
 		aria-label="Breadcrumb"
-		class={ utils.Cn("ui-breadcrumb", props.UtilityProps.Resolve(), props.Class) }
+		class={ utils.Cn("ui-breadcrumb", props.Class) }
 	>
 		<ol class="ui-breadcrumb-list">
 			for _, item := range props.Items {

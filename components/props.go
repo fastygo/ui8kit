@@ -1,16 +1,12 @@
 package components
 
-import "github.com/fastygo/ui8kit/utils"
-
 type CardProps struct {
-	utils.UtilityProps
 	Class   string
 	Variant string
 	Tag     string
 }
 
 type CardHeaderProps struct {
-	utils.UtilityProps
 	Class string
 }
 
@@ -24,23 +20,19 @@ type CardDescriptionProps struct {
 }
 
 type CardContentProps struct {
-	utils.UtilityProps
 	Class string
 }
 
 type CardFooterProps struct {
-	utils.UtilityProps
 	Class string
 }
 
 type AccordionProps struct {
-	utils.UtilityProps
 	Class string
 	Type  string
 }
 
 type AccordionItemProps struct {
-	utils.UtilityProps
 	Class string
 	Value string
 	Open  bool
@@ -53,14 +45,12 @@ type AccordionTriggerProps struct {
 }
 
 type AccordionContentProps struct {
-	utils.UtilityProps
 	Class string
 	Value string
 	Open  bool
 }
 
 type SheetProps struct {
-	utils.UtilityProps
 	Class string
 	ID    string
 	Side  string
