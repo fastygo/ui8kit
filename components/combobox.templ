@@ -12,9 +12,9 @@ templ Combobox(props ComboboxProps) {
 		class={ utils.Cn("ui-combobox", props.Class) }
 	>
 		if props.Label != "" {
-			<label for={ comboboxInputID(props.ID) } class="ui-combobox-label">{ props.Label }</label>
+			<label for={ comboboxInputID(props.ID) } class="text-sm text-muted-foreground">{ props.Label }</label>
 		}
-		<div class="ui-combobox-control">
+		<div class="relative flex">
 			<input
 				id={ comboboxInputID(props.ID) }
 				type="text"
@@ -23,13 +23,13 @@ templ Combobox(props ComboboxProps) {
 				role="combobox"
 				aria-expanded="false"
 				aria-controls={ comboboxOptionsID(props.ID) }
-				class="ui-combobox-input"
+				class="flex-1 border border-input bg-background px-3 py-2 text-sm"
 				value={ props.Value }
 				placeholder={ props.Placeholder }
 			/>
 			<button
 				type="button"
-				class="ui-combobox-toggle"
+				class="border border-input bg-background px-3 py-2"
 				aria-label="Open options"
 				data-combobox-toggle
 				data-combobox-target={ comboboxID(props.ID) }
@@ -37,7 +37,7 @@ templ Combobox(props ComboboxProps) {
 				▾
 			</button>
 		</div>
-		<ul id={ comboboxOptionsID(props.ID) } class="ui-combobox-options" hidden>
+		<ul id={ comboboxOptionsID(props.ID) } class="mt-1 max-h-60 overflow-auto border border-border bg-card p-1" hidden>
 			for _, option := range props.Options {
 				<li
 					id={ comboboxOptionID(props.ID, option.Value) }
@@ -46,6 +46,7 @@ templ Combobox(props ComboboxProps) {
 					data-combobox-value={ option.Value }
 					aria-disabled={ map[bool]string{true: "true", false: "false"}[option.Disabled] }
 					tabindex="-1"
+					class="cursor-pointer rounded px-2 py-2 text-sm"
 				>{ option.Label }</li>
 			}
 		</ul>

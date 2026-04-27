@@ -20,13 +20,13 @@ templ Sheet(props SheetProps) {
 			class="ui-sheet-content-wrapper"
 		>
 			<div class="ui-sheet-header">
-				<span id={ sheetTitleID(props.ID) } class="ui-sheet-title">{ props.Title }</span>
+				<span id={ sheetTitleID(props.ID) } class="text-sm text-muted-foreground">{ props.Title }</span>
 				<button
 					type="button"
 					data-ui8kit-dialog-close
 					data-ui8kit-dialog-target={ sheetPanelID(props.ID) }
 					aria-label="Close"
-					class="ui-sheet-close"
+					class="inline-flex h-8 w-8 items-center justify-center rounded border border-border"
 				>✕</button>
 			</div>
 			<div class="ui-sheet-content">{ children... }</div>

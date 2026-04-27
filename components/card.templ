@@ -35,7 +35,7 @@ templ CardTitle(props CardTitleProps, value string) {
 }
 
 templ CardDescription(props CardDescriptionProps, value string) {
-	<p class={ utils.Cn("ui-card-description", props.Class) }>{ value }</p>
+	<p class={ utils.Cn("text-sm text-muted-foreground", props.Class) }>{ value }</p>
 }
 
 templ CardContent(props CardContentProps) {

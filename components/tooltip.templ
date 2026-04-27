@@ -18,7 +18,7 @@ templ Tooltip(props TooltipProps) {
 			id={ tooltipContentID(props.ID) }
 			role="tooltip"
 			hidden={!props.Open}
-			class="ui-tooltip-content"
+			class="absolute z-40 hidden rounded border border-border bg-popover px-3 py-2 text-xs text-popover-foreground shadow"
 		>
 			{ props.Text }
 		</span>

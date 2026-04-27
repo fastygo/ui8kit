@@ -20,7 +20,7 @@ templ Tabs(props TabsProps) {
 				data-tabs-trigger
 				data-tabs-target={ tabsID(props.ID) }
 				data-tabs-value={ tab.Value }
-				class="ui-tab-trigger"
+				class={ tabTriggerClass(props.ActiveTab == tab.Value) }
 				disabled?={ tab.Disabled }
 			>
 				{ tab.Label }
@@ -39,7 +39,7 @@ templ TabsPanel(props TabsPanelProps) {
 		data-tabs-value={ props.Value }
 		hidden?={!props.Active}
 		data-tabs-target={ tabsID(props.TabsID) }
-		class="ui-tab-panel"
+		class={ utils.Cn("mt-2", props.Class) }
 	>
 		{ children... }
 	</div>

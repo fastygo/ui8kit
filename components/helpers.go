@@ -126,6 +126,14 @@ func tabPanelID(tabs string, value string) string {
 	return tabsID(tabs) + "-panel-" + id
 }
 
+func tabTriggerClass(active bool) string {
+	base := "inline-flex items-center justify-center rounded px-3 py-2 text-sm"
+	if active {
+		return utils.Cn(base, "bg-accent text-accent-foreground")
+	}
+	return base
+}
+
 func comboboxID(value string) string {
 	id := strings.TrimSpace(value)
 	if id == "" {

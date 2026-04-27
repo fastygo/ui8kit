@@ -12,13 +12,13 @@ templ Breadcrumb(props BreadcrumbProps) {
 			for _, item := range props.Items {
 				<li class="ui-breadcrumb-item">
 					if item.Current {
-						<span class="ui-breadcrumb-current" aria-current="page">
+						<span class="text-sm font-medium" aria-current="page">
 							{ item.Label }
 						</span>
 					} else if item.Disabled {
-						<span class="ui-breadcrumb-link text-muted-foreground">{ item.Label }</span>
+						<span class="text-muted-foreground hover:underline">{ item.Label }</span>
 					} else {
-						<a href={ item.Href } class="ui-breadcrumb-link">{ item.Label }</a>
+						<a href={ item.Href } class="hover:underline">{ item.Label }</a>
 					}
 				</li>
 			}
