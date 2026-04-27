@@ -20,6 +20,14 @@ go run github.com/fastygo/ui8kit/scripts/cmd/sync-assets web/static
 - By default the CLI builds a **subset** IIFE from `@ui8kit/aria` using Bun.
 - `theme.js` is emitted separately for first-paint theme bootstrap.
 - `ui8kit.js` contains the ARIA bundle plus locale behavior.
+- The CLI writes missing app-local `.ui8px/policy` files by default. This lets
+  `npx ui8px lint ./...` treat vendored `web/static/css/ui8kit/**` and theme
+  token CSS such as `web/static/css/shadcn.css` as control/theme CSS instead of
+  app layout CSS. Pass `--ui8px-policy=false` when an application owns its policy
+  completely.
+- Existing app policy is preserved: `scopes.json`, `allowed.json`, `denied.json`,
+  and `groups.json` are only written when missing. `patterns.json` is merged so
+  UI8Kit-owned `ui-*` patterns stay current while app-specific patterns remain.
 
 ## `preflight.sh`
 

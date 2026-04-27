@@ -60,6 +60,15 @@ func TestButtonDisabled(t *testing.T) {
 	assertContains(t, html, "ui-button-disabled")
 }
 
+func TestButtonUnstyledDoesNotApplyDefaultSize(t *testing.T) {
+	btn := ui.Button(ui.ButtonProps{Variant: "unstyled", Class: "ui-header-theme-btn"}, "Theme")
+	html := render(t, btn)
+	assertContains(t, html, "ui-header-theme-btn")
+	assertNotContains(t, html, "h-9")
+	assertNotContains(t, html, "px-4")
+	assertNotContains(t, html, "py-2")
+}
+
 func TestBadgeVariants(t *testing.T) {
 	for _, v := range []string{"", "success", "destructive", "warning", "info"} {
 		b := ui.Badge(ui.BadgeProps{Variant: v}, "Status")

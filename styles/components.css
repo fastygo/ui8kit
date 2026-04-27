@@ -76,7 +76,7 @@
   }
 
   .ui-container {
-    @apply max-w-7xl mx-auto px-4;
+    @apply w-full max-w-7xl mx-auto;
   }
 
   .ui-field-wrap {
@@ -124,7 +124,7 @@
   }
 
   .ui-grid {
-    @apply grid;
+    @apply grid gap-4;
   }
 
   .ui-card-footer {

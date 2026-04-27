@@ -39,9 +39,20 @@
     root.classList.toggle("dark", theme === "dark");
   }
 
-  function applyThemeButtonState() {
+  function ensureThemeIcon(button) {
     var icon = document.getElementById("theme-toggle-icon");
+    if (!icon && button) {
+      icon = document.createElement("span");
+      icon.id = "theme-toggle-icon";
+      icon.setAttribute("aria-hidden", "true");
+      button.appendChild(icon);
+    }
+    return icon;
+  }
+
+  function applyThemeButtonState() {
     var button = document.getElementById("ui8kit-theme-toggle");
+    var icon = ensureThemeIcon(button);
     var dark = root.classList.contains("dark");
     var switchToDark =
       button && button.dataset.switchToDarkLabel

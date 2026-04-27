@@ -96,6 +96,99 @@ func TestBuildAriaEntryUsesSelectedPatterns(t *testing.T) {
 	}
 }
 
+func TestSyncUI8pxPolicyWritesMissingAppPolicy(t *testing.T) {
+	appDir := t.TempDir()
+	ui8kitDir := filepath.Join(t.TempDir(), "ui8kit")
+	for _, name := range []string{"allowed.json", "denied.json", "groups.json", "patterns.json"} {
+		writeFile(t, filepath.Join(ui8kitDir, ".ui8px", "policy", name), `{"ok":true}`)
+	}
+
+	if err := syncUI8pxPolicy(appDir, ui8kitDir); err != nil {
+		t.Fatalf("syncUI8pxPolicy() error = %v", err)
+	}
+
+	policyDir := filepath.Join(appDir, ".ui8px", "policy")
+	assertExists(t, filepath.Join(policyDir, "allowed.json"))
+	assertExists(t, filepath.Join(policyDir, "denied.json"))
+	assertExists(t, filepath.Join(policyDir, "groups.json"))
+	assertExists(t, filepath.Join(policyDir, "patterns.json"))
+
+	scopes, err := os.ReadFile(filepath.Join(policyDir, "scopes.json"))
+	if err != nil {
+		t.Fatalf("read scopes: %v", err)
+	}
+	for _, want := range []string{"web/static/css/ui8kit/**", "**/web/static/css/ui8kit/**", "web/static/css/shadcn.css", "control"} {
+		if !strings.Contains(string(scopes), want) {
+			t.Fatalf("scopes.json missing %q:\n%s", want, scopes)
+		}
+	}
+}
+
+func TestSyncUI8pxPolicyDoesNotOverwriteExistingPolicy(t *testing.T) {
+	appDir := t.TempDir()
+	ui8kitDir := filepath.Join(t.TempDir(), "ui8kit")
+	for _, name := range []string{"allowed.json", "denied.json", "groups.json"} {
+		writeFile(t, filepath.Join(ui8kitDir, ".ui8px", "policy", name), `{"from":"ui8kit"}`)
+	}
+	writeFile(t, filepath.Join(ui8kitDir, ".ui8px", "policy", "patterns.json"), `{"patterns":{"ui-grid":["grid","gap-4"]}}`)
+	writeFile(t, filepath.Join(appDir, ".ui8px", "policy", "allowed.json"), `{"from":"app"}`)
+	writeFile(t, filepath.Join(appDir, ".ui8px", "policy", "scopes.json"), `{"from":"app"}`)
+
+	if err := syncUI8pxPolicy(appDir, ui8kitDir); err != nil {
+		t.Fatalf("syncUI8pxPolicy() error = %v", err)
+	}
+
+	data, err := os.ReadFile(filepath.Join(appDir, ".ui8px", "policy", "allowed.json"))
+	if err != nil {
+		t.Fatalf("read allowed: %v", err)
+	}
+	if string(data) != `{"from":"app"}` {
+		t.Fatalf("allowed.json was overwritten: %s", data)
+	}
+	data, err = os.ReadFile(filepath.Join(appDir, ".ui8px", "policy", "scopes.json"))
+	if err != nil {
+		t.Fatalf("read scopes: %v", err)
+	}
+	if string(data) != `{"from":"app"}` {
+		t.Fatalf("scopes.json was overwritten: %s", data)
+	}
+}
+
+func TestSyncUI8pxPolicyMergesPatterns(t *testing.T) {
+	appDir := t.TempDir()
+	ui8kitDir := filepath.Join(t.TempDir(), "ui8kit")
+	for _, name := range []string{"allowed.json", "denied.json", "groups.json"} {
+		writeFile(t, filepath.Join(ui8kitDir, ".ui8px", "policy", name), `{"ok":true}`)
+	}
+	writeFile(t, filepath.Join(ui8kitDir, ".ui8px", "policy", "patterns.json"), `{
+  "patterns": {
+    "ui-grid": ["grid", "gap-4"],
+    "ui-container": ["w-full", "max-w-7xl", "mx-auto"]
+  }
+}`)
+	writeFile(t, filepath.Join(appDir, ".ui8px", "policy", "patterns.json"), `{
+  "patterns": {
+    "ui-grid": ["grid"],
+    "app-card": ["rounded"]
+  }
+}`)
+
+	if err := syncUI8pxPolicy(appDir, ui8kitDir); err != nil {
+		t.Fatalf("syncUI8pxPolicy() error = %v", err)
+	}
+
+	data, err := os.ReadFile(filepath.Join(appDir, ".ui8px", "policy", "patterns.json"))
+	if err != nil {
+		t.Fatalf("read patterns: %v", err)
+	}
+	content := string(data)
+	for _, want := range []string{`"ui-grid": [`, `"gap-4"`, `"ui-container": [`, `"app-card": [`} {
+		if !strings.Contains(content, want) {
+			t.Fatalf("patterns.json missing %q:\n%s", want, content)
+		}
+	}
+}
+
 func TestSubsetModeGeneratesBundleWithBun(t *testing.T) {
 	if _, err := exec.LookPath("bun"); err != nil {
 		t.Skip("bun not installed")

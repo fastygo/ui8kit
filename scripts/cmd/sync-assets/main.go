@@ -43,6 +43,7 @@ type syncConfig struct {
 	EnableTheme  bool
 	EnableAria   bool
 	EnableLocale bool
+	EnableUI8px  bool
 	HashNames    bool
 	AriaMode     string
 	AriaPatterns []string
@@ -87,6 +88,7 @@ func parseFlags(args []string) (syncConfig, error) {
 	fs.BoolVar(&cfg.EnableTheme, "theme", true, "emit theme.js")
 	fs.BoolVar(&cfg.EnableAria, "aria", true, "emit ui8kit.js with aria bundle")
 	fs.BoolVar(&cfg.EnableLocale, "locale", true, "include locale.js in ui8kit.js")
+	fs.BoolVar(&cfg.EnableUI8px, "ui8px-policy", true, "write missing app-local ui8px policy files")
 	fs.BoolVar(&cfg.HashNames, "hash", true, "emit hashed JS filenames in addition to stable aliases")
 	fs.StringVar(&cfg.AriaMode, "aria-mode", "subset", "aria mode: subset or full")
 	fs.StringVar(&cfg.AriaVersion, "aria-version", "", "override aria version")
@@ -149,6 +151,11 @@ func run(cfg syncConfig) error {
 	if cfg.EnableCSS {
 		if err := syncCSS(staticRoot, ui8kitDir); err != nil {
 			return err
+		}
+		if cfg.EnableUI8px {
+			if err := syncUI8pxPolicy(localPkgDir, ui8kitDir); err != nil {
+				return err
+			}
 		}
 	}
 	if cfg.EnableFonts {
@@ -358,6 +365,137 @@ func syncCSS(staticRoot, ui8kitDir string) error {
 	}
 	return nil
 }
+
+func syncUI8pxPolicy(appDir, ui8kitDir string) error {
+	policyDir := filepath.Join(appDir, ".ui8px", "policy")
+	if err := os.MkdirAll(policyDir, 0o755); err != nil {
+		return fmt.Errorf("create ui8px policy dir: %w", err)
+	}
+
+	for _, name := range []string{"allowed.json", "denied.json", "groups.json"} {
+		dst := filepath.Join(policyDir, name)
+		if _, err := os.Stat(dst); err == nil {
+			continue
+		} else if !errors.Is(err, os.ErrNotExist) {
+			return fmt.Errorf("stat %s: %w", dst, err)
+		}
+
+		src := filepath.Join(ui8kitDir, ".ui8px", "policy", name)
+		if err := copyFile(src, dst); err != nil {
+			return fmt.Errorf("copy ui8px %s: %w", name, err)
+		}
+	}
+	if err := syncUI8pxPatterns(filepath.Join(ui8kitDir, ".ui8px", "policy", "patterns.json"), filepath.Join(policyDir, "patterns.json")); err != nil {
+		return err
+	}
+
+	scopesPath := filepath.Join(policyDir, "scopes.json")
+	if _, err := os.Stat(scopesPath); err == nil {
+		return nil
+	} else if !errors.Is(err, os.ErrNotExist) {
+		return fmt.Errorf("stat %s: %w", scopesPath, err)
+	}
+
+	if err := os.WriteFile(scopesPath, []byte(appUI8pxScopesJSON), 0o644); err != nil {
+		return fmt.Errorf("write ui8px scopes: %w", err)
+	}
+	return nil
+}
+
+type ui8pxPatternsPolicy struct {
+	Patterns map[string][]string `json:"patterns"`
+}
+
+func syncUI8pxPatterns(src, dst string) error {
+	srcPolicy, err := readUI8pxPatterns(src)
+	if err != nil {
+		return fmt.Errorf("read ui8px patterns source: %w", err)
+	}
+	dstPolicy := ui8pxPatternsPolicy{Patterns: map[string][]string{}}
+	if _, err := os.Stat(dst); err == nil {
+		dstPolicy, err = readUI8pxPatterns(dst)
+		if err != nil {
+			return fmt.Errorf("read ui8px patterns target: %w", err)
+		}
+	} else if !errors.Is(err, os.ErrNotExist) {
+		return fmt.Errorf("stat %s: %w", dst, err)
+	}
+	if dstPolicy.Patterns == nil {
+		dstPolicy.Patterns = map[string][]string{}
+	}
+
+	for name, tokens := range srcPolicy.Patterns {
+		if strings.HasPrefix(name, "ui-") {
+			dstPolicy.Patterns[name] = slices.Clone(tokens)
+		} else if _, ok := dstPolicy.Patterns[name]; !ok {
+			dstPolicy.Patterns[name] = slices.Clone(tokens)
+		}
+	}
+
+	data, err := json.MarshalIndent(dstPolicy, "", "  ")
+	if err != nil {
+		return fmt.Errorf("marshal ui8px patterns: %w", err)
+	}
+	data = append(data, '\n')
+	if err := os.WriteFile(dst, data, 0o644); err != nil {
+		return fmt.Errorf("write ui8px patterns: %w", err)
+	}
+	return nil
+}
+
+func readUI8pxPatterns(path string) (ui8pxPatternsPolicy, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return ui8pxPatternsPolicy{}, err
+	}
+	var policy ui8pxPatternsPolicy
+	if err := json.Unmarshal(data, &policy); err != nil {
+		return ui8pxPatternsPolicy{}, err
+	}
+	return policy, nil
+}
+
+const appUI8pxScopesJSON = `{
+  "defaultScope": "layout",
+  "scopes": [
+    {
+      "name": "views",
+      "files": [
+        "**/internal/site/views/**"
+      ],
+      "spacing": "layout"
+    },
+    {
+      "name": "app-components",
+      "files": [
+        "web/static/css/*-components.css",
+        "**/web/static/css/*-components.css"
+      ],
+      "spacing": "control"
+    },
+    {
+      "name": "app-theme",
+      "files": [
+        "web/static/css/shadcn.css",
+        "web/static/css/theme.css",
+        "web/static/css/tokens.css",
+        "**/web/static/css/shadcn.css",
+        "**/web/static/css/theme.css",
+        "**/web/static/css/tokens.css"
+      ],
+      "spacing": "control"
+    },
+    {
+      "name": "ui8kit-assets",
+      "files": [
+        "web/static/css/ui8kit/**",
+        "**/web/static/css/ui8kit/**"
+      ],
+      "spacing": "control"
+    }
+  ]
+}
+`
 
 func syncFonts(staticRoot, frameworkDir string) error {
 	srcCSS := filepath.Join(frameworkDir, "pkg", "fonts", "outfit.css")

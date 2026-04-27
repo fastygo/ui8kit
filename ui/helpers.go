@@ -18,6 +18,9 @@ func buttonClasses(p ButtonProps) string {
 	if p.Disabled {
 		state = "ui-button-disabled"
 	}
+	if strings.TrimSpace(p.Variant) == "unstyled" && strings.TrimSpace(p.Size) == "" {
+		return utils.Cn(utils.ButtonStyleVariant(p.Variant), state, p.Class)
+	}
 	return utils.Cn(utils.ButtonStyleVariant(p.Variant), utils.ButtonSizeVariant(p.Size), state, p.Class)
 }
 
