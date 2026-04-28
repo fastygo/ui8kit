@@ -133,15 +133,15 @@
   }
 
   .ui-header-title {
-    @apply flex-1 truncate px-2 text-base font-bold;
+    @apply flex-1 truncate px-2 text-base font-bold tracking-tight;
   }
 
   .ui-header-nav-wrap {
-    @apply flex justify-center;
+    @apply hidden justify-center md:flex;
   }
 
   .ui-header-nav {
-    @apply mx-auto flex flex-wrap items-center justify-center gap-3 md:gap-4;
+    @apply mx-auto flex items-center justify-center gap-4;
   }
 
   .ui-header-nav-link {

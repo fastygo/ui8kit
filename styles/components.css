@@ -242,7 +242,7 @@
    * header uses a grid so title + HeaderExtra + theme share one row.
    */
   .ui-shell-body--marketing .ui-shell-desktop-aside {
-    @apply !hidden;
+    @apply hidden!;
   }
 
   .ui-shell-body--marketing .ui-header {
@@ -273,7 +273,7 @@
 
   @media (max-width: 767px) {
     .ui-shell-body--marketing .ui-header {
-      @apply flex flex-wrap;
+      @apply flex flex-nowrap;
     }
 
     .ui-shell-body--marketing .ui-header-actions {
