@@ -1,0 +1,15 @@
+---
+description: UI8Kit block/box semantics and tag boundaries
+alwaysApply: true
+---
+
+# Block and Box Semantics
+
+- `ui.Block` is the only top-level layout unit for page sections, landmarks, and public anchors.
+- Never nest `ui.Block` inside another `ui.Block`. If a nested area needs its own public anchor or landmark, promote it to a sibling top-level block.
+- `ID` belongs to `Block` only, except native form/control IDs handled by form primitives such as `Field`.
+- `ui.Box` is always internal layout. Do not use `Box` for public anchors, navigation targets, or top-level page sections.
+- Children inside a `Block` must be internal UI composition only: `Box` and neutral UI primitives/composites such as `Stack`, `Group`, `Grid`, `Card`.
+- HTML5 semantics are mandatory and canonical. Choose tags for meaning first, not styling.
+- Tag availability is intentionally separated by layer in `utils/tags.go` via `IsAllowedTag`. Do not widen tag groups unless the semantic layer truly owns that tag.
+- Product/app `.templ` files must not provide raw HTML layout tags; UI8Kit is the tag supplier.
