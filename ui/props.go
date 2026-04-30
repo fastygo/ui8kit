@@ -30,7 +30,11 @@ type ContainerProps struct {
 	Tag   string
 }
 
-type BlockProps = BoxProps
+type BlockProps struct {
+	ID    string
+	Class string
+	Tag   string
+}
 
 type ButtonProps struct {
 	ID        string

@@ -56,6 +56,10 @@ func buttonAttrs(p ButtonProps) templ.Attributes {
 	return attrs
 }
 
+func blockAttrs(p BlockProps) templ.Attributes {
+	return domAttrs(DOMProps{ID: p.ID})
+}
+
 func buttonType(t string) string {
 	if strings.TrimSpace(t) == "" {
 		return "button"

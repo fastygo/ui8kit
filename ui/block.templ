@@ -1,5 +1,26 @@
 package ui
 
+import "github.com/fastygo/ui8kit/utils"
+
 templ Block(props BlockProps) {
-	@Box(BoxProps(props))
+	switch utils.ResolveTag(props.Tag, "div", utils.TagGroupLayout) {
+		case "section":
+			<section class={ props.Class } { blockAttrs(props)... }>{ children... }</section>
+		case "article":
+			<article class={ props.Class } { blockAttrs(props)... }>{ children... }</article>
+		case "aside":
+			<aside class={ props.Class } { blockAttrs(props)... }>{ children... }</aside>
+		case "header":
+			<header class={ props.Class } { blockAttrs(props)... }>{ children... }</header>
+		case "footer":
+			<footer class={ props.Class } { blockAttrs(props)... }>{ children... }</footer>
+		case "main":
+			<main class={ props.Class } { blockAttrs(props)... }>{ children... }</main>
+		case "nav":
+			<nav class={ props.Class } { blockAttrs(props)... }>{ children... }</nav>
+		case "figure":
+			<figure class={ props.Class } { blockAttrs(props)... }>{ children... }</figure>
+		default:
+			<div class={ props.Class } { blockAttrs(props)... }>{ children... }</div>
+	}
 }
