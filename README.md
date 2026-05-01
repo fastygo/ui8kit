@@ -1,3 +1,6 @@
+[![GitHub Release](https://img.shields.io/github/v/release/fastygo/ui8kit?style=flat-square&color=%2300769c)](https://pkg.go.dev/github.com/fastygo/ui8kit)
+![GitHub Release Date](https://img.shields.io/github/release-date/fastygo/ui8kit)
+
 # UI8Kit Go
 
 `github.com/fastygo/ui8kit` is a Go component kit for server-rendered dashboards powered by `templ` + Tailwind. Styling is expressed as explicit Tailwind utility classes and validated with `ui8px`.

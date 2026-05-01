@@ -17,23 +17,23 @@ vMAJOR.MINOR.PATCH
 Examples:
 
 - `v0.1.1`
-- `v0.3.0`
+- `v0.4.0`
 - `v1.0.0`
 
 ## Release flow
 
-Run the release script from the repository root (example version `0.3.0`):
+Run the release script from the repository root (example version `0.4.0`):
 
 ```bash
 bash ./scripts/preflight.sh
-bash ./scripts/release.sh 0.3.0
+bash ./scripts/release.sh 0.4.0
 ```
 
 Or, if you prefer to think of it as explicit steps:
 
 ```bash
 bash ./scripts/preflight.sh
-bash ./scripts/release.sh 0.3.0
+bash ./scripts/release.sh 0.4.0
 git push origin main --tags
 ```
 
@@ -41,13 +41,13 @@ The intended sequence is:
 
 1. `bash ./scripts/preflight.sh` (with Bun available; see [scripts.md](scripts.md)).
 2. Commit any generated or formatted changes if preflight produced them.
-3. `bash ./scripts/release.sh 0.3.0`
+3. `bash ./scripts/release.sh 0.4.0`
 4. `git push origin <branch> --tags` (use your current branch if not `main`)
 
 If you already know the tree is clean and preflight already passed, the release script may be run directly:
 
 ```bash
-./scripts/release.sh 0.3.0
+./scripts/release.sh 0.4.0
 ```
 
 `release.sh`:
@@ -77,7 +77,7 @@ This avoids blocking releases on Windows or other environments where `go test -r
 If your machine supports CGO and you want race tests during the preflight that `release.sh` invokes:
 
 ```bash
-RELEASE_RUN_RACE=1 ./scripts/release.sh 0.3.0
+RELEASE_RUN_RACE=1 ./scripts/release.sh 0.4.0
 ```
 
 If CGO is unavailable, preflight skips local race tests and prints a notice. CI still enforces them.
