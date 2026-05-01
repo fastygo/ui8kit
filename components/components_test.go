@@ -60,6 +60,36 @@ func TestAccordionParts(t *testing.T) {
 	assertContains(t, contentHTML, `aria-labelledby="ui8kit-accordion-trigger-a"`)
 }
 
+func TestDialogAriaReferencesAreOptIn(t *testing.T) {
+	dialog := components.Dialog(components.DialogProps{ID: "demo"})
+	html := render(t, dialog)
+	if strings.Contains(html, `aria-labelledby=`) || strings.Contains(html, `aria-describedby=`) {
+		t.Fatalf("dialog without title/description should not emit broken ARIA refs:\n%s", html)
+	}
+}
+
+func TestDialogAriaAttributes(t *testing.T) {
+	dialog := components.Dialog(components.DialogProps{
+		ID:          "demo",
+		Title:       "Dialog title",
+		Description: "Dialog description",
+	})
+	html := render(t, dialog)
+	assertContains(t, html, `aria-modal="true"`)
+	assertContains(t, html, `aria-labelledby="ui8kit-dialog-demo-title"`)
+	assertContains(t, html, `aria-describedby="ui8kit-dialog-demo-description"`)
+}
+
+func TestDialogTriggerAriaState(t *testing.T) {
+	trigger := components.DialogTrigger(components.DialogTriggerProps{For: "demo", Label: "Open", Open: true})
+	html := render(t, trigger)
+	assertContains(t, html, `data-ui8kit-dialog-open`)
+	assertContains(t, html, `data-ui8kit-dialog-target="ui8kit-dialog-demo"`)
+	assertContains(t, html, `aria-controls="ui8kit-dialog-demo"`)
+	assertContains(t, html, `aria-haspopup="dialog"`)
+	assertContains(t, html, `aria-expanded="true"`)
+}
+
 func TestAlertDialogCancelButton(t *testing.T) {
 	button := components.AlertDialogCancelButton("Cancel")
 	html := render(t, button)
@@ -67,6 +97,14 @@ func TestAlertDialogCancelButton(t *testing.T) {
 	assertContains(t, html, `type="button"`)
 	assertContains(t, html, `data-ui8kit-dialog-close`)
 	assertContains(t, html, "Cancel")
+}
+
+func TestAlertDialogAriaLabel(t *testing.T) {
+	dialog := components.AlertDialog(components.AlertDialogProps{ID: "danger", AriaLabel: "Confirm destructive action"})
+	html := render(t, dialog)
+	assertContains(t, html, `role="alertdialog"`)
+	assertContains(t, html, `aria-modal="true"`)
+	assertContains(t, html, `aria-label="Confirm destructive action"`)
 }
 
 func TestComboboxRender(t *testing.T) {

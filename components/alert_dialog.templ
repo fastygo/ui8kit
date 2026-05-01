@@ -11,10 +11,10 @@ templ AlertDialog(props AlertDialogProps) {
 		data-ui8kit="alertdialog"
 		data-ui8kit-dialog
 		role="alertdialog"
-		aria-modal="true"
 		hidden?={!props.Open}
 		data-state={ map[bool]string{true: "open", false: "closed"}[props.Open] }
 		class={ utils.Cn("ui-alert-dialog", props.Class) }
+		{ AlertDialogAriaAttrs(props)... }
 	>
 		<div class="ui-dialog-overlay" data-ui8kit-dialog-overlay data-ui8kit-dialog-close data-ui8kit-dialog-target={ dialogID(props.ID) }></div>
 		@ui.Box(ui.BoxProps{Class: "ui-alert-dialog-content", Tag: "section"}) {

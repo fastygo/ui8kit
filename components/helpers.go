@@ -99,6 +99,44 @@ func dialogDescriptionID(dialogIDValue string) string {
 	return dialogID(dialogIDValue) + "-description"
 }
 
+func DialogAriaAttrs(props DialogProps) templ.Attributes {
+	labelledBy := ""
+	label := props.AriaLabel
+	if strings.TrimSpace(props.Title) != "" {
+		labelledBy = dialogTitleID(props.ID)
+		label = ""
+	}
+	describedBy := ""
+	if strings.TrimSpace(props.Description) != "" {
+		describedBy = dialogDescriptionID(props.ID)
+	}
+	return utils.MergeAttrs(
+		utils.AriaModal(true),
+		utils.AriaLabelledBy(labelledBy),
+		utils.AriaDescribedBy(describedBy),
+		utils.AriaLabel(label),
+	)
+}
+
+func DialogTriggerAttrs(props DialogTriggerProps) templ.Attributes {
+	return utils.MergeAttrs(
+		templ.Attributes{
+			"data-ui8kit-dialog-open":   true,
+			"data-ui8kit-dialog-target": dialogID(props.For),
+		},
+		utils.AriaControls(dialogID(props.For)),
+		utils.AriaHasPopup("dialog"),
+		utils.AriaExpanded(props.Open),
+	)
+}
+
+func AlertDialogAriaAttrs(props AlertDialogProps) templ.Attributes {
+	return utils.MergeAttrs(
+		utils.AriaModal(true),
+		utils.AriaLabel(props.AriaLabel),
+	)
+}
+
 func alertVariantClass(value string) string {
 	switch strings.TrimSpace(value) {
 	case "destructive":

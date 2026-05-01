@@ -12,12 +12,10 @@ templ Dialog(props DialogProps) {
 		data-ui8kit-dialog
 		data-dialog-target={ dialogID(props.ID) }
 		role="dialog"
-		aria-modal="true"
-		aria-labelledby={ dialogTitleID(props.ID) }
-		aria-describedby={ dialogDescriptionID(props.ID) }
 		hidden?={!props.Open}
 		data-state={ map[bool]string{true: "open", false: "closed"}[props.Open] }
 		class={ utils.Cn("ui-dialog", props.Class) }
+		{ DialogAriaAttrs(props)... }
 	>
 		<div class="ui-dialog-overlay" data-ui8kit-dialog-overlay data-ui8kit-dialog-close data-ui8kit-dialog-target={ dialogID(props.ID) }></div>
 		@ui.Box(ui.BoxProps{Class: "ui-dialog-content", Tag: "section"}) {
@@ -29,9 +27,8 @@ templ Dialog(props DialogProps) {
 templ DialogTrigger(props DialogTriggerProps) {
 	<button
 		type="button"
-		data-ui8kit-dialog-open
-		data-ui8kit-dialog-target={ dialogID(props.For) }
 		class={ props.Class }
+		{ DialogTriggerAttrs(props)... }
 	>
 		{ props.Label }
 	</button>

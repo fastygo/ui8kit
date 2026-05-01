@@ -1,22 +1,26 @@
 package components
 
 type DialogProps struct {
-	ID    string
-	Class string
-	Title string
-	Open  bool
+	ID          string
+	Class       string
+	Title       string
+	Description string
+	AriaLabel   string
+	Open        bool
 }
 
 type DialogTriggerProps struct {
 	For   string
 	Label string
 	Class string
+	Open  bool
 }
 
 type AlertDialogProps struct {
-	ID    string
-	Class string
-	Open  bool
+	ID        string
+	Class     string
+	AriaLabel string
+	Open      bool
 }
 
 type AlertProps struct {
