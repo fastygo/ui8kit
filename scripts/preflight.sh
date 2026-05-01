@@ -12,6 +12,8 @@ set -euo pipefail
 # - go vet ./...
 # - go build ./...
 # - go test ./... -count=1
+# - go run ./scripts/cmd/style-patterns --check
+# - ui8px lint when npx/bunx is available
 # - optional: go test ./... -race -count=1
 # - optional: require Bun for sync-assets subset coverage
 # - git diff checks to ensure generation/formatting produced no uncommitted changes
@@ -50,6 +52,22 @@ go build ./...
 
 echo "Running tests..."
 go test ./... -count=1
+
+echo "Checking semantic style patterns..."
+go run ./scripts/cmd/style-patterns --check
+
+echo "Checking ui8px utility policy..."
+if command -v npx >/dev/null 2>&1; then
+  npx ui8px@latest lint ui components utils styles tests/examples
+elif command -v bunx >/dev/null 2>&1; then
+  bunx ui8px@latest lint ui components utils styles tests/examples
+else
+  if [ "$REQUIRE_BUN" = "1" ]; then
+    echo "Error: ui8px lint requires npx or bunx, but neither was found."
+    exit 1
+  fi
+  echo "Warning: npx/bunx not found; skipping ui8px lint."
+fi
 
 if [ "$REQUIRE_BUN" = "1" ]; then
   echo "Running sync-assets tests with Bun available..."

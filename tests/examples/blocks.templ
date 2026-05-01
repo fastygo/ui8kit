@@ -85,3 +85,58 @@ templ SettingsBlockExample() {
 		}
 	}
 }
+
+templ DataTableBlockExample() {
+	@ui.Box(ui.BoxProps{Tag: "section"}) {
+		@ui.Container(ui.ContainerProps{}) {
+			@ui.Stack(ui.StackProps{}) {
+				@ui.Title(ui.TitleProps{Order: 2}, "Data table block")
+				@ui.Text(ui.TextProps{}, "Tables use dedicated UI8Kit primitives so app templates do not need raw table tags.")
+				@ui.Table(ui.TableProps{}) {
+					@ui.TableHead(ui.TableSectionProps{}) {
+						@ui.TableRow(ui.TableRowProps{}) {
+							@ui.TableHeadCell(ui.TableCellProps{Scope: "col"}) {
+								Metric
+							}
+							@ui.TableHeadCell(ui.TableCellProps{Scope: "col"}) {
+								Value
+							}
+						}
+					}
+					@ui.TableBody(ui.TableSectionProps{}) {
+						@ui.TableRow(ui.TableRowProps{}) {
+							@ui.TableHeadCell(ui.TableCellProps{Scope: "row"}) {
+								Conversion
+							}
+							@ui.TableCell(ui.TableCellProps{}) {
+								8.4%
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+templ SemanticFormBlockExample() {
+	@ui.Box(ui.BoxProps{Tag: "section"}) {
+		@ui.Container(ui.ContainerProps{}) {
+			@ui.Form(ui.FormProps{Method: "post"}) {
+				@ui.Fieldset(ui.FieldsetProps{}) {
+					@ui.Legend(ui.LegendProps{}) {
+						Profile settings
+					}
+					@ui.Stack(ui.StackProps{}) {
+						@ui.Field(ui.FieldProps{Name: "name", Label: "Name", Placeholder: "Acme Inc."})
+						@ui.Field(ui.FieldProps{Name: "email", Type: "email", Label: "Email"})
+						@ui.Group(ui.GroupProps{}) {
+							@ui.Button(ui.ButtonProps{Variant: "primary"}, "Save")
+							@ui.Button(ui.ButtonProps{Variant: "ghost"}, "Cancel")
+						}
+					}
+				}
+			}
+		}
+	}
+}

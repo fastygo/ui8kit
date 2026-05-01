@@ -135,6 +135,89 @@
     @apply grid gap-4;
   }
 
+  .ui-table {
+    @apply w-full border-collapse text-sm;
+  }
+
+  .ui-table-caption {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .ui-table-head,
+  .ui-table-foot {
+    @apply border-b border-border;
+  }
+
+  .ui-table-body {
+    @apply divide-y divide-border;
+  }
+
+  .ui-table-row {
+    @apply border-b border-border;
+  }
+
+  .ui-table-head-cell {
+    @apply px-4 py-2 text-left font-medium;
+  }
+
+  .ui-table-cell {
+    @apply px-4 py-2 align-top;
+  }
+
+  .ui-list {
+    @apply list-disc;
+  }
+
+  .ui-list-item {
+    @apply text-sm;
+  }
+
+  .ui-description-list {
+    @apply grid gap-2;
+  }
+
+  .ui-description-term {
+    @apply text-sm font-medium;
+  }
+
+  .ui-description-details {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .ui-figure {
+    @apply grid gap-2;
+  }
+
+  .ui-figure-caption {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .ui-disclosure {
+    @apply rounded border border-border p-4;
+  }
+
+  .ui-disclosure-summary {
+    @apply cursor-pointer text-sm font-medium;
+  }
+
+  .ui-form {
+    @apply grid gap-4;
+  }
+
+  .ui-fieldset {
+    @apply rounded border border-border p-4;
+  }
+
+  .ui-legend {
+    @apply px-2 text-sm font-medium;
+  }
+
+  .ui-output,
+  .ui-meter,
+  .ui-progress {
+    @apply text-sm;
+  }
+
   .ui-card-footer {
     @apply px-4 py-3 border-t border-border;
   }

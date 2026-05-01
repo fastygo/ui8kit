@@ -1,0 +1,61 @@
+package ui
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ Table(props TableProps) {
+	<table class={ utils.Cn("ui-table", props.Class) } { tableAttrs(props)... }>
+		{ children... }
+	</table>
+}
+
+templ TableCaption(props TableCaptionProps) {
+	<caption class={ utils.Cn("ui-table-caption", props.Class) }>
+		{ children... }
+	</caption>
+}
+
+templ TableHead(props TableSectionProps) {
+	<thead class={ utils.Cn("ui-table-head", props.Class) }>
+		{ children... }
+	</thead>
+}
+
+templ TableBody(props TableSectionProps) {
+	<tbody class={ utils.Cn("ui-table-body", props.Class) }>
+		{ children... }
+	</tbody>
+}
+
+templ TableFoot(props TableSectionProps) {
+	<tfoot class={ utils.Cn("ui-table-foot", props.Class) }>
+		{ children... }
+	</tfoot>
+}
+
+templ TableRow(props TableRowProps) {
+	<tr class={ utils.Cn("ui-table-row", props.Class) }>
+		{ children... }
+	</tr>
+}
+
+templ TableHeadCell(props TableCellProps) {
+	<th class={ utils.Cn("ui-table-head-cell", props.Class) } { tableCellAttrs(props, true)... }>
+		{ children... }
+	</th>
+}
+
+templ TableCell(props TableCellProps) {
+	<td class={ utils.Cn("ui-table-cell", props.Class) } { tableCellAttrs(props, false)... }>
+		{ children... }
+	</td>
+}
+
+templ TableColGroup(props TableColGroupProps) {
+	<colgroup class={ props.Class } { spanAttrs(props.Span)... }>
+		{ children... }
+	</colgroup>
+}
+
+templ TableCol(props TableColProps) {
+	<col class={ props.Class } { spanAttrs(props.Span)... }/>
+}

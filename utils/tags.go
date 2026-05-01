@@ -10,7 +10,17 @@ const (
 	TagGroupInline
 	TagGroupHeading
 	TagGroupList
+	TagGroupListItem
 	TagGroupForm
+	TagGroupFormControl
+	TagGroupFormLabel
+	TagGroupTable
+	TagGroupTableSection
+	TagGroupTableRow
+	TagGroupTableCell
+	TagGroupTableColumn
+	TagGroupMedia
+	TagGroupDisclosure
 	TagGroupStack
 	TagGroupGroup
 	TagGroupText
@@ -41,8 +51,28 @@ func IsAllowedTag(tag string, group TagGroup) bool {
 		return oneOf(t, "h1", "h2", "h3", "h4", "h5", "h6")
 	case TagGroupList:
 		return oneOf(t, "ul", "ol", "dl", "menu")
+	case TagGroupListItem:
+		return oneOf(t, "li", "dt", "dd")
 	case TagGroupForm:
 		return oneOf(t, "form", "fieldset")
+	case TagGroupFormControl:
+		return oneOf(t, "input", "textarea", "select", "button", "option", "optgroup", "datalist", "output", "meter", "progress")
+	case TagGroupFormLabel:
+		return oneOf(t, "label", "legend")
+	case TagGroupTable:
+		return oneOf(t, "table")
+	case TagGroupTableSection:
+		return oneOf(t, "thead", "tbody", "tfoot")
+	case TagGroupTableRow:
+		return oneOf(t, "tr")
+	case TagGroupTableCell:
+		return oneOf(t, "th", "td")
+	case TagGroupTableColumn:
+		return oneOf(t, "colgroup", "col")
+	case TagGroupMedia:
+		return oneOf(t, "img", "picture", "source")
+	case TagGroupDisclosure:
+		return oneOf(t, "details", "summary")
 	case TagGroupStack:
 		return IsAllowedTag(t, TagGroupLayout) || oneOf(t, "ul", "ol")
 	case TagGroupGroup:

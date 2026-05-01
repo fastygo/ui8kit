@@ -51,3 +51,74 @@ templ DisclosureElement() {
 		}
 	}
 }
+
+templ DataTableElement() {
+	@ui.Table(ui.TableProps{}) {
+		@ui.TableCaption(ui.TableCaptionProps{}) {
+			Plan limits
+		}
+		@ui.TableHead(ui.TableSectionProps{}) {
+			@ui.TableRow(ui.TableRowProps{}) {
+				@ui.TableHeadCell(ui.TableCellProps{Scope: "col"}) {
+					Plan
+				}
+				@ui.TableHeadCell(ui.TableCellProps{Scope: "col"}) {
+					Seats
+				}
+			}
+		}
+		@ui.TableBody(ui.TableSectionProps{}) {
+			@ui.TableRow(ui.TableRowProps{}) {
+				@ui.TableHeadCell(ui.TableCellProps{Scope: "row"}) {
+					Starter
+				}
+				@ui.TableCell(ui.TableCellProps{}) {
+					5
+				}
+			}
+		}
+	}
+}
+
+templ DescriptionListElement() {
+	@ui.DescriptionList(ui.DescriptionListProps{}) {
+		@ui.DescriptionTerm(ui.DescriptionTermProps{}) {
+			Status
+		}
+		@ui.DescriptionDetails(ui.DescriptionDetailsProps{}) {
+			Ready
+		}
+	}
+}
+
+templ NativeDisclosureElement() {
+	@ui.Disclosure(ui.DisclosureProps{}) {
+		@ui.DisclosureSummary(ui.DisclosureSummaryProps{}) {
+			Native disclosure
+		}
+		@ui.Text(ui.TextProps{}, "Use this zero-JS primitive when APG accordion behavior is not required.")
+	}
+}
+
+templ MediaElement() {
+	@ui.Figure(ui.FigureProps{}) {
+		@ui.Picture(ui.PictureProps{}) {
+			@ui.Source(ui.SourceProps{SrcSet: "/static/example.avif", Type: "image/avif"})
+			@ui.Image(ui.ImageProps{Src: "/static/example.png", Alt: "Example preview", Aspect: "video"})
+		}
+		@ui.FigureCaption(ui.FigureCaptionProps{}) {
+			Responsive media with a semantic caption.
+		}
+	}
+}
+
+templ FormElement() {
+	@ui.Form(ui.FormProps{Method: "post"}) {
+		@ui.Fieldset(ui.FieldsetProps{}) {
+			@ui.Legend(ui.LegendProps{}) {
+				Account
+			}
+			@ui.Field(ui.FieldProps{Name: "email", Type: "email", Label: "Email"})
+		}
+	}
+}

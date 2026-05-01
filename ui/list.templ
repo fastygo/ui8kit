@@ -1,0 +1,48 @@
+package ui
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ List(props ListProps) {
+	switch listTag(props.Tag) {
+		case "ol":
+			<ol class={ utils.Cn("ui-list", props.Class) }>
+				{ children... }
+			</ol>
+		case "dl":
+			<dl class={ utils.Cn("ui-description-list", props.Class) }>
+				{ children... }
+			</dl>
+		case "menu":
+			<menu class={ utils.Cn("ui-list", props.Class) }>
+				{ children... }
+			</menu>
+		default:
+			<ul class={ utils.Cn("ui-list", props.Class) }>
+				{ children... }
+			</ul>
+	}
+}
+
+templ ListItem(props ListItemProps) {
+	<li class={ utils.Cn("ui-list-item", props.Class) } { listItemAttrs(props)... }>
+		{ children... }
+	</li>
+}
+
+templ DescriptionList(props DescriptionListProps) {
+	<dl class={ utils.Cn("ui-description-list", props.Class) }>
+		{ children... }
+	</dl>
+}
+
+templ DescriptionTerm(props DescriptionTermProps) {
+	<dt class={ utils.Cn("ui-description-term", props.Class) }>
+		{ children... }
+	</dt>
+}
+
+templ DescriptionDetails(props DescriptionDetailsProps) {
+	<dd class={ utils.Cn("ui-description-details", props.Class) }>
+		{ children... }
+	</dd>
+}

@@ -10,10 +10,19 @@
 
 ## Styling workflow
 
-1. Use `utils/props.go` and `utils/variants.go` for reusable style API.
+1. Use `ui/props.go`, `components/props.go`, `components/organisms.go`, and `utils/variants.go` for reusable component and style API.
 2. If pattern is reusable across packages, add in variants/shared props.
 3. Keep app-only overrides in app CSS as `app-*` classes.
 4. For new kit-wide patterns use `styles/components.css` or `styles/shell.css` via `@apply`.
+
+## Tag ownership
+
+- UI8Kit is the tag supplier for applications that forbid raw `.templ` tags.
+- `utils/tags.go` defines controlled selectable tag groups for components with `Tag` props.
+- Tags with strict content models are owned by dedicated primitives instead of generic containers.
+- `Box`, `Block`, `Stack`, `Group`, and `Container` must not become a dumping ground for all HTML5 tags.
+- Tables, list items, description list children, media sources, disclosure, and form wrappers should use their dedicated `ui` primitives.
+- Shell/head metadata such as `script`, `style`, `link`, `meta`, and `title` belongs to the shell/head layer, not app UI composition.
 
 ## Elements and Blocks baseline
 

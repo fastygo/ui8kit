@@ -1,0 +1,51 @@
+package ui
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ Form(props FormProps) {
+	<form class={ utils.Cn("ui-form", props.Class) } { formAttrs(props)... }>
+		{ children... }
+	</form>
+}
+
+templ Fieldset(props FieldsetProps) {
+	<fieldset class={ utils.Cn("ui-fieldset", props.Class) } { fieldsetAttrs(props)... }>
+		{ children... }
+	</fieldset>
+}
+
+templ Legend(props LegendProps) {
+	<legend class={ utils.Cn("ui-legend", props.Class) }>
+		{ children... }
+	</legend>
+}
+
+templ DataList(props DataListProps) {
+	<datalist class={ props.Class } { dataListAttrs(props)... }>
+		{ children... }
+	</datalist>
+}
+
+templ OptGroup(props OptGroupProps) {
+	<optgroup class={ props.Class } { optGroupAttrs(props)... }>
+		{ children... }
+	</optgroup>
+}
+
+templ Output(props OutputProps) {
+	<output class={ utils.Cn("ui-output", props.Class) } { outputAttrs(props)... }>
+		{ props.Value }
+	</output>
+}
+
+templ Meter(props MeterProps) {
+	<meter class={ utils.Cn("ui-meter", props.Class) } { meterAttrs(props)... }>
+		{ props.Value }
+	</meter>
+}
+
+templ Progress(props ProgressProps) {
+	<progress class={ utils.Cn("ui-progress", props.Class) } { progressAttrs(props)... }>
+		{ props.Value }
+	</progress>
+}

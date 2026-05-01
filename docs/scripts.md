@@ -42,6 +42,8 @@ Runs the same quality checks locally that should pass in CI before a release or 
 - `go vet ./...`
 - `go build ./...`
 - `go test ./... -count=1`
+- `npx ui8px@latest lint ui components utils styles tests/examples` when Bun or npm tooling is available
+- `go run ./scripts/cmd/style-patterns --check`
 - when `PREFLIGHT_REQUIRE_BUN=1`: require Bun on PATH, then `go test ./scripts/cmd/sync-assets -count=1`
 - optional `go test ./... -race -count=1`
 - `git diff` / `git diff --cached` against a clean tree
@@ -69,6 +71,7 @@ PREFLIGHT_REQUIRE_BUN=1 bash ./scripts/preflight.sh
 - On systems without CGO support, local race tests are skipped with a warning.
 - CI still enforces `go test ./... -race`.
 - If `preflight.sh` changes generated or formatted files, it fails on the final `git diff` check so you can review and commit those changes before releasing.
+- CI and release run preflight with Bun required, so ui8px and semantic pattern checks are expected to be available there.
 
 ## `cmd/style-patterns`
 

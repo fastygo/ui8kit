@@ -17,8 +17,13 @@ Element examples represent reusable widgets that can later move into an `Element
 - `ActionCardElement`
 - `FormFieldElement`
 - `DisclosureElement`
+- `DataTableElement`
+- `DescriptionListElement`
+- `NativeDisclosureElement`
+- `MediaElement`
+- `FormElement`
 
-These examples compose `Card`, `Field`, `Accordion`, `Text`, `Group`, and `Button` without app-specific styling.
+These examples compose `Card`, `Field`, `Accordion`, `Table`, `DescriptionList`, `Disclosure`, `Picture`, `Figure`, `Form`, `Text`, `Group`, and `Button` without app-specific styling.
 
 ## Block Examples
 
@@ -26,6 +31,8 @@ Block examples represent page sections that can later move into a `Blocks` packa
 
 - `SummaryBlockExample`
 - `SettingsBlockExample`
+- `DataTableBlockExample`
+- `SemanticFormBlockExample`
 
 Blocks should compose existing primitives and elements first. If a block needs a new visual treatment, prefer adding a neutral UI8Kit variant or component policy before adding product-local CSS.
 

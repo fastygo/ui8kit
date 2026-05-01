@@ -303,3 +303,77 @@ func TestGridColRender(t *testing.T) {
 	assertContains(t, html, "col-start-2")
 	assertContains(t, html, "order-1")
 }
+
+func TestTablePrimitivesRender(t *testing.T) {
+	assertContains(t, render(t, ui.Table(ui.TableProps{})), "<table")
+	assertContains(t, render(t, ui.TableCaption(ui.TableCaptionProps{})), "<caption")
+	assertContains(t, render(t, ui.TableHead(ui.TableSectionProps{})), "<thead")
+	assertContains(t, render(t, ui.TableBody(ui.TableSectionProps{})), "<tbody")
+	assertContains(t, render(t, ui.TableFoot(ui.TableSectionProps{})), "<tfoot")
+	assertContains(t, render(t, ui.TableRow(ui.TableRowProps{})), "<tr")
+	assertContains(t, render(t, ui.TableHeadCell(ui.TableCellProps{Scope: "col"})), `scope="col"`)
+	assertContains(t, render(t, ui.TableCell(ui.TableCellProps{ColSpan: 2})), `colspan="2"`)
+}
+
+func TestTableColumnsRender(t *testing.T) {
+	assertContains(t, render(t, ui.TableColGroup(ui.TableColGroupProps{Span: 2})), "<colgroup")
+	assertContains(t, render(t, ui.TableCol(ui.TableColProps{Span: 2})), "<col")
+	assertContains(t, render(t, ui.TableCol(ui.TableColProps{Span: 2})), `span="2"`)
+}
+
+func TestListPrimitivesRender(t *testing.T) {
+	assertContains(t, render(t, ui.List(ui.ListProps{Tag: "ol"})), "<ol")
+	assertContains(t, render(t, ui.ListItem(ui.ListItemProps{Value: 2})), "<li")
+	assertContains(t, render(t, ui.ListItem(ui.ListItemProps{Value: 2})), `value="2"`)
+}
+
+func TestDescriptionListPrimitivesRender(t *testing.T) {
+	assertContains(t, render(t, ui.DescriptionList(ui.DescriptionListProps{})), "<dl")
+	assertContains(t, render(t, ui.DescriptionTerm(ui.DescriptionTermProps{})), "<dt")
+	assertContains(t, render(t, ui.DescriptionDetails(ui.DescriptionDetailsProps{})), "<dd")
+}
+
+func TestMediaPrimitivesRender(t *testing.T) {
+	assertContains(t, render(t, ui.Picture(ui.PictureProps{})), "<picture")
+	sourceHTML := render(t, ui.Source(ui.SourceProps{SrcSet: "/hero.avif", Type: "image/avif"}))
+	assertContains(t, sourceHTML, "<source")
+	assertContains(t, sourceHTML, `srcset="/hero.avif"`)
+}
+
+func TestFigurePrimitivesRender(t *testing.T) {
+	assertContains(t, render(t, ui.Figure(ui.FigureProps{})), "<figure")
+	assertContains(t, render(t, ui.FigureCaption(ui.FigureCaptionProps{})), "<figcaption")
+}
+
+func TestDisclosurePrimitivesRender(t *testing.T) {
+	html := render(t, ui.Disclosure(ui.DisclosureProps{Open: true}))
+	assertContains(t, html, "<details")
+	assertContains(t, html, "open")
+	assertContains(t, render(t, ui.DisclosureSummary(ui.DisclosureSummaryProps{})), "<summary")
+}
+
+func TestFormPrimitivesRender(t *testing.T) {
+	html := render(t, ui.Form(ui.FormProps{ID: "settings", Method: "post", NoValidate: true}))
+	assertContains(t, html, "<form")
+	assertContains(t, html, `method="post"`)
+	assertContains(t, html, "novalidate")
+	assertContains(t, render(t, ui.Fieldset(ui.FieldsetProps{Name: "profile"})), "<fieldset")
+	assertContains(t, render(t, ui.Legend(ui.LegendProps{})), "<legend")
+}
+
+func TestFormValuePrimitivesRender(t *testing.T) {
+	output := ui.Output(ui.OutputProps{ID: "total", Name: "total", For: "amount", Value: "42"})
+	meter := ui.Meter(ui.MeterProps{Value: "3", Min: "0", Max: "5"})
+	progress := ui.Progress(ui.ProgressProps{Value: "2", Max: "10"})
+
+	outputHTML := render(t, output)
+	meterHTML := render(t, meter)
+	progressHTML := render(t, progress)
+
+	assertContains(t, outputHTML, "<output")
+	assertContains(t, outputHTML, `for="amount"`)
+	assertContains(t, meterHTML, "<meter")
+	assertContains(t, meterHTML, `max="5"`)
+	assertContains(t, progressHTML, "<progress")
+	assertContains(t, progressHTML, `max="10"`)
+}

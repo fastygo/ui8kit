@@ -131,6 +131,26 @@ type ImageProps struct {
 	Loading  string
 }
 
+type PictureProps struct {
+	Class string
+}
+
+type SourceProps struct {
+	SrcSet string
+	Src    string
+	Media  string
+	Type   string
+	Sizes  string
+}
+
+type FigureProps struct {
+	Class string
+}
+
+type FigureCaptionProps struct {
+	Class string
+}
+
 type GridProps struct {
 	Class string
 	Cols  string
@@ -142,4 +162,136 @@ type GridColProps struct {
 	Start int
 	End   int
 	Order int
+}
+
+type TableProps struct {
+	Class string
+	Attrs templ.Attributes
+}
+
+type TableCaptionProps struct {
+	Class string
+}
+
+type TableSectionProps struct {
+	Class string
+}
+
+type TableRowProps struct {
+	Class string
+}
+
+type TableCellProps struct {
+	Class   string
+	Scope   string
+	ColSpan int
+	RowSpan int
+	Headers string
+	Abbr    string
+}
+
+type TableColGroupProps struct {
+	Class string
+	Span  int
+}
+
+type TableColProps struct {
+	Class string
+	Span  int
+}
+
+type ListProps struct {
+	Class string
+	Tag   string
+}
+
+type ListItemProps struct {
+	Class string
+	Value int
+}
+
+type DescriptionListProps struct {
+	Class string
+}
+
+type DescriptionTermProps struct {
+	Class string
+}
+
+type DescriptionDetailsProps struct {
+	Class string
+}
+
+type DisclosureProps struct {
+	Class string
+	Open  bool
+}
+
+type DisclosureSummaryProps struct {
+	Class string
+}
+
+type FormProps struct {
+	ID           string
+	Class        string
+	Action       string
+	Method       string
+	Enctype      string
+	Autocomplete string
+	Name         string
+	Target       string
+	NoValidate   bool
+	Attrs        templ.Attributes
+}
+
+type FieldsetProps struct {
+	Class    string
+	Name     string
+	Form     string
+	Disabled bool
+	Attrs    templ.Attributes
+}
+
+type LegendProps struct {
+	Class string
+}
+
+type DataListProps struct {
+	ID    string
+	Class string
+}
+
+type OptGroupProps struct {
+	Class    string
+	Label    string
+	Disabled bool
+}
+
+type OutputProps struct {
+	ID    string
+	Class string
+	Name  string
+	For   string
+	Value string
+	Attrs templ.Attributes
+}
+
+type MeterProps struct {
+	ID      string
+	Class   string
+	Value   string
+	Min     string
+	Max     string
+	Low     string
+	High    string
+	Optimum string
+	Attrs   templ.Attributes
+}
+
+type ProgressProps struct {
+	ID    string
+	Class string
+	Value string
+	Max   string
+	Attrs templ.Attributes
 }

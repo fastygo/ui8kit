@@ -1,0 +1,25 @@
+package ui
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ Picture(props PictureProps) {
+	<picture class={ props.Class }>
+		{ children... }
+	</picture>
+}
+
+templ Source(props SourceProps) {
+	<source { sourceAttrs(props)... }/>
+}
+
+templ Figure(props FigureProps) {
+	<figure class={ utils.Cn("ui-figure", props.Class) }>
+		{ children... }
+	</figure>
+}
+
+templ FigureCaption(props FigureCaptionProps) {
+	<figcaption class={ utils.Cn("ui-figure-caption", props.Class) }>
+		{ children... }
+	</figcaption>
+}

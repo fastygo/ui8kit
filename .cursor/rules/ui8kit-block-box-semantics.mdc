@@ -7,9 +7,13 @@ alwaysApply: true
 
 - `ui.Block` is the only top-level layout unit for page sections, landmarks, and public anchors.
 - Never nest `ui.Block` inside another `ui.Block`. If a nested area needs its own public anchor or landmark, promote it to a sibling top-level block.
-- `ID` belongs to `Block` only, except native form/control IDs handled by form primitives such as `Field`.
+- `ID` belongs to `Block` only, except native controls and strict semantic primitives that own IDs, such as `Field`, `Button`, `Form`, `DataList`, `Output`, `Meter`, `Progress`, dialogs, tabs, accordion, combobox, and similar components.
 - `ui.Box` is always internal layout. Do not use `Box` for public anchors, navigation targets, or top-level page sections.
-- Children inside a `Block` must be internal UI composition only: `Box` and neutral UI primitives/composites such as `Stack`, `Group`, `Grid`, `Card`.
+- Children inside a `Block` must be internal UI composition only: `Box` and neutral UI primitives/composites such as `Stack`, `Group`, `Grid`, `Card`, table primitives, list primitives, media primitives, disclosure primitives, and form wrappers.
 - HTML5 semantics are mandatory and canonical. Choose tags for meaning first, not styling.
 - Tag availability is intentionally separated by layer in `utils/tags.go` via `IsAllowedTag`. Do not widen tag groups unless the semantic layer truly owns that tag.
+- Generic layout components must not become a dumping ground for strict content-model tags. `Box`, `Block`, `Stack`, `Group`, and `Container` must not accept table, list-item, form-control, media-source, or disclosure tags just because app code needs them.
+- Use owned primitives for strict HTML5 structures: `Table*` for `table` trees, `List`/`ListItem` for `ul`/`ol`/`menu`, `DescriptionList`/`DescriptionTerm`/`DescriptionDetails` for `dl`, `Picture`/`Source`/`Image`/`Figure` for media, `Disclosure`/`DisclosureSummary` for native disclosure, and `Form`/`Fieldset`/`Legend` around fields.
+- Keep `utils/tags.go` grouped by semantic ownership: selectable layout/text tags are separate from table, list item, form control/label, media, and disclosure tags. Add a group only when a UI8Kit primitive or composite owns the corresponding content model.
+- Shell/head metadata tags such as `script`, `style`, `link`, `meta`, and `title` belong to shell/head ownership, not app UI composition.
 - Product/app `.templ` files must not provide raw HTML layout tags; UI8Kit is the tag supplier.

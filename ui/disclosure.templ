@@ -1,0 +1,15 @@
+package ui
+
+import "github.com/fastygo/ui8kit/utils"
+
+templ Disclosure(props DisclosureProps) {
+	<details class={ utils.Cn("ui-disclosure", props.Class) } open?={ props.Open }>
+		{ children... }
+	</details>
+}
+
+templ DisclosureSummary(props DisclosureSummaryProps) {
+	<summary class={ utils.Cn("ui-disclosure-summary", props.Class) }>
+		{ children... }
+	</summary>
+}
