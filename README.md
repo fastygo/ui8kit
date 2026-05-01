@@ -1,5 +1,5 @@
 [![GitHub Release](https://img.shields.io/github/v/release/fastygo/ui8kit?style=flat-square&color=%2300769c)](https://pkg.go.dev/github.com/fastygo/ui8kit)
-![GitHub Release Date](https://img.shields.io/github/release-date/fastygo/ui8kit)
+[![GitHub Release Date](https://img.shields.io/github/release-date/fastygo/ui8kit)](https://github.com/fastygo/ui8kit/releases)
 
 # UI8Kit Go
 
